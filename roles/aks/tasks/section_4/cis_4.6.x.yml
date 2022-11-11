@@ -1,0 +1,15 @@
+---
+- name: "4.6.1 | Verify that admission controllers are working as expected (Manual)"
+  block:
+      - shell: "kubectl get po -n gatekeeper-system "
+        register: result461
+
+      - debug:
+          msg: "4.6.1 | NOT SCORED | Verify that admission controllers are working as expected (Manual)."
+      - lineinfile:
+          line: "4.6.1 | NOT SCORED | Verify that admission controllers are working as expected (Manual)."
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1

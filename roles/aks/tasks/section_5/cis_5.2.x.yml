@@ -1,0 +1,12 @@
+---
+- name: "5.2.1 | Prefer using dedicated AKS Service Accounts (Manual)"
+  block:
+      - debug:
+          msg: "5.1.1 | NOT SCORED | Prefer using dedicated AKS Service Accounts (Manual)."
+      - lineinfile:
+          line: "5.1.1 | NOT SCORED | Prefer using dedicated AKS Service Accounts (Manual).\n- Audit: For each namespace in the cluster, review the rights assigned to the default service account and ensure that it has no roles or cluster roles bound to it apart from the defaults."
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1

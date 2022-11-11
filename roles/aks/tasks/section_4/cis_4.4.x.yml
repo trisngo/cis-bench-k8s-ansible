@@ -1,0 +1,27 @@
+---
+- name: "4.4.1 | Ensure latest CNI version is used (Manual)"
+  block:
+      - debug:
+          msg: "4.4.1 | NOT SCORED | Ensure latest CNI version is used (Manual)."
+      - lineinfile:
+          line: "4.4.1 | NOT SCORED | Ensure latest CNI version is used (Manual).\n- Audit: Review the documentation of CNI plugin in use by the cluster, and confirm that it supports network policies."
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1
+
+- name: "4.4.2 | Ensure that all Namespaces have Network Policies defined (Manual)"
+  block:
+      - shell: "kubectl get networkpolicy --all-namespaces | awk '{ if (NR!=1) print \"Namespace \" $1 \" have \" $2 \" policy \" }'"
+        register: result442
+      - debug:
+          msg: "4.4.2 | NOT SCORED | Ensure that all Namespaces have Network Policies defined (Manual)."
+      - lineinfile:
+          line: "4.4.2 | NOT SCORED | Ensure that all Namespaces have Network Policies defined (Manual).\n- Found: {{ result442.stdout | default(0) }}"
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1
+  

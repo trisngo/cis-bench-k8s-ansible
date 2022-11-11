@@ -1,0 +1,111 @@
+---
+- name: "4.2.1 | Minimize the admission of privileged containers (Automated)"
+  block:
+      - shell: "kubectl get psp 2>&1 | grep -q 'No resources found' && echo 'Not found any PodSecurityPolicy'"
+        register: result42
+
+      - debug:
+          msg: "4.2.1 | NOT SCORED | Minimize the admission of privileged containers (Automated)).\n- {{ result42.stdout }}"
+      - lineinfile:
+          line: "4.2.1 | NOT SCORED | Minimize the admission of privileged containers (Automated).\n- {{ result42.stdout }}"
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1
+  
+- name: "4.2.2 | Minimize the admission of containers wishing to share the host process ID namespace (Automated)"
+  block:
+      - debug:
+          msg: "4.2.2 | NOT SCORED | Minimize the admission of containers wishing to share the host process ID namespace (Automated).\n- {{ result42.stdout }}"
+      - lineinfile:
+          line: "4.2.2 | NOT SCORED | Minimize the admission of containers wishing to share the host process ID namespace (Automated).\n- {{ result42.stdout }}"
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1
+
+- name: "4.2.3 | Minimize the admission of containers wishing to share the host IPC namespace (Automated)"
+  block:
+      - debug:
+          msg: "4.2.3 | NOT SCORED | Minimize the admission of containers wishing to share the host IPC namespace (Automated).\n- {{ result42.stdout }}"
+      - lineinfile:
+          line: "4.2.3 | NOT SCORED | Minimize the admission of containers wishing to share the host IPC namespace (Automated).\n- {{ result42.stdout }}"
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1
+
+- name: "4.2.4 | Minimize the admission of containers wishing to share the host network namespace (Automated)"
+  block:
+      - debug:
+          msg: "4.2.4 | NOT SCORED | Minimize the admission of containers wishing to share the host network namespace (Automated).\n- {{ result42.stdout }}"
+      - lineinfile:
+          line: "4.2.4 | NOT SCORED | Minimize the admission of containers wishing to share the host network namespace (Automated).\n- {{ result42.stdout }}"
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1
+
+- name: "4.2.5 | Minimize the admission of containers wishing to share the host network namespace (Automated)"
+  block:
+      - debug:
+          msg: "4.2.5 | NOT SCORED | Minimize the admission of containers wishing to share the host network namespace (Automated).\n- {{ result42.stdout }}"
+      - lineinfile:
+          line: "4.2.5 | NOT SCORED | Minimize the admission of containers wishing to share the host network namespace (Automated).\n- {{ result42.stdout }}"
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1
+
+- name: "4.2.6 | Minimize the admission of root containers (Automated)"
+  block:
+      - debug:
+          msg: "4.2.6 | NOT SCORED | Minimize the admission of root containers (Automated).\n- {{ result42.stdout }}"
+      - lineinfile:
+          line: "4.2.6 | NOT SCORED | Minimize the admission of root containers (Automated).\n- {{ result42.stdout }}"
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1
+
+- name: "4.2.7 | Minimize the admission of containers with the NET_RAW capability (Automated)"
+  block:
+      - debug:
+          msg: "4.2.7 | NOT SCORED | Minimize the admission of containers with the NET_RAW capability (Automated).\n- {{ result42.stdout }}"
+      - lineinfile:
+          line: "4.2.7 | NOT SCORED | Minimize the admission of containers with the NET_RAW capability (Automated).\n- {{ result42.stdout }}"
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1
+
+- name: "4.2.8 | Minimize the admission of containers with added capabilities (Automated)"
+  block:
+      - debug:
+          msg: "4.2.8 | NOT SCORED | Minimize the admission of containers with added capabilities (Automated).\n- {{ result42.stdout }}"
+      - lineinfile:
+          line: "4.2.8 | NOT SCORED | Minimize the admission of containers with added capabilities (Automated).\n- {{ result42.stdout }}"
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1
+
+- name: "4.2.9 | Minimize the admission of containers with capabilities assigned (Manual)"
+  block:
+      - debug:
+          msg: "4.2.9 | NOT SCORED | Minimize the admission of containers with capabilities assigned (Manual).\n- {{ result42.stdout }}"
+      - lineinfile:
+          line: "4.2.9 | NOT SCORED | Minimize the admission of containers with capabilities assigned (Manual).\n- {{ result42.stdout }}"
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1

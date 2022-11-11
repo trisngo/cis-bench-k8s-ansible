@@ -1,0 +1,12 @@
+---
+- name: "SECTION | 1 | Master (Control Plane) Components"
+  block:
+      - debug:
+          msg: "1.0.0 | NOT SCORED | Master (Control Plane) Components."
+      - lineinfile:
+          line: "1.0.0,Master (Control Plane) Components,NOT SCORED"
+          dest: "{{ csv_path }}/{{ csv_filename }}"
+          create: true
+          state: present
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1

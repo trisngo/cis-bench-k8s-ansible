@@ -1,0 +1,27 @@
+---
+- name: "4.5.1 | Prefer using secrets as files over secrets as environment variables(Manual)"
+  block:
+      - shell: kubectl get all -o jsonpath='{range .items[?(@..secretKeyRef)]} {.kind} {.metadata.name} {"\n"}{end}' -A
+        register: result451
+
+      - debug:
+          msg: "4.5.1 | NOT SCORED | Prefer using secrets as files over secrets as environment variables(Manual)."
+      - lineinfile:
+          line: "4.5.1 | NOT SCORED | Prefer using secrets as files over secrets as environment variables(Manual)."
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1
+
+- name: "4.5.2 | Consider external secret storage (Manual)"
+  block:
+      - debug:
+          msg: "4.5.2 | NOT SCORED | Consider external secret storage (Manual)."
+      - lineinfile:
+          line: "4.5.2 | NOT SCORED | Consider external secret storage (Manual).\n- Audit: Review your secrets management implementation."
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1

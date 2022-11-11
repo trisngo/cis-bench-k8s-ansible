@@ -1,0 +1,49 @@
+---
+- name: "5.1.1 | Apply Security Context to Your Pods and Containers (Manual)"
+  block:
+      - debug:
+          msg: "5.1.1 | NOT SCORED | Ensure Image Vulnerability Scanning using Azure Defender image scanning or a third party provider (Manual)."
+      - lineinfile:
+          line: "5.1.1 | NOT SCORED | Ensure Image Vulnerability Scanning using Azure Defender image scanning or a third party provider (Manual)."
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1
+
+- name: "5.1.2 | Minimize user access to Azure Container Registry (ACR) (Manual)"
+  block:
+      - debug:
+          msg: "5.1.2 | NOT SCORED | Minimize user access to Azure Container Registry (ACR) (Manual)."
+      - lineinfile:
+          line: "5.1.2,Minimize user access to Azure Container Registry (ACR) (Manual),NOT SCORED"
+          dest: "{{ csv_path }}/{{ csv_filename }}"
+          create: true
+          state: present
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1
+
+
+- name: "5.1.3 | Minimize cluster access to read-only for Azure Container Registry(ACR) (Manual)"
+  block:
+      - debug:
+          msg: "5.1.3 | NOT SCORED | Minimize cluster access to read-only for Azure Container Registry(ACR) (Manual)."
+      - lineinfile:
+          line: "5.1.3 | NOT SCORED | Minimize cluster access to read-only for Azure Container Registry(ACR) (Manual)."
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1
+
+- name: "5.1.4 | Minimize Container Registries to only those approved (Manual)"
+  block:
+      - debug:
+          msg: "5.1.4 | NOT SCORED | Minimize Container Registries to only those approved (Manual)."
+      - lineinfile:
+          line: "5.1.4 | NOT SCORED | Minimize Container Registries to only those approved (Manual)."
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1

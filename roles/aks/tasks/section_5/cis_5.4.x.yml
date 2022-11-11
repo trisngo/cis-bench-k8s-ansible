@@ -1,0 +1,60 @@
+---
+- name: "5.4.1 | Restrict Access to the Control Plane Endpoint (Manual)"
+  block:
+      - debug:
+          msg: "5.4.1 | NOT SCORED | Restrict Access to the Control Plane Endpoint (Manual)."
+      - lineinfile:
+          line: "5.4.1 | NOT SCORED | Restrict Access to the Control Plane Endpoint (Manual)."
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1
+
+- name: "5.4.2 | Ensure clusters are created with Private Endpoint Enabled and Public Access Disabled (Manual)"
+  block:
+      - debug:
+          msg: "5.4.2 | NOT SCORED | Ensure clusters are created with Private Endpoint Enabled and Public Access Disabled (Manual)."
+      - lineinfile:
+          line: "5.4.2 | NOT SCORED | Ensure clusters are created with Private Endpoint Enabled and Public Access Disabled (Manual)."
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1
+
+- name: "5.4.3 | Ensure clusters are created with Private Nodes (Manual)"
+  block:
+      - debug:
+          msg: "5.4.3 | NOT SCORED | Ensure clusters are created with Private Nodes (Manual)."
+      - lineinfile:
+          line: "5.4.3 | NOT SCORED | Ensure clusters are created with Private Nodes (Manual)."
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1
+
+- name: "5.4.4 | Ensure Network Policy is Enabled and set as appropriate (Manual)"
+  block:
+      - debug:
+          msg: "5.4.4 | NOT SCORED | Ensure Network Policy is Enabled and set as appropriate (Manual)."
+      - lineinfile:
+          line: "5.4.4 | NOT SCORED | Ensure Network Policy is Enabled and set as appropriate (Manual)."
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1
+
+- name: "5.4.5 | Encrypt traffic to HTTPS load balancers with TLS certificates(Manual)"
+  block:
+      - debug:
+          msg: "5.4.5 | NOT SCORED | Encrypt traffic to HTTPS load balancers with TLS certificates(Manual)."
+      - lineinfile:
+          line: "5.4.5 | NOT SCORED | Encrypt traffic to HTTPS load balancers with TLS certificates(Manual)."
+          insertafter: EOF
+          dest: "{{ report_path }}"
+          create: yes
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1

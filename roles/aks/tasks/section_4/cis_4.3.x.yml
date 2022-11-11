@@ -1,0 +1,12 @@
+---
+- name: "4.3  | NOT SCORED | Azure Policy / OPA"
+  block:
+    - debug:
+        msg: "4.3  | NOT SCORED | Azure Policy / OPA"
+    - lineinfile:
+        line: "4.3  | NOT SCORED | Azure Policy / OPA"
+        insertafter: EOF
+        dest: "{{ report_path }}"
+        create: yes
+      delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1

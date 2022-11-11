@@ -1,0 +1,12 @@
+---
+- name: "2.1.1 | Enable audit Logs (Manual)"
+  block:
+      - debug:
+          msg: "2.1.1 | NOT SCORED | Enable audit Logs (Manual)."
+      - lineinfile:
+          line: "2.1.1,Enable audit Logs (Manual),NOT SCORED"
+          dest: "{{ csv_path }}/{{ csv_filename }}"
+          create: true
+          state: present
+        delegate_to: 127.0.0.1
+  delegate_to: 127.0.0.1
