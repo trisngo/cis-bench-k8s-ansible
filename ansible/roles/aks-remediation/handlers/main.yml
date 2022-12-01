@@ -1,0 +1,8 @@
+---
+# handlers file for aks-remediation
+  - name: restart kubelet
+    systemd:
+      name: kubelet
+      daemon_reload: true
+      state: restarted
+      

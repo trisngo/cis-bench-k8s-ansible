@@ -1,0 +1,23 @@
+---
+- name: "4.4.1 | Ensure latest CNI version is used (Manual)"
+  block:
+      - debug:
+          msg: "4.4.1 | NOT SCORED | Ensure latest CNI version is used (Manual)."
+      - name: Get NOT SCORED result
+        set_fact:
+          report_data: '{{ report_data | default([]) + [{ "task_number":"4.4.1","task_description":"Ensure latest CNI version is used (Manual)","status":"NOT SCORED","configuration":"","remediation":"Script here" }] }}'
+
+  delegate_to: 127.0.0.1
+
+- name: "4.4.2 | Ensure that all Namespaces have Network Policies defined (Manual)"
+  block:
+      - shell: "kubectl get networkpolicy --all-namespaces | awk '{ if (NR!=1) print \"Namespace \" $1 \" have \" $2 \" policy \" }'"
+        register: result442
+      - debug:
+          msg: "4.4.2 | NOT SCORED | Ensure that all Namespaces have Network Policies defined (Manual)."
+      - name: Get NOT SCORED result
+        set_fact:
+          report_data: '{{ report_data | default([]) + [{ "task_number":"4.4.2","task_description":"Ensure that all Namespaces have Network Policies defined (Manual)","status":"NOT SCORED","configuration":"","remediation":"Script here" }] }}'
+
+  delegate_to: 127.0.0.1
+  

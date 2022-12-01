@@ -1,0 +1,17 @@
+---
+# Disable/Enable whole sections (Default is for all)
+akscis_section1: true
+akscis_section2: true
+akscis_section3: true
+akscis_section4: true
+akscis_section5: true
+akscis_section6: true
+
+
+
+kubeletkubeconfig: "/var/lib/kubelet/kubeconfig"
+kubeletconf: "/etc/default/kubelet"
+kubeletbin: "kubelet"
+report_path: "/home/trind/ansible-projects/cis-bench-k8s-ansible"
+html_filename: "report-{{ ansible_date_time.date }}.html"
+txt_filename: "report-{{ ansible_date_time.date }}.txt"

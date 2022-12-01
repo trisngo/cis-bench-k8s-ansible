@@ -1,0 +1,13 @@
+---
+- name: "4.6.1 | Verify that admission controllers are working as expected (Manual)"
+  block:
+      - shell: "kubectl get po -n gatekeeper-system "
+        register: result461
+
+      - debug:
+          msg: "4.6.1 | NOT SCORED | Verify that admission controllers are working as expected (Manual)."
+      - name: Get NOT SCORED result
+        set_fact:
+          report_data: '{{ report_data | default([]) + [{ "task_number":"4.6.1","task_description":"Verify that admission controllers are working as expected (Manual)","status":"NOT SCORED","configuration":"","remediation":"Script here" }] }}'
+
+  delegate_to: 127.0.0.1
