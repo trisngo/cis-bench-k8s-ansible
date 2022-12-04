@@ -1,6 +1,6 @@
 ---
 - name: CIS Benchmark
-  hosts: k8s
+  hosts: aks
   # become: yes
   # become_user: root
 
