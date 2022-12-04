@@ -1,0 +1,17 @@
+---
+
+#- name: Task 1 config
+#  import_tasks: section1/main.yml
+#  when: inventory_hostname in groups["master"]
+
+#- name: Task 2 config
+#  import_tasks: section2/main.yml
+#  when: inventory_hostname in groups["master"]
+
+#- name: Task 3 config
+#  import_tasks: section3/main.yml
+#  when: inventory_hostname in groups["master"]
+
+- name: Task 5 config
+  import_tasks: section5/main.yml
+  when: inventory_hostname in groups["masters"]

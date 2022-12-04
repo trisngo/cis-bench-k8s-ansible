@@ -1,0 +1,8 @@
+---
+
+- name: minikube benchmark
+  hosts: k8s
+  become: true
+
+  roles:
+      - minukube_benchmark

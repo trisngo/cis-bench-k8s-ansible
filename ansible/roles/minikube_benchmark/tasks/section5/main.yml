@@ -1,0 +1,173 @@
+- name: 5.1.1 Ensure that the cluster-admin role is only used where required (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.1.1","task_description":"Ensure that the cluster-admin role is only used where required","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.1.2 Minimize access to secrets (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.1.2","task_description":"Minimize access to secrets","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.1.4 Minimize access to create pods (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.1.4","task_description":"Minimize access to create pods","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.1.5 Ensure that default service accounts are not actively used (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.1.5","task_description":"Ensure that default service accounts are not actively used","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.1.6 Ensure that Service Account Tokens are only mounted where necessary (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.1.6","task_description":"Ensure that Service Account Tokens are only mounted where necessary","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.1.7 Avoid use of system:masters group (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.1.7","task_description":"Avoid use of system:masters group","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.1.8 Limit use of the Bind, Impersonate and Escalate permissions in the Kubernetes cluster (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.1.8","task_description":"Limit use of the Bind, Impersonate and Escalate permissions in the Kubernetes cluster","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.2.1 Ensure that the cluster has at least one active policy control mechanism in place (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.2.1","task_description":"Ensure that the cluster has at least one active policy control mechanism in place","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.2.2 Minimize the admission of privileged containers (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.2.2","task_description":"Minimize the admission of privileged containers","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.2.3 Minimize the admission of containers wishing to share the host process ID namespace (Automated)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.2.3","task_description":"Minimize the admission of containers wishing to share the host process ID namespace","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.2.4 Minimize the admission of containers wishing to share the host IPC namespace (Automated)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.2.4","task_description":"Minimize the admission of containers wishing to share the host IPC namespace","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.2.5 Minimize the admission of containers wishing to share the host network namespace (Automated)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.2.5","task_description":"Minimize the admission of containers wishing to share the host network namespace","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.2.6 Minimize the admission of containers with allowPrivilegeEscalation (Automated)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.2.6","task_description":"Minimize the admission of containers with allowPrivilegeEscalation","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.2.7 Minimize the admission of root containers (Automated)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.2.7","task_description":"Minimize the admission of root containers","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.2.8 Minimize the admission of containers with the NET_RAW capability (Automated)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.2.8","task_description":"Minimize the admission of containers with the NET_RAW capability","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.2.9 Minimize the admission of containers with added capabilities (Automated)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.2.9","task_description":"Minimize the admission of containers with added capabilities","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.2.10 Minimize the admission of containers with capabilities assigned (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.2.10","task_description":"Minimize the admission of containers with capabilities assigned","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.2.11 Minimize the admission of Windows HostProcess Containers (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.2.11","task_description":"Minimize the admission of Windows HostProcess Containers","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.2.12 Minimize the admission of HostPath volumes (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.2.12","task_description":"Minimize the admission of HostPath volumes","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.2.13 Minimize the admission of containers which use HostPorts (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.2.13","task_description":"Minimize the admission of containers which use HostPorts","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.3.1 Ensure that the CNI in use supports Network Policies (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.3.1","task_description":"Ensure that the CNI in use supports Network Policies","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.3.2 Ensure that all Namespaces have Network Policies defined (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.3.2","task_description":"Ensure that all Namespaces have Network Policies defined","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.4.1 Prefer using secrets as files over secrets as environment variables (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.4.1","task_description":"Prefer using secrets as files over secrets as environment variables","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.4.2 Consider external secret storage (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.4.2","task_description":"Consider external secret storage","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.5.1 Configure Image Provenance using ImagePolicyWebhook admission controller (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.5.1","task_description":"Configure Image Provenance using ImagePolicyWebhook admission controller","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.7.1 Create administrative boundaries between resources using namespaces (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.7.1","task_description":"Create administrative boundaries between resources using namespaces","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.7.2 Ensure that the seccomp profile is set to docker/default in your pod definitions (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.7.2","task_description":"Ensure that the seccomp profile is set to docker/default in your pod definitions","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.7.3 Apply Security Context to Your Pods and Containers (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.7.3","task_description":"Apply Security Context to Your Pods and Containers","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
+###
+- name: 5.7.4 The default namespace should not be used (Manual)
+  block:
+    - name: Add task to list 
+      set_fact:
+        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.7.4","task_description":"The default namespace should not be used","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
