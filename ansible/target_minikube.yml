@@ -5,4 +5,4 @@
   become: true
 
   roles:
-      - minukube_benchmark
+      - minikube_benchmark

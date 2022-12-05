@@ -1,0 +1,14 @@
+Note CIS
+
+Tool on ubuntu
+https://www.youtube.com/watch?v=wyEX0eyoK88
+
+apt install usg-cisbenchmark
+
+Trong gói này có tool là 
+cis-audit ( scan kiểm tra -> tạo html kết quả)
+cis-hardening (fix lỗi, nó có 1 file rule dùng để cấu hình trước những gì nó sẽ tự động fix)
+
+
+https://www.youtube.com/watch?v=RcH7Y5d38Uc
+

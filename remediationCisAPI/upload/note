@@ -1,0 +1,42 @@
+-script test failover show thông tin như ip,...
+-check đã backup đủ file hay chưa = cách gửi 1 file txt có chứa số lượng file được backup bên client, bên server kiểm tra số lượng qua file đó (done)
+$path_backup/$date/$hostname_$ip/$services (tren server thi la /data/storage, tren client thi /data/backup) (done)
+-ll -ltt (optional)
+-motd (optional)
+-encrypt folder khi backup cũng như restore
+-chuyển file sử dụng rsync(port,custom user, passwd, ssh thi nên chi cho ket noi tu local toi cac container)
+-crontab trong container 
+
+
+viet demo.md
+
+
+https://linuxize.com/post/scheduling-cron-jobs-with-crontab/
+
+Run Cron Job Every Minute	* * * * * /root/backup.sh
+Run Cron Job Every Day at Midnight	0 0 * * * /root/backup.sh
+Run Cron Job Every Day at 0:5	5 0 * * * /root/backup.sh
+
+
+https://linuxhint.com/encrypt-decrypt-with-pgp/
+-encrypt dir chua compress file -> lb1.pgp -> khi giai nen se thanh lb1/
+-transfer file do va store
+
+gpg --gen-key
+gpg --export -a tringo > public.key
+
+gpg --output private.key --armor --export-secret-key tringo
+gpg --output public.key --armor --export tringo
+
+
+gpg --import public.key
+gpg --import private.key
+
+gpg --list-public-keys
+
+gpg -e -r tringo --trust-model always test.txt
+
+gpg --batch --passphrase 123123 test.txt.gpg
+
+
+
