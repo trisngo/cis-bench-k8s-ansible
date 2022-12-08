@@ -1,0 +1,20 @@
+---
+- name: "5.6.1 | Restrict untrusted workloads (Manual)"
+  block:
+      - debug:
+          msg: "5.6.1 | NOT SCORED | Restrict untrusted workloads (Manual)."
+      - name: Get NOT SCORED result
+        set_fact:
+          report_data: '{{ report_data | default([]) + [{ "task_number":"5.6.1","task_description":"Restrict untrusted workloads (Manual)","status":"NOT SCORED","configuration":"","remediation":"Script here" }] }}'
+
+  delegate_to: 127.0.0.1
+
+- name: "5.6.2 | Hostile multi-tenant workloads (Manual)"
+  block:
+      - debug:
+          msg: "5.6.2 | NOT SCORED | Hostile multi-tenant workloads (Manual)."
+      - name: Get NOT SCORED result
+        set_fact:
+          report_data: '{{ report_data | default([]) + [{ "task_number":"5.6.2","task_description":"Hostile multi-tenant workloads (Manual)","status":"NOT SCORED","configuration":"","remediation":"Script here" }] }}'
+
+  delegate_to: 127.0.0.1

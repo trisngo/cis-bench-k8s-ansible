@@ -1,0 +1,3 @@
+---
+- name: "SECTION | 2.1 | Logging"
+  import_tasks: cis_2.1.x.yml

@@ -1,0 +1,111 @@
+- name: 2.1 Ensure that the --cert-file and --key-file arguments are set as appropriate
+  block:
+    - ansible.builtin.shell: ps -ef | grep etcd | grep -oE "\-\-(cert|key)\-file=[^ ]+" || exit 0
+      register: filestat
+      ignore_errors: yes
+      changed_when: false
+    - name: Add passed task to list 
+      set_fact:
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.1","task_description":"Ensure that the --cert-file and --key-file arguments are set as appropriate","task_status":"PASSED","configuration":filestat.stdout,"script":"" }] }}'
+      when: filestat.stdout_lines|length == 2
+    - name: Add failed task to list 
+      set_fact:
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.1","task_description":"Ensure that the --cert-file and --key-file arguments are set as appropriate","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
+      when: filestat.stdout_lines|length < 2
+###
+- name: 2.2 Ensure that the --client-cert-auth argument is set to true
+  block:
+    - ansible.builtin.shell: ps -ef | grep etcd | grep -oE "\-\-client\-cert\-auth=[^ ]+" || echo "Argument is not set"
+      register: filestat
+      ignore_errors: yes
+      changed_when: false
+    - name: Add passed task to list 
+      set_fact:
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.2","task_description":"Ensure that the --client-cert-auth argument is set to true","task_status":"PASSED","configuration":filestat.stdout,"script":"" }] }}'
+      when: "'true' in filestat.stdout"
+    - name: Add failed task to list 
+      set_fact:
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.2","task_description":"Ensure that the --client-cert-auth argument is set to true","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
+      when: "'true' not in filestat.stdout"
+###
+- name: 2.3 Ensure that the --auto-tls argument is not set to true
+  block:
+    - ansible.builtin.shell: ps -ef | grep etcd | grep -oE "\-\-auto\-tls=[^ ]+" || echo "Argument is not set"
+      register: filestat
+      ignore_errors: yes
+      changed_when: false
+    - name: Add passed task to list 
+      set_fact:
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.3","task_description":"Ensure that the --auto-tls argument is not set to true","task_status":"PASSED","configuration":filestat.stdout,"script":"" }] }}'
+      when: "'true' not in filestat.stdout"
+    - name: Add failed task to list 
+      set_fact:
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.3","task_description":"Ensure that the --auto-tls argument is not set to true","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
+      when: "'true' in filestat.stdout and filestat.stdout != 'Argument is not set'"
+###
+- name: 2.4 Ensure that the --peer-cert-file and --peer-key-file arguments are set as appropriate
+  block:
+    - ansible.builtin.shell: ps -ef | grep etcd | grep -oE "\-\-peer\-(cert|key)\-file=[^ ]+" || exit 0
+      register: filestat
+      ignore_errors: yes
+      changed_when: false
+    - name: Add passed task to list 
+      set_fact:
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.4","task_description":"Ensure that the --peer-cert-file and --peer-key-file arguments are set as appropriate","task_status":"PASSED","configuration":filestat.stdout,"script":"" }] }}'
+      when: filestat.stdout_lines|length == 2
+    - name: Add failed task to list 
+      set_fact:
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.4","task_description":"Ensure that the --peer-cert-file and --peer-key-file arguments are set as appropriate","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
+      when: filestat.stdout_lines|length < 2
+###
+- name: 2.5 Ensure that the --peer-client-cert-auth argument is set to true
+  block:
+    - ansible.builtin.shell: ps -ef | grep etcd | grep -oE "\-\-peer\-client\-cert\-auth=[^ ]+" || echo "Argument is not set"
+      register: filestat
+      ignore_errors: yes
+      changed_when: false
+    - name: Add passed task to list 
+      set_fact:
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.5","task_description":"Ensure that the --peer-client-cert-auth argument is set to true","task_status":"PASSED","configuration":filestat.stdout,"script":"" }] }}'
+      when: "'true' in filestat.stdout"
+    - name: Add failed task to list 
+      set_fact:
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.5","task_description":"Ensure that the --peer-client-cert-auth argument is set to true","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
+      when: "'true' not in filestat.stdout"
+###
+- name: 2.6 Ensure that the --peer-auto-tls argument is not set to true
+  block:
+    - ansible.builtin.shell: ps -ef | grep etcd | grep -oE "\-\-peer\-auto\-tls=[^ ]+" || echo "Argument is not set"
+      register: filestat
+      ignore_errors: yes
+      changed_when: false
+    - name: Add passed task to list 
+      set_fact:
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.6","task_description":"Ensure that the --peer-auto-tls argument is not set to true","task_status":"PASSED","configuration":filestat.stdout,"script":"" }] }}'
+      when: "'false' in filestat.stdout or filestat.stdout == 'Argument is not set'"
+    - name: Add failed task to list 
+      set_fact:
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.6","task_description":"Ensure that the --peer-auto-tls argument is not set to true","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
+      when: "'false' not in filestat.stdout and filestat.stdout != 'Argument is not set'"
+###
+- name: 2.7 Ensure that a unique Certificate Authority is used for etcd
+  block:
+    - ansible.builtin.shell: ps -ef | grep etcd | grep -oE "\-\-trusted\-ca\-file=[^ ]+" | awk -F= '{print $2}' || exit 0
+      register: file1
+      ignore_errors: yes
+      changed_when: false
+    - ansible.builtin.shell: ps -ef | grep apiserver | grep -oE "\-\-client\-ca\-file=[^ ]+" | awk -F= '{print $2}' || exit 0
+      register: file2
+      ignore_errors: yes
+      changed_when: false
+    - name: Add passed task to list 
+      set_fact:
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.7","task_description":"Ensure that a unique Certificate Authority is used for etcd","task_status":"PASSED","configuration":filestat.stdout,"script":"" }] }}'
+      when: file1.stdout != '' and file2.stdout != '' and file1.stdout != file2.stdout
+    - name: Add failed task to list 
+      set_fact:
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.7","task_description":"Ensure that a unique Certificate Authority is used for etcd","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
+      when: 
+        - file1.stdout == '' or file2.stdout == ''
+        - file1.stdout != '' and file2.stdout != '' and file1.stdout == file2.stdout
+###

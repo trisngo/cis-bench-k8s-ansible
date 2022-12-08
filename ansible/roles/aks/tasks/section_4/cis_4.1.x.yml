@@ -1,0 +1,85 @@
+- name: "4.1.1 | Ensure that the cluster-admin role is only used where required (Manual)"
+  block:
+      - shell: "kubectl get clusterrolebindings -o=custom-columns=NAME:.metadata.name,ROLE:.roleRef.name,SUBJECT:.subjects[*].name | grep cluster-admin | awk 'BEGIN { ORS=\" \" }; {print NR \".\"$1}'"
+        register: result411
+
+      - debug:
+          msg: "4.1.1 | NOT SCORED | Ensure that the cluster-admin role is only used where required (Manual).\n- Found: {{ result411.stdout | default(0) }}"
+
+      - name: Get NOT SCORED result
+        set_fact:
+          report_data: '{{ report_data | default([]) + [{ "task_number":"4.1.1","task_description":"Ensure that the cluster-admin role is only used where required (Manual)","status":"NOT SCORED","configuration":result411.stdout,"remediation":"Script here" }] }}'
+
+  delegate_to: 127.0.0.1
+
+
+- name: "4.1.2 | Minimize access to secrets (Manual)"
+  block:
+      - shell: "kubectl api-resources --sort-by name -o wide | grep secret | cut -d'[' -f 2 | sed 's/.$//'"
+        register: result412
+
+      - debug:
+          msg: "4.1.2 | NOT SCORED | Minimize access to secrets (Manual).\n- Found: {{ result412.stdout | default(0) }}"
+
+      # - name: Get NOT SCORED result
+      #   set_fact:
+      #     report_data: '{{ report_data | default([]) + [{ "task_number":"4.1.2","task_description":"Minimize access to secrets (Manual)","status":"NOT SCORED","configuration":"{{ kubeletbin }}","remediation":"Script here" }] }}'
+
+      - name: Get NOT SCORED result
+        set_fact:
+          report_data: '{{ report_data | default([]) + [{ "task_number":"4.1.2","task_description":"Minimize access to secrets (Manual)","status":"NOT SCORED","configuration":result412.stdout,"remediation":"Script here" }] }}'
+
+  delegate_to: 127.0.0.1
+
+- name: "4.1.3 | Minimize wildcard use in Roles and ClusterRoles (Manual)"
+  block:
+      - shell: "kubectl get roles --all-namespaces -o yaml | grep -q '*' && echo 'Found wildcard in Roles'; kubectl get clusterroles -o yaml | grep -q '*' && echo 'Found wildcard in Cluster Roles'"
+        register: result413
+
+      - debug:
+          msg: "4.1.3 | NOT SCORED | Minimize wildcard use in Roles and ClusterRoles (Manual).\n- {{ result413.stdout }}"
+      - name: Get NOT SCORED result
+        set_fact:
+          report_data: '{{ report_data | default([]) + [{ "task_number":"4.1.3","task_description":"Minimize wildcard use in Roles and ClusterRoles (Manual)","status":"NOT SCORED","configuration":result413.stdout,"remediation":"Script here" }] }}'
+
+  delegate_to: 127.0.0.1
+
+- name: "4.1.4 | Minimize access to create pods (Manual)"
+  block:
+      - shell: "kubectl api-resources --sort-by name -o wide | grep -w Pod | cut -d'[' -f 2 | sed 's/.$//'"
+        register: result414
+
+      - debug:
+          msg: "4.1.4 | NOT SCORED | Minimize access to create pods (Manual).\n- Found: {{ result414.stdout | default(0) }}"
+
+      - name: Get NOT SCORED result
+        set_fact:
+          report_data: '{{ report_data | default([]) + [{ "task_number":"4.1.4","task_description":"Minimize access to create pods (Manual)","status":"NOT SCORED","configuration":result414.stdout,"remediation":"Script here" }] }}'
+
+  delegate_to: 127.0.0.1
+
+- name: "4.1.5 | Ensure that default service accounts are not actively used.(Manual)"
+  block:
+      - shell: "kubectl api-resources --sort-by name -o wide | grep -w Pod | cut -d'[' -f 2 | sed 's/.$//'"
+        register: result415
+
+      - debug:
+          msg: "4.1.5 | NOT SCORED | Ensure that default service accounts are not actively used.(Manual).\n- Found: {{ result415.stdout | default(0) }}"
+      - name: Get NOT SCORED result
+        set_fact:
+          report_data: '{{ report_data | default([]) + [{ "task_number":"4.1.5","task_description":"Ensure that default service accounts are not actively used.(Manual)","status":"NOT SCORED","configuration":result415.stdout,"remediation":"Script here" }] }}'
+
+  delegate_to: 127.0.0.1
+
+- name: "4.1.6 | Ensure that Service Account Tokens are only mounted where necessary (Manual)"
+  block:
+      - shell: "kubectl get rolebindings,clusterrolebindings --all-namespaces  -o custom-columns='KIND:kind,NAMESPACE:metadata.namespace,NAME:metadata.name,SERVICE_ACCOUNTS:subjects[?(@.kind==\"ServiceAccount\")].name' | grep -q default || echo 'Not found any binding'; kubectl get serviceaccount default -o yaml | grep 'automountServiceAccountToken: false' || echo 'Not found automountServiceAccountToken: false'"
+        register: result416
+
+      - debug:
+          msg: "4.1.6 | NOT SCORED | Ensure that Service Account Tokens are only mounted where necessary (Manual).\n- {{ result416.stdout }}"
+      - name: Get NOT SCORED result
+        set_fact:
+          report_data: '{{ report_data | default([]) + [{ "task_number":"4.1.6","task_description":"Ensure that Service Account Tokens are only mounted where necessary (Manual)","status":"NOT SCORED","configuration":result416.stdout,"remediation":"Script here" }] }}'
+
+  delegate_to: 127.0.0.1

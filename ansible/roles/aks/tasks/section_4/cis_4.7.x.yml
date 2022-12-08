@@ -1,0 +1,36 @@
+---
+- name: "4.7.1 | Create administrative boundaries between resources using namespaces (Manual)"
+  block:
+      - shell: "kubectl get namespaces | awk 'BEGIN { ORS=\"; \" }; {if (NR!=1) print $1 }'"
+        register: result471
+
+      - debug:
+          msg: "4.7.1 | NOT SCORED | Create administrative boundaries between resources using namespaces (Manual)."
+      - name: Get NOT SCORED result
+        set_fact:
+          report_data: '{{ report_data | default([]) + [{ "task_number":"4.7.1","task_description":"Create administrative boundaries between resources using namespaces (Manual)","status":"NOT SCORED","configuration":"","remediation":"Script here" }] }}'
+
+  delegate_to: 127.0.0.1
+
+- name: "4.7.2 | Apply Security Context to Your Pods and Containers (Manual)"
+  block:
+      - debug:
+          msg: "4.7.2 | NOT SCORED | Apply Security Context to Your Pods and Containers (Manual)."
+      - name: Get NOT SCORED result
+        set_fact:
+          report_data: '{{ report_data | default([]) + [{ "task_number":"4.7.2","task_description":"Apply Security Context to Your Pods and Containers (Manual)","status":"NOT SCORED","configuration":"","remediation":"Script here" }] }}'
+
+  delegate_to: 127.0.0.1
+
+- name: "4.7.3 | The default namespace should not be used (Manual)"
+  block:
+      - shell: "kubectl get all -n default | awk 'BEGIN { ORS=\"; \" }; {if (NR!=1) print $1 }'"
+        register: result471
+
+      - debug:
+          msg: "4.7.3 | NOT SCORED | The default namespace should not be used (Manual)."
+      - name: Get NOT SCORED result
+        set_fact:
+          report_data: '{{ report_data | default([]) + [{ "task_number":"4.7.3","task_description":"The default namespace should not be used (Manual)","status":"NOT SCORED","configuration":"","remediation":"Script here" }] }}'
+
+  delegate_to: 127.0.0.1
