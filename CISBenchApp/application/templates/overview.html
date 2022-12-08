@@ -1,0 +1,18 @@
+<!doctype html>
+<title>Overview</title>
+<h1>Overview</h1>
+<h2>IP list</h2>
+{% for ip in ips  %}
+<h3>Node {{ loop.index0 }}: {{ ip }}</h3>
+
+{% endfor %}
+
+<h2>SSHKey Path list</h2>
+
+{% for f in files  %}
+<h3>Node {{ loop.index0 }}: {{ f }}</h3>
+{% endfor %}
+
+<form action="{{ url_for('bench.run_bench' ) }}">
+    <input type="submit" value="Go to run bench" />
+</form>

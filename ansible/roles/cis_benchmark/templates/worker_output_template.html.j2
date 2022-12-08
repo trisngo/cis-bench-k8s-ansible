@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Output</title>
+</head>
+<body>
+    <h1>Report</h1>
+    <table border="1" cellpadding="10">
+        <tr style="background:#fbfcae">
+            <th colspan="5">{{ section4 }}</th>
+        </tr>
+        <tr style="background:#85eddf">
+            <td style="text-align:center">Task number</td>
+            <td style="text-align:center">Description</td>
+            <td style="text-align:center">Task status</td>
+            <td style="text-align:center">Your configuration</td>
+            <td style="text-align:center">Remediation Script</td>
+        </tr>
+        {% for section4_task in section4_tasks %}
+        <tr>
+            <td>
+                {{ section4_task["task_number"] }}
+            </td>
+            <td style="max-width:500px;word-wrap: break-word;">
+                {{ section4_task["task_description"] }}
+            </td>
+            {% if section4_task["task_status"]=="PASSED" %}  
+            <td style="background: #c0ebc6; text-align: center;">
+            {% elif section4_task["task_status"]=="FAILED" %}
+            <td style="background: #ebcfc0; text-align: center;">
+             {% else %}
+            <td style="background: #f6f7d2; text-align: center;">
+            {% endif %}    
+                {{ section4_task["task_status"] }}
+            </td>
+            <td style="max-width:400px;word-wrap: break-word;">{{ section4_task["configuration"] | replace("\n","<br>") }}</td>
+            <td>{{ section4_task["script"] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
