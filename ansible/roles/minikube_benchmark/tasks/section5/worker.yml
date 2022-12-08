@@ -1,5 +1,0 @@
-- name: 5.1.3 Minimize wildcard use in Roles and ClusterRoles (Manual)
-  block:
-    - name: Add task to list 
-      set_fact:
-        section5_tasks: '{{ section5_tasks + [{ "task_number":"5.1.3","task_description":"Minimize wildcard use in Roles and ClusterRoles","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'

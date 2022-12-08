@@ -28,9 +28,9 @@ def create_app():
     app.config['SECRET_KEY'] = 'hjshjhdjah kjshkjdhjs'
 
     from .views import views
-    from .api import api
+    from .bench import bench
 
     app.register_blueprint(views, url_prefix='/')
-    app.register_blueprint(api, url_prefix='/')
+    app.register_blueprint(bench, url_prefix='/')
 
     return app

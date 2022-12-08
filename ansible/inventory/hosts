@@ -1,7 +1,7 @@
 [masters]
-132.1.1.1 ansible_ssh_private_key_file=/home/trind/ansible-projects/cis-bench-k8s-ansible/remediationCisAPI/upload/list_domain_mtozing.txt
+192.168.49.2 ansible_ssh_private_key_file=/home/trind/ansible-projects/cis-bench-k8s-ansible/remediationCisAPI/upload/24617fc5-13a8-46c6-9eb4-6ad4f1d8c8b6-id_rsa
 [workers]
-2.2.2.2 ansible_ssh_private_key_file=/home/trind/ansible-projects/cis-bench-k8s-ansible/remediationCisAPI/upload/list_mto_not_iggy.txt
+192.168.49.3 ansible_ssh_private_key_file=/home/trind/ansible-projects/cis-bench-k8s-ansible/remediationCisAPI/upload/29ad2432-02ba-4430-9c82-c4dfe2947c53-id_rsa
 [k8s:children]
 masters
 workers

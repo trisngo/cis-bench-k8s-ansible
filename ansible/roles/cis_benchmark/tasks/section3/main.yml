@@ -1,8 +1,3 @@
-- name: 3.1.1 Client certificate authentication should not be used for users
-  block:
-    - name: Add manual task to list 
-      set_fact:
-        section3_tasks: '{{ section3_tasks + [{ "task_number":"3.1.1","task_description":"Client certificate authentication should not be used for users","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'
 ###
 - name: 3.2.1 Ensure that a minimal audit policy is created
   block:
@@ -18,9 +13,3 @@
       set_fact:
         section3_tasks: '{{ section3_tasks + [{ "task_number":"3.2.1","task_description":"Ensure that a minimal audit policy is created","task_status":"FAILED","configuration":"Argument is not set","script":"Script here" }] }}'
       when: filestat.stdout == ''
-###
-- name: 3.2.2 Ensure that the audit policy covers key security concerns
-  block:
-    - name: Add manual task to list 
-      set_fact:
-        section3_tasks: '{{ section3_tasks + [{ "task_number":"3.2.2","task_description":"Ensure that the audit policy covers key security concerns\nThis task must be checked manually","task_status":"NOT CHECKED","configuration":"","script":"" }] }}'

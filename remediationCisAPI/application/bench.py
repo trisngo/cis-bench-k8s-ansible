@@ -3,13 +3,18 @@ from flask import Blueprint, Flask, render_template, request, flash, jsonify, re
 import sys, json, datetime, time, hashlib, urllib.request, urllib.parse, subprocess, importlib, configparser, os
 # from flask import Flask, jsonify, request, redirect, abort
 from werkzeug.utils import secure_filename
+from uuid import uuid4
 from . import mylogging, config_get, respJson
 
-api = Blueprint('api', __name__)
+bench = Blueprint('bench', __name__)
 
 ALLOWED_EXTENSIONS = {''}
 
-@api.route('/select_ip_mini', methods=['GET', 'POST'])
+def make_unique(string):
+    ident = uuid4().__str__()
+    return f"{ident}-{string}"
+
+@bench.route('/select_ip_mini', methods=['GET', 'POST'])
 def select_ip_mini():
     post_data = '{"task": ["3.1.1", "3.2.2", "3.3.1"]}'
     if request.method == 'POST':
@@ -19,14 +24,14 @@ def select_ip_mini():
         if (numWorker != 0 ):
             for i in range (0,int(numWorker)):
                 session["ip_%s" % (i + 1)] = request.form.get("ip_%s" % (i + 1))
-        return redirect(url_for('api.upload_key_mini'))
+        return redirect(url_for('bench.upload_key_mini'))
     return render_template("home.html")
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@api.route('/upload_key_mini', methods=['GET'])
+@bench.route('/upload_key_mini', methods=['GET'])
 def upload_key_mini():
     numWorker = session.get('num_worker')
     listFile = [None] * (int(numWorker)+1)
@@ -38,7 +43,7 @@ def upload_key_mini():
         #     listFile[i] = "None"
     return render_template("upload_mini.html", files = listFile)
 
-@api.route('/upload/<name>', methods=['GET', 'POST'])
+@bench.route('/upload/<name>', methods=['GET', 'POST'])
 def upload(name):
     if request.method == 'POST':
         # check if the post request has the file part
@@ -55,12 +60,13 @@ def upload(name):
         if file:
             ip_index = request.form.get('ip')
             filename = secure_filename(file.filename)
-            file.save(os.path.join("/home/trind/ansible-projects/cis-bench-k8s-ansible/remediationCisAPI/upload", filename))
-            session['filename_%s' % ip_index] = filename
-            return redirect(url_for('api.upload_key_mini'))
+            unique_filename = make_unique(filename)
+            file.save(os.path.join("/home/trind/ansible-projects/cis-bench-k8s-ansible/remediationCisAPI/upload", unique_filename))
+            session['filename_%s' % ip_index] = unique_filename
+            return redirect(url_for('bench.upload_key_mini'))
     return render_template("upload.html", name=name)
 
-@api.route('/overview', methods=['GET'])
+@bench.route('/overview', methods=['GET'])
 def overview():
     numWorker = session.get('num_worker')
     listIP = []
@@ -75,7 +81,7 @@ def overview():
     print(listFile)
     return render_template("overview.html", ips=listIP, files=listFile)
 
-@api.route('/run_bench', methods=['GET'])
+@bench.route('/run_bench', methods=['GET'])
 def run_bench():
     numWorker = session.get('num_worker')
     listIP = []
@@ -101,6 +107,10 @@ def writeInventory_mini(listIP, listFile):
     file_name = config_get("ansible", "inventory")
 
     masterSsh = os.path.join("/home/trind/ansible-projects/cis-bench-k8s-ansible/remediationCisAPI/upload", listFile[0])
+
+    cmd = ["chmod", "600", "%s" % masterSsh]
+    subprocess.run(cmd)
+
     hosts_data = "[masters]\n" + \
                 "%s ansible_ssh_private_key_file=%s\n" % (listIP[0], masterSsh)
 
@@ -108,6 +118,8 @@ def writeInventory_mini(listIP, listFile):
 
     for i in range(1,len(listIP)):
         workerSsh = os.path.join("/home/trind/ansible-projects/cis-bench-k8s-ansible/remediationCisAPI/upload", listFile[i])
+        cmd = ["chmod", "600", "%s" % workerSsh]
+        subprocess.run(cmd)
         hosts_data += "%s ansible_ssh_private_key_file=%s\n" % (listIP[i], workerSsh)
 
     hosts_data += "[k8s:children]\n" + \
@@ -117,7 +129,7 @@ def writeInventory_mini(listIP, listFile):
                 "ansible_user=docker\n" + \
                 "[local]\n" + \
                 "localhost ansible_connection=local"
-    with open(file_name, 'w') as configfile:    # save
+    with open(file_name, 'w') as configfile:
         configfile.write(hosts_data)
 
 def bench_mini():
@@ -136,45 +148,10 @@ def bench_mini():
         mylogging("ERROR: %s" %ex)
         return jsonify(respJson(-500, "Something went wrong!"))
 
-@api.route('/submitRemediation', methods=['GET']) #POST
-def storeOption():
-    post_data = '{"task": ["3.1.1", "3.2.2", "3.3.1"]}'
-    try:
-        # date = request.headers.get('date')
-        file_name = "%s/options.yml" % (config_get("data_store", "dir"))
-        # post_data = request.get_data()
-    
-        data  = json.loads(post_data)
-        print (data['task'])
-
-        # w_file = open(file_name, "w")
-        # w_file.write(data.decode("utf-8"))
-
-        with open(file_name, 'w') as w_file:
-            for item in data['task']:
-                w_file.write("task_%s: true\n" % item)
-
-        # w_file.close()
-        mylogging("INFO: Selections store succeed")
-        return jsonify(respJson(0, "Store selection succeed"))
-
-    except Exception as ex:
-        mylogging("ERROR: %s" %ex)
-        return jsonify(respJson(-500, "Something went wrong!"))
-
-@api.route('/runRemediation', methods=['GET'])
-def remediation():
-    try:
-        now = datetime.datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
-        cmd = ["%s" % (config_get("ansible", "bin")),"-i" ,"%s" % (config_get("ansible", "inventory")),"%s" % (config_get("minikube", "config"))]
-        file_name = "logs/playbook_logs/playbook_%s.log" % now
-        
-        with open(file_name, "w") as w_file:
-            subprocess.run(cmd, stdout=w_file)
-    
-        mylogging("INFO: Run remediation playbook succeed")
-        return jsonify(respJson(0, "Run remediation playbook succeed, view at %s" % file_name))
-
-    except Exception as ex:
-        mylogging("ERROR: %s" %ex)
-        return jsonify(respJson(-500, "Something went wrong!"))
+@bench.route('/result/<name>', methods=['GET'])
+def result(name):
+    if name == "master":
+        return render_template("result/minikube/master_benchmark_output.html")
+    if name == "worker":
+        return render_template("result/minikube/worker_benchmark_output.html")
+    return redirect(request.url)

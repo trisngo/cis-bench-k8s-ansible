@@ -31,33 +31,33 @@
 ###
 - name: 4.1.3 If proxy kubeconfig file exists ensure permissions are set to 600 or more restrictive
   block:
-    - ansible.builtin.shell: ps -ef | grep kube-proxy | grep -oE "\-\-kubeconfig=[^ ]+" | awk -F= '{print $2}' | xargs stat -c %a || echo "Argument is not set"
+    - ansible.builtin.shell: ps -ef | grep kube-proxy | grep -oE "\-\-kubeconfig=[^ ]+" | awk -F= '{print $2}' | xargs stat -c %a || echo "kubeconfig file not exists"
       register: filestat
       changed_when: false
       ignore_errors: yes
     - name: Add passed task to list
       set_fact:
-        section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.3","task_description":"If proxy kubeconfig file exists ensure permissions are set to 600 or more restrictive","task_status":"PASSED","configuration":filestat.stdout,"script":"" }] }}'
-      when: filestat.stdout == '600'
+        section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.3","task_description":"If proxy kubeconfig file exists ensure permissions are set to 600 or more restrictive","task_status":"PASSED","configuration":"kubeconfig file not exists","script":"" }] }}'
+      when: filestat.stdout == '600' or filestat.stdout == 'kubeconfig file not exists'
     - name: Add failed task to list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.3","task_description":"If proxy kubeconfig file exists ensure permissions are set to 600 or more restrictive","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
-      when: filestat.stdout != '600'
+      when: filestat.stdout != '600' and filestat.stdout != 'kubeconfig file not exists'
 ###
 - name: 4.1.4 If proxy kubeconfig file exists ensure ownership is set to root:root
   block:
-    - ansible.builtin.shell: ps -ef | grep kube-proxy | grep -oE "\-\-kubeconfig=[^ ]+" | awk -F= '{print $2}' | xargs stat -c %U:%G || echo "Argument is not set"
+    - ansible.builtin.shell: ps -ef | grep kube-proxy | grep -oE "\-\-kubeconfig=[^ ]+" | awk -F= '{print $2}' | xargs stat -c %U:%G || echo "kubeconfig file not exists"
       register: filestat
       changed_when: false
       ignore_errors: yes
     - name: Add passed task to list
       set_fact:
-        section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.4","task_description":"If proxy kubeconfig file exists ensure ownership is set to root:root","task_status":"PASSED","configuration":filestat.stdout,"script":"" }] }}'
-      when: filestat.stdout == 'root:root'
+        section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.4","task_description":"If proxy kubeconfig file exists ensure ownership is set to root:root","task_status":"PASSED","configuration":"kubeconfig file not exists","script":"" }] }}'
+      when: filestat.stdout == 'root:root' or filestat.stdout == 'kubeconfig file not exists'
     - name: Add failed task to list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.4","task_description":"If proxy kubeconfig file exists ensure ownership is set to root:root","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
-      when: filestat.stdout != 'root:root'
+      when: filestat.stdout != 'root:root' and filestat.stdout != 'kubeconfig file not exists'
 ###
 - name: 4.1.5 Ensure that the --kubeconfig kubelet.conf file permissions are set to 600 or more restrictive
   block:
@@ -91,7 +91,7 @@
 ###
 - name: 4.1.7 Ensure that the certificate authorities file permissions are set to 600 or more restrictive
   block:
-    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-client\-ca\-file=[^ ]+" | awk -F= '{print $2}' | xargs stat -c %a || echo "Argument is not set"
+    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-config=[^ ]+" | awk -F= '{print $2}' | xargs cat | grep -oE 'clientCAFile:.*\.crt' | awk -F'[ ]' '{print $2}' | xargs stat -c %a || exit 0
       register: filestat
       changed_when: false
       ignore_errors: yes
@@ -106,7 +106,7 @@
 ###
 - name: 4.1.8 Ensure that the client certificate authorities file ownership is set to root:root
   block:
-    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-client\-ca\-file=[^ ]+" | awk -F= '{print $2}' | xargs stat -c %U:%G || echo "Argument is not set"
+    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-config=[^ ]+" | awk -F= '{print $2}' | xargs cat | grep -oE 'clientCAFile:.*\.crt' | awk -F'[ ]' '{print $2}' | xargs stat -c %U:%G || exit 0
       register: filestat
       changed_when: false
       ignore_errors: yes
@@ -151,7 +151,7 @@
 ###
 - name: 4.2.1 Ensure that the --anonymous-auth argument is set to false
   block:
-    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-anonymous\-auth=[^ ]+" || echo "Argument is not set"
+    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-config=[^ ]+" | awk -F= '{print $2}' | xargs cat | grep -EA1 'anonymous' || exit 0
       register: filestat
       changed_when: false
       ignore_errors: yes
@@ -166,37 +166,37 @@
 ###
 - name: 4.2.2 Ensure that the --authorization-mode argument is not set to AlwaysAllow
   block:
-    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-authorization\-mode=[^ ]+" || echo "Argument is not set"
+    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-config=[^ ]+" | awk -F= '{print $2}' | xargs cat | grep -EA1 'authorization' || exit 0
       register: filestat
       changed_when: false
       ignore_errors: yes
     - name: Add passed task to list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.2","task_description":"Ensure that the --authorization-mode argument is not set to AlwaysAllow","task_status":"PASSED","configuration":filestat.stdout,"script":"" }] }}'
-      when: filestat.stdout != "Argument is not set" and 'AlwaysAllow' not in filestat.stdout
+      when: "'AlwaysAllow' not in filestat.stdout"
     - name: Add failed task to list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.2","task_description":"Ensure that the --authorization-mode argument is not set to AlwaysAllow","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
-      when: "'AlwaysAllow' in filestat.stdout or filestat.stdout == 'Argument is not set'"
+      when: "'AlwaysAllow' in filestat.stdout"
 ###
 - name: 4.2.3 Ensure that the --client-ca-file argument is set as appropriate
   block:
-    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-client\-ca\-file=[^ ]+" || echo "Argument is not set"
+    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-config=[^ ]+" | awk -F= '{print $2}' | xargs cat | grep -oE 'clientCAFile.*\.crt' || exit 0
       register: filestat
       changed_when: false
       ignore_errors: yes
     - name: Add passed task to list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.3","task_description":"Ensure that the --client-ca-file argument is set as appropriate","task_status":"PASSED","configuration":filestat.stdout,"script":"" }] }}'
-      when: filestat.stdout != 'Argument is not set'
+      when: filestat.stdout != ''
     - name: Add failed task to list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.3","task_description":"Ensure that the --client-ca-file argument is set as appropriate","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
-      when: filestat.stdout == 'Argument is not set'
+      when: filestat.stdout == ''
 ###
 - name: 4.2.4 Verify that the --read-only-port argument is set to 0
   block:
-    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-read\-only\-port=[^ ]+" | grep -oE "[0-9]+" || echo "Argument is not set"
+    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-config=[^ ]+" | awk -F= '{print $2}' | xargs sudo cat | grep -E 'readOnlyPort'| grep -oE [0-9]+ || echo "Argument is not set"
       register: filestat
       changed_when: false
       ignore_errors: yes
@@ -211,7 +211,7 @@
 ###
 - name: 4.2.5 Ensure that the --streaming-connection-idle-timeout argument is not set to 0
   block:
-    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-streaming\-connection\-idle\-timeout=[^ ]+" | grep -oE "[0-9]+" || echo "Argument is not set"
+    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-config=[^ ]+" | awk -F= '{print $2}' | xargs sudo cat | grep -E 'streamingConnectionIdleTimeout'| grep -oE [0-9]+ || echo "Argument is not set"
       register: filestat
       changed_when: false
       ignore_errors: yes
@@ -226,7 +226,7 @@
 ###
 - name: 4.2.6 Ensure that the --protect-kernel-defaults argument is set to true
   block:
-    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-protect\-kernel\-defaults=[^ ]+" || echo "Argument is not set"
+    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-config=[^ ]+" | awk -F= '{print $2}' | xargs sudo cat | grep -E 'protectKernelDefaults' || echo "Argument is not set"
       register: filestat
       changed_when: false
       ignore_errors: yes
@@ -241,7 +241,7 @@
 ###
 - name: 4.2.7 Ensure that the --make-iptables-util-chains argument is set to true
   block:
-    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-make\-iptables\-util\-chains=[^ ]+" || echo "Argument is not set"
+    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-config=[^ ]+" | awk -F= '{print $2}' | xargs sudo cat | grep -E 'makeIPTablesUtilChains' || echo "Argument is not set"
       register: filestat
       changed_when: false
       ignore_errors: yes
@@ -271,18 +271,18 @@
 ###
 - name: 4.2.9 Ensure that the --event-qps argument is set to 0 or a level which ensures appropriate event capture
   block:
-    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-event\-qps=[^ ]+" | grep -oE "[0-9]+" || echo "Argument is not set"
+    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-config=[^ ]+" | awk -F= '{print $2}' | xargs sudo cat | grep -E 'eventRecordQPS' || echo "Argument is not set"
       register: filestat
       changed_when: false
       ignore_errors: yes
     - name: Add passed task to list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.9","task_description":"Ensure that the --event-qps argument is set to 0 or a level which ensures appropriate event capture","task_status":"PASSED","configuration":filestat.stdout,"script":"" }] }}'
-      when: filestat.stdout == "0"
+      when: filestat.stdout != "Argument is not set"
     - name: Add failed task to list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.9","task_description":"Ensure that the --event-qps argument is set to 0 or a level which ensures appropriate event capture","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
-      when: filestat.stdout != "0"
+      when: filestat.stdout == "Argument is not set"
 ###
 - name: 4.2.10 Ensure that the --tls-cert-file and --tls-private-key-file arguments are set as appropriate
   block:
@@ -301,18 +301,18 @@
 ###
 - name: 4.2.11 Ensure that the --rotate-certificates argument is not set to false
   block:
-    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-rotate\-certificates=[^ ]+" || echo "Argument is not set"
+    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-config=[^ ]+" | awk -F= '{print $2}' | xargs sudo cat | grep -E 'rotateCertificates' || echo "Argument is not set"
       register: filestat
       changed_when: false
       ignore_errors: yes
     - name: Add passed task to list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.11","task_description":"Ensure that the --rotate-certificates argument is not set to false","task_status":"PASSED","configuration":filestat.stdout,"script":"" }] }}'
-      when: filestat.stdout == '' or 'true' in filestat.stdout
+      when: "'true' in filestat.stdout"
     - name: Add failed task to list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.11","task_description":"Ensure that the --rotate-certificates argument is not set to false","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
-      when: "'false' in filestat.stdout"
+      when: "'true' not in filestat.stdout"
 ###
 - name: 4.2.12 Verify that the RotateKubeletServerCertificate argument is set to true
   block:
@@ -328,9 +328,3 @@
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.12","task_description":"Verify that the RotateKubeletServerCertificate argument is set to true","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
       when: "'true' not in filestat.stdout"
-###
-- name: 4.2.13 Ensure that the Kubelet only makes use of Strong Cryptographic Ciphers
-  block:
-    - name: Add task to list 
-      set_fact:
-        section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.13","task_description":"Ensure that the Kubelet only makes use of Strong Cryptographic Ciphers ","task_status":"NOT CHECKED","configuration":filestat.stdout,"script":"" }] }}'

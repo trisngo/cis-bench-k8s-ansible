@@ -315,21 +315,6 @@
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.21","task_description":"Ensure that the Kubernetes PKI key file permissions are set to 600","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
       when: filestat.stdout != ''
 ############################################################################
-- name: 1.2.1 Ensure that the --anonymous-auth argument is set to false
-  block:
-    - ansible.builtin.shell: ps -ef | grep kube-apiserver | grep -oE "\-\-anonymous\-auth=[^ ]+" || echo "Argument is not set"
-      register: filestat
-      ignore_errors: yes
-      changed_when: false
-    - name: Add passed task to list 
-      set_fact:
-        section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.1","task_description":"Ensure that the --anonymous-auth argument is set to false","task_status":"PASSED","configuration":filestat.stdout,"script":"" }] }}'
-      when: "'false' in filestat.stdout"
-    - name: Add failed task to list 
-      set_fact:
-        section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.1","task_description":"Ensure that the --anonymous-auth argument is set to false","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
-      when: "'false' not in filestat.stdout"
-############################################################################
 - name: 1.2.2 Ensure that the --token-auth-file parameter is not set
   block:
     - ansible.builtin.shell: ps -ef | grep kube-apiserver | grep -oE "\-\-token\-auth\-file=[^ ]+" || echo "Argument is not set"

@@ -16,21 +16,13 @@
   import_tasks: section4/main.yml
   when: inventory_hostname in groups["workers"]
 
-- name: Import section 5 tasks
-  import_tasks: section5/main.yml
-  when: inventory_hostname in groups["masters"]
-
-- name: Import section 5 worker tasks
-  import_tasks: section5/worker.yml
-  when: inventory_hostname in groups["workers"]
-
 - name: Apply Page Template On Masters Node
-  local_action: template src=master_output_template.html.j2 dest=/home/ubuntu/Desktop/master_benchmark_output.html
+  local_action: template src=master_output_template.html.j2 dest=/home/trind/ansible-projects/cis-bench-k8s-ansible/remediationCisAPI/result/minikube/master_benchmark_output.html
   become: false
   when: inventory_hostname in groups["masters"]
 
 - name: Apply Page Template On Worker
-  local_action: template src=worker_output_template.html.j2 dest=/home/ubuntu/Desktop/worker_benchmark_output.html
+  local_action: template src=worker_output_template.html.j2 dest=/home/trind/ansible-projects/cis-bench-k8s-ansible/remediationCisAPI/result/minikube/worker_benchmark_output.html
   become: false
   when: inventory_hostname in groups["workers"]
 
