@@ -7,8 +7,9 @@
     <title>Output</title>
 </head>
 <body>
-    <h1>Report</h1>
-    <table border="1" cellpadding="10">
+    <h1 style="text-align:center">CIS Benchmark Report</h1>
+    <br>
+    <table border="1" cellpadding="10" style="margin-left:auto;margin-right:auto">
         <tr style="background:#fbfcae">
             <th colspan="5">{{ section4 }}</th>
         </tr>
@@ -37,7 +38,11 @@
                 {{ section4_task["task_status"] }}
             </td>
             <td style="max-width:400px;word-wrap: break-word;">{{ section4_task["configuration"] | replace("\n","<br>") }}</td>
+            {% if section4_task["script"]=="Fix it" %} 
+            <td><a href="#" style="background:yellow;text-decoration:none;padding:10px;font-weight:bold">{{ section4_task["script"] }}</a></td>
+            {% else %}
             <td>{{ section4_task["script"] }}</td>
+            {% endif %}   
         </tr>
         {% endfor %}
     </table>

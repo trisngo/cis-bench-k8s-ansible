@@ -12,6 +12,6 @@
   import_tasks: section3/main.yml
   when: inventory_hostname in groups["masters"]
 
-#- name: Task 5 config
-#  import_tasks: section5/main.yml
-#  when: inventory_hostname in groups["workers"]
+- name: Task 4 config
+  import_tasks: section5/main.yml
+  when: inventory_hostname in groups["workers"]

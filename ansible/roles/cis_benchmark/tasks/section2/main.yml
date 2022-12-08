@@ -10,7 +10,7 @@
       when: filestat.stdout_lines|length == 2
     - name: Add failed task to list 
       set_fact:
-        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.1","task_description":"Ensure that the --cert-file and --key-file arguments are set as appropriate","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.1","task_description":"Ensure that the --cert-file and --key-file arguments are set as appropriate","task_status":"FAILED","configuration":filestat.stdout,"script":"Fix it" }] }}'
       when: filestat.stdout_lines|length < 2
 ###
 - name: 2.2 Ensure that the --client-cert-auth argument is set to true
@@ -25,7 +25,7 @@
       when: "'true' in filestat.stdout"
     - name: Add failed task to list 
       set_fact:
-        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.2","task_description":"Ensure that the --client-cert-auth argument is set to true","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.2","task_description":"Ensure that the --client-cert-auth argument is set to true","task_status":"FAILED","configuration":filestat.stdout,"script":"Fix it" }] }}'
       when: "'true' not in filestat.stdout"
 ###
 - name: 2.3 Ensure that the --auto-tls argument is not set to true
@@ -40,7 +40,7 @@
       when: "'true' not in filestat.stdout"
     - name: Add failed task to list 
       set_fact:
-        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.3","task_description":"Ensure that the --auto-tls argument is not set to true","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.3","task_description":"Ensure that the --auto-tls argument is not set to true","task_status":"FAILED","configuration":filestat.stdout,"script":"Fix it" }] }}'
       when: "'true' in filestat.stdout and filestat.stdout != 'Argument is not set'"
 ###
 - name: 2.4 Ensure that the --peer-cert-file and --peer-key-file arguments are set as appropriate
@@ -55,7 +55,7 @@
       when: filestat.stdout_lines|length == 2
     - name: Add failed task to list 
       set_fact:
-        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.4","task_description":"Ensure that the --peer-cert-file and --peer-key-file arguments are set as appropriate","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.4","task_description":"Ensure that the --peer-cert-file and --peer-key-file arguments are set as appropriate","task_status":"FAILED","configuration":filestat.stdout,"script":"Fix it" }] }}'
       when: filestat.stdout_lines|length < 2
 ###
 - name: 2.5 Ensure that the --peer-client-cert-auth argument is set to true
@@ -70,7 +70,7 @@
       when: "'true' in filestat.stdout"
     - name: Add failed task to list 
       set_fact:
-        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.5","task_description":"Ensure that the --peer-client-cert-auth argument is set to true","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.5","task_description":"Ensure that the --peer-client-cert-auth argument is set to true","task_status":"FAILED","configuration":filestat.stdout,"script":"Fix it" }] }}'
       when: "'true' not in filestat.stdout"
 ###
 - name: 2.6 Ensure that the --peer-auto-tls argument is not set to true
@@ -81,11 +81,11 @@
       changed_when: false
     - name: Add passed task to list 
       set_fact:
-        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.6","task_description":"Ensure that the --peer-auto-tls argument is not set to true","task_status":"PASSED","configuration":filestat.stdout,"script":"" }] }}'
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.6","task_description":"Ensure that the --peer-auto-tls argument is not set to true","task_status":"PASSED","configuration":"Argument is not set to true","script":"" }] }}'
       when: "'false' in filestat.stdout or filestat.stdout == 'Argument is not set'"
     - name: Add failed task to list 
       set_fact:
-        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.6","task_description":"Ensure that the --peer-auto-tls argument is not set to true","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.6","task_description":"Ensure that the --peer-auto-tls argument is not set to true","task_status":"FAILED","configuration":filestat.stdout,"script":"Fix it" }] }}'
       when: "'false' not in filestat.stdout and filestat.stdout != 'Argument is not set'"
 ###
 - name: 2.7 Ensure that a unique Certificate Authority is used for etcd
@@ -100,11 +100,11 @@
       changed_when: false
     - name: Add passed task to list 
       set_fact:
-        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.7","task_description":"Ensure that a unique Certificate Authority is used for etcd","task_status":"PASSED","configuration":filestat.stdout,"script":"" }] }}'
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.7","task_description":"Ensure that a unique Certificate Authority is used for etcd","task_status":"PASSED","configuration":file1.stdout + " - " + file2.stdout ,"script":"" }] }}'
       when: file1.stdout != '' and file2.stdout != '' and file1.stdout != file2.stdout
     - name: Add failed task to list 
       set_fact:
-        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.7","task_description":"Ensure that a unique Certificate Authority is used for etcd","task_status":"FAILED","configuration":filestat.stdout,"script":"Script here" }] }}'
+        section2_tasks: '{{ section2_tasks + [{ "task_number":"2.7","task_description":"Ensure that a unique Certificate Authority is used for etcd","task_status":"FAILED","configuration":"Unique Certificate Authority is not used for etcd","script":"Fix it" }] }}'
       when: 
         - file1.stdout == '' or file2.stdout == ''
         - file1.stdout != '' and file2.stdout != '' and file1.stdout == file2.stdout

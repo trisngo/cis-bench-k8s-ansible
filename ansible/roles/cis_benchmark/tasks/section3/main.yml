@@ -11,5 +11,5 @@
       when: filestat.stdout != ''
     - name: Add failed task to list 
       set_fact:
-        section3_tasks: '{{ section3_tasks + [{ "task_number":"3.2.1","task_description":"Ensure that a minimal audit policy is created","task_status":"FAILED","configuration":"Argument is not set","script":"Script here" }] }}'
+        section3_tasks: '{{ section3_tasks + [{ "task_number":"3.2.1","task_description":"Ensure that a minimal audit policy is created","task_status":"FAILED","configuration":"Minimal audit policy is not created","script":"Fix it" }] }}'
       when: filestat.stdout == ''
