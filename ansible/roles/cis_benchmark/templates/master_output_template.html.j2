@@ -9,6 +9,9 @@
 <body>
     <h1 style="text-align:center">CIS Benchmark Report</h1>
     <br>
+    <h2 style="margin-left:15px"> Master node: 192.168.49.2 </h2>
+    <h2 style="margin-left:15px"> Benchmark time: 16:30:21 11/12/2022 </h2>
+    <br>
     <table border="1" cellpadding="10" style="margin-left:auto;margin-right:auto">
         <tr style="background:#fbfcae">
             <th colspan="5">{{ section1 }}</th>
@@ -18,7 +21,7 @@
             <td style="text-align:center">Description</td>
             <td style="text-align:center">Task status</td>
             <td style="text-align:center">Your configuration</td>
-            <td style="text-align:center">Remediation Script</td>
+            <td style="text-align:center">Hardening</td>
         </tr>
         {% for section1_task in section1_tasks %}
         <tr>
@@ -39,7 +42,7 @@
             </td>
             <td style="max-width:400px; word-wrap: break-word;">{{ section1_task["configuration"] | replace("\n","<br>") }}</td>
             {% if section1_task["script"]=="Fix it" %} 
-            <td><a href="#" style="background:yellow;text-decoration:none;padding:10px;font-weight:bold">{{ section1_task["script"] }}</a></td>
+            <td style="text-align:center"><a href="#" style="background:yellow;text-decoration:none;padding:10px;font-weight:bold">{{ section1_task["script"] }}</a></td>
             {% else %}
             <td>{{ section1_task["script"] }}</td>
             {% endif %}   
@@ -53,7 +56,7 @@
             <td style="text-align:center">Description</td>
             <td style="text-align:center">Task status</td>
             <td style="text-align:center">Your configuration</td>
-            <td style="text-align:center">Remediation Script</td>
+            <td style="text-align:center">Hardening</td>
         </tr>
         {% for section2_task in section2_tasks %}
         <tr>
@@ -74,7 +77,7 @@
             </td>
             <td style="max-width:400px;word-wrap: break-word;">{{ section2_task["configuration"] | replace("\n","<br>") }}</td>
             {% if section2_task["script"]=="Fix it" %} 
-            <td><a href="#" style="background:yellow;text-decoration:none;padding:10px;font-weight:bold">{{ section2_task["script"] }}</a></td>
+            <td style="text-align:center"><a href="#" style="background:yellow;text-decoration:none;padding:10px;font-weight:bold">{{ section2_task["script"] }}</a></td>
             {% else %}
             <td>{{ section2_task["script"] }}</td>
             {% endif %}   
@@ -88,7 +91,7 @@
             <td style="text-align:center">Description</td>
             <td style="text-align:center">Task status</td>
             <td style="text-align:center">Your configuration</td>
-            <td style="text-align:center">Remediation Script</td>
+            <td style="text-align:center">Hardening</td>
         </tr>
         {% for section3_task in section3_tasks %}
         <tr>
@@ -109,7 +112,7 @@
             </td>
             <td style="max-width:400px;word-wrap: break-word;">{{ section3_task["configuration"] | replace("\n","<br>") }}</td>
             {% if section3_task["script"]=="Fix it" %} 
-            <td><a href="#" style="background:yellow;text-decoration:none;padding:10px;font-weight:bold">{{ section3_task["script"] }}</a></td>
+            <td style="text-align:center"><a href="#" style="background:yellow;text-decoration:none;padding:10px;font-weight:bold">{{ section3_task["script"] }}</a></td>
             {% else %}
             <td>{{ section3_task["script"] }}</td>
             {% endif %}   
