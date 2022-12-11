@@ -854,3 +854,8 @@
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.4.2","task_description":"Ensure that the --bind-address argument is set to 127.0.0.1","task_status":"FAILED","configuration":filestat.stdout,"script":"Fix it" }] }}'
       when: "'127.0.0.1' not in filestat.stdout"
+- name: Count Section 1 passed tasks
+  set_fact:
+    master_passed_tasks_count: '{{ master_passed_tasks_count | int + 1 }}'
+  loop: "{{ section1_tasks | flatten(levels=1) }}"
+  when: item.task_status == "PASSED"

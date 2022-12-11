@@ -328,3 +328,8 @@
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.12","task_description":"Verify that the RotateKubeletServerCertificate argument is set to true","task_status":"FAILED","configuration":filestat.stdout,"script":"Fix it" }] }}'
       when: "'true' not in filestat.stdout"
+- name: Count Section 4 passed tasks
+  set_fact:
+    worker_passed_tasks_count: '{{ worker_passed_tasks_count | int + 1 }}'
+  loop: "{{ section4_tasks | flatten(levels=1) }}"
+  when: item.task_status == "PASSED"

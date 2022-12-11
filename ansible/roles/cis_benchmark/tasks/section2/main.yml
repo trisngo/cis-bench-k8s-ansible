@@ -108,4 +108,8 @@
       when: 
         - file1.stdout == '' or file2.stdout == ''
         - file1.stdout != '' and file2.stdout != '' and file1.stdout == file2.stdout
-###
+- name: Count Section 2 passed tasks
+  set_fact:
+    master_passed_tasks_count: '{{ master_passed_tasks_count | int + 1 }}'
+  loop: "{{ section2_tasks | flatten(levels=1) }}"
+  when: item.task_status == "PASSED"
