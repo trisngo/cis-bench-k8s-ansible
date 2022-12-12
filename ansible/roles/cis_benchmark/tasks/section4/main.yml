@@ -328,6 +328,22 @@
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.12","task_description":"Verify that the RotateKubeletServerCertificate argument is set to true","task_status":"FAILED","configuration":filestat.stdout,"script":"Fix it" }] }}'
       when: "'true' not in filestat.stdout"
+############################################################################
+- name: 4.2.13 Ensure that the Kubelet only makes use of Strong Cryptographic Ciphers
+  block:
+    - ansible.builtin.shell: ps -ef | grep kubelet | grep -oE "\-\-tls\-cipher\-suites=[^ ]+" | grep -E "(TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256|TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256|TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305|TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305|TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384|TLS_RSA_WITH_AES_256_GCM_SHA384|TLS_RSA_WITH_AES_128_GCM_SHA256)" || echo "Argument is not set or not appropriately configured"
+      register: filestat
+      ignore_errors: yes
+      changed_when: false
+    - name: Add passed task to list 
+      set_fact:
+        section1_tasks: '{{ section4_tasks + [{ "task_number":"4.2.13","task_description":"Ensure that the API Server only makes use of Strong Cryptographic Ciphers","task_status":"PASSED","configuration":filestat.stdout,"script":"" }] }}'
+      when: filestat.stdout != 'Argument is not set or not appropriately configured'
+    - name: Add failed task to list 
+      set_fact:
+        section1_tasks: '{{ section4_tasks + [{ "task_number":"4.2.13","task_description":"Ensure that the API Server only makes use of Strong Cryptographic Ciphers","task_status":"FAILED","configuration":filestat.stdout,"script":"Fix it" }] }}'
+      when: filestat.stdout == 'Argument is not set or not appropriately configured'
+############################################################################
 - name: Count Section 4 passed tasks
   set_fact:
     worker_passed_tasks_count: '{{ worker_passed_tasks_count | int + 1 }}'
