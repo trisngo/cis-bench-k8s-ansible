@@ -3,6 +3,7 @@
 - name: cis benchmark
   hosts: k8s
   become: true
+  gather_facts: no
 
   roles:
       - cis_benchmark_config
