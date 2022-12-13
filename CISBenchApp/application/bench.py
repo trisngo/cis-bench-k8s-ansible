@@ -14,8 +14,8 @@ def make_unique(string):
     ident = uuid4().__str__()
     return f"{ident}-{string}"
 
-@bench.route('/select_ip_mini', methods=['GET', 'POST'])
-def select_ip_mini():
+@bench.route('/enter_ip_mini', methods=['GET', 'POST'])
+def enter_ip_mini():
     post_data = '{"task": ["3.1.1", "3.2.2", "3.3.1"]}'
     if request.method == 'POST':
         session['ip_0'] = request.form.get('ip_0')
@@ -25,7 +25,7 @@ def select_ip_mini():
             for i in range (0,int(numWorker)):
                 session["ip_%s" % (i + 1)] = request.form.get("ip_%s" % (i + 1))
         return redirect(url_for('bench.upload_key_mini'))
-    return render_template("home.html")
+    return render_template("enter_ip.html")
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -81,7 +81,7 @@ def overview():
     print(listFile)
     return render_template("overview.html", ips=listIP, files=listFile)
 
-@bench.route('/run_bench', methods=['GET'])
+@bench.route('/run', methods=['GET'])
 def run_bench():
     numWorker = session.get('num_worker')
     listIP = []

@@ -29,8 +29,10 @@ def create_app():
 
     from .views import views
     from .bench import bench
+    from .remediation import remediation
 
     app.register_blueprint(views, url_prefix='/')
-    app.register_blueprint(bench, url_prefix='/')
-
+    app.register_blueprint(bench, url_prefix='/bench')
+    app.register_blueprint(remediation, url_prefix='/remediation')
+    
     return app

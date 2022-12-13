@@ -171,6 +171,7 @@ cython_debug/
 # End of https://www.toptal.com/developers/gitignore/api/flask
 
 report/
-remediationCisAPI/venv
-remediationCisAPI/logs/playbook_logs/playbook_*
-remediationCisAPI/logs/access_*
+CISBenchApp/venv
+CISBenchApp/logs/playbook_logs/playbook_*
+CISBenchApp/logs/access_*
+CISBenchApp/upload
