@@ -1,4 +1,3 @@
-###
 - name: 3.2.1 Ensure that a minimal audit policy is created
   block:
     - ansible.builtin.shell: ps -ef | grep kube-apiserver | grep -oE "\-\-audit\-policy\-file=[^ ]+" || exit 0

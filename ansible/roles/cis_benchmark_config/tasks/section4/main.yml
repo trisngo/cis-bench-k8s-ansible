@@ -63,14 +63,8 @@
     insertafter: "syncFrequency: 0s"
     line: 'tlsCipherSuites: [TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256]'
     firstmatch: yes
-#- name: 4.2.13 Ensure that the Kubelet only makes use of Strong Cryptographic Ciphers
-#  lineinfile:
-#    path: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
-#    backrefs: yes
-#    regexp: "(.*--node-ip=[^\n]+)" 
-#    line: '\1 --tls-ciphersuites=TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256'
-#    firstmatch: yes
-- name: Reload daemon
-  ansible.builtin.shell: systemctl daemon-reload
-- name: Restart service
-  ansible.builtin.shell: systemctl restart kubelet.service
+- name: Restart kubelet service
+  ansible.builtin.systemd:
+    state: restarted
+    daemon_reload: yes
+    name: kubelet
