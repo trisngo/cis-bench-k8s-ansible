@@ -1,0 +1,19 @@
+- name: 3.2.1 Ensure that a minimal audit policy is created
+  block:
+    - ansible.builtin.shell: ps -ef | grep kube-apiserver | grep -oE "\-\-audit\-policy\-file=[^ ]+" || exit 0
+      register: result
+      ignore_errors: yes
+      changed_when: false
+    - name: Add passed task to list 
+      set_fact:
+        section3_tasks: '{{ section3_tasks + [{ "task_number":"3.2.1","task_description":"Ensure that a minimal audit policy is created","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
+      when: result.stdout != ''
+    - name: Add failed task to list 
+      set_fact:
+        section3_tasks: '{{ section3_tasks + [{ "task_number":"3.2.1","task_description":"Ensure that a minimal audit policy is created","task_status":"FAILED","configuration":"Minimal audit policy is not created","script":"Fix it" }] }}'
+      when: result.stdout == ''
+- name: Count Section 3 passed tasks
+  set_fact:
+    master_passed_tasks_count: '{{ master_passed_tasks_count | int + 1 }}'
+  loop: "{{ section3_tasks | flatten(levels=1) }}"
+  when: item.task_status == "PASSED"

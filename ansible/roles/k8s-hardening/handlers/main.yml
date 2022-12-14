@@ -1,0 +1,7 @@
+---
+# handlers file for cis_benchmark_config
+- name: Restart kubelet service
+  ansible.builtin.systemd:
+    state: restarted
+    daemon_reload: yes
+    name: kubelet

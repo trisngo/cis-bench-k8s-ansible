@@ -1,7 +1,7 @@
 [masters]
-192.168.49.2 ansible_ssh_private_key_file=/home/trind/ansible-projects/cis-bench-k8s-ansible/CISBenchApp/upload/1f02c437-2ebc-44a6-8394-384ce6e751f1-id_rsa
+192.168.49.2 ansible_ssh_private_key_file=/home/trind/ansible-projects/cis-bench-k8s-ansible/CISBenchApp/upload/c154fe49-9a34-450d-8d81-0d047245c361-id_rsa
 [workers]
-192.168.49.3 ansible_ssh_private_key_file=/home/trind/ansible-projects/cis-bench-k8s-ansible/CISBenchApp/upload/aee26883-6fe7-4651-8fa3-680060bb33f1-id_rsa
+192.168.49.3 ansible_ssh_private_key_file=/home/trind/ansible-projects/cis-bench-k8s-ansible/CISBenchApp/upload/f22d0ce5-fc21-424c-8980-5542726f07c2-id_rsa
 [k8s:children]
 masters
 workers

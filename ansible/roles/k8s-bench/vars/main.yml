@@ -1,0 +1,9 @@
+---
+# vars file for cis_benchmark
+master_passed_tasks_count: 0
+worker_passed_tasks_count: 0
+section1_tasks: []
+section2_tasks: []
+section3_tasks: []
+section4_tasks: []
+section5_tasks: []

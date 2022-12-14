@@ -19,7 +19,8 @@ def enter_ip_mini():
     post_data = '{"task": ["3.1.1", "3.2.2", "3.3.1"]}'
     if request.method == 'POST':
         session['ip_0'] = request.form.get('ip_0')
-        numWorker = request.form.get('num_worker')
+        # numWorker = request.form.get('num_worker')
+        numWorker = 1
         session['num_worker'] = numWorker
         if (numWorker != 0 ):
             for i in range (0,int(numWorker)):
@@ -95,6 +96,9 @@ def run_bench():
     print(listIP)
     print(listFile)
 
+    now = datetime.datetime.now()
+    dt = now.strftime("%d/%m/%Y %H:%M:%S")
+    session['bench_time'] = dt
     print("Request received1")
     writeInventory_mini(listIP, listFile)
     bench_mini()
@@ -150,8 +154,14 @@ def bench_mini():
 
 @bench.route('/result/<name>', methods=['GET'])
 def result(name):
+    today = datetime.datetime.now(datetime.timezone.utc)
+    bench_time = session['bench_time']
+    date = today.strftime("%Y-%m-%d")
+    
     if name == "master":
-        return render_template("result/minikube/master_benchmark_output.html")
+        ip_address = session['ip_0']
+        return render_template("result/minikube/master_benchmark_%s.html" % (date), ip_address=ip_address, bench_time=bench_time)
     if name == "worker":
-        return render_template("result/minikube/worker_benchmark_output.html")
+        ip_address = session['ip_1']
+        return render_template("result/minikube/worker_benchmark_%s.html" % (date), ip_address=ip_address, bench_time=bench_time)
     return redirect(request.url)

@@ -1,0 +1,9 @@
+---
+
+- name: Minikube Hardening
+  hosts: k8s
+  become: true
+  gather_facts: no
+
+  roles:
+      - k8s-hardening

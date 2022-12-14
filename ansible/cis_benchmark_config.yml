@@ -1,8 +1,0 @@
----
-
-- name: cis benchmark
-  hosts: k8s
-  become: true
-
-  roles:
-      - cis_benchmark_config

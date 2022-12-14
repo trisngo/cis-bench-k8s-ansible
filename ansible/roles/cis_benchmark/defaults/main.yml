@@ -1,8 +1,0 @@
----
-# defaults file for cis_benchmark
-report_default_path: /home/ubuntu/Desktop/
-section1: "Section 1"
-section2: "Section 2"
-section3: "Section 3"
-section4: "Section 4"
-section5: "Section 5"

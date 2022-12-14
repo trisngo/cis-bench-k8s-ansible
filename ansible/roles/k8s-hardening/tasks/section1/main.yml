@@ -1,0 +1,196 @@
+- name: 1.1.9 Ensure that the Container Network Interface file permissions are set to 600 or more restrictive
+  ansible.builtin.shell: chmod 600 /etc/cni/net.d/*.conf
+  tags:
+    - 1.1.9
+
+- name: 1.1.12 Ensure that the etcd data directory ownership is set to etcd:etcd
+  ansible.builtin.file:
+    path: /var/lib/minikube/etcd
+    owner: root
+    group: root
+  tags:
+    - 1.1.12
+
+- name: 1.1.20 Ensure that the Kubernetes PKI certificate file permissions are set to 600 or more restrictive (Manual)
+  ansible.builtin.shell: chmod 600 /var/lib/minikube/certs/*.crt
+  tags:
+    - 1.1.20
+  
+- name: 1.2.5 Ensure that the --kubelet-certificate-authority argument is set as appropriate
+  lineinfile:
+    path: /etc/kubernetes/manifests/kube-apiserver.yaml
+    insertbefore: "image:" 
+    line: "    - --kubelet-certificate-authority=/var/lib/minikube/certs/ca.crt"
+    firstmatch: yes
+  tags:
+    - 1.2.5
+
+- name: 1.2.9 Ensure that the admission control plugin EventRateLimit is set (Manual)
+  block:
+    - name: Copy config file 1
+      copy:
+        src: admission.yaml
+        dest: /var/lib/minikube/certs/admission.yaml
+    - name: Copy config file 2
+      copy:
+        src: eventconfig.yaml
+        dest: /var/lib/minikube/certs/eventconfig.yaml
+    - name: Add new argument 1
+      lineinfile:
+        path: /etc/kubernetes/manifests/kube-apiserver.yaml
+        backrefs: yes
+        regexp: "^(    - --enable-admission-plugins=[^\n]+)" 
+        line: '\1,EventRateLimit'
+        firstmatch: yes
+    - name: Add new argument 2
+      lineinfile:
+        path: /etc/kubernetes/manifests/kube-apiserver.yaml
+        insertbefore: "image:" 
+        line: '    - --admission-control-config-file=/var/lib/minikube/certs/admission.yaml'
+        firstmatch: yes
+  tags:
+    - 1.2.9
+
+- name: 1.2.11 Ensure that the admission control plugin AlwaysPullImages is set
+  lineinfile:
+    path: /etc/kubernetes/manifests/kube-apiserver.yaml
+    backrefs: yes
+    regexp: "^(    - --enable-admission-plugins=[^\n]+)" 
+    line: '\1,AlwaysPullImages'
+    firstmatch: yes
+  tags:
+    - 1.2.11
+  
+- name: 1.2.12 Ensure that the admission control plugin SecurityContextDeny is set if PodSecurityPolicy is not used
+  lineinfile:
+    path: /etc/kubernetes/manifests/kube-apiserver.yaml
+    backrefs: yes
+    regexp: "^(    - --enable-admission-plugins=[^\n]+)" 
+    line: '\1,SecurityContextDeny'
+    firstmatch: yes
+  tags:
+    - 1.2.12
+
+- name: 1.2.17 Ensure that the --profiling argument is set to false
+  lineinfile:
+    path: /etc/kubernetes/manifests/kube-apiserver.yaml
+    insertbefore: "image:" 
+    line: "    - --profiling=false"
+    firstmatch: yes
+  tags:
+    - 1.2.17
+  
+- name: 1.2.18 Ensure that the --audit-log-path argument is set
+  lineinfile:
+    path: /etc/kubernetes/manifests/kube-apiserver.yaml
+    insertbefore: "image:" 
+    line: "    - --audit-log-path=/home/docker/audit/audit.log"
+    firstmatch: yes
+  tags:
+    - 1.2.18
+  
+- name: 1.2.19 Ensure that the --audit-log-maxage argument is set to 30 or as appropriate
+  lineinfile:
+    path: /etc/kubernetes/manifests/kube-apiserver.yaml
+    insertbefore: "image:" 
+    line: "    - --audit-log-maxage=30"
+    firstmatch: yes
+  tags:
+    - 1.2.19
+
+- name: 1.2.20 Ensure that the --audit-log-maxbackup argument is set to 10 or as appropriate
+  lineinfile:
+    path: /etc/kubernetes/manifests/kube-apiserver.yaml
+    insertbefore: "image:" 
+    line: "    - --audit-log-maxbackup=10"
+    firstmatch: yes
+  tags:
+    - 1.2.20
+
+- name: 1.2.21 Ensure that the --audit-log-maxsize argument is set to 100 or as appropriate
+  lineinfile:
+    path: /etc/kubernetes/manifests/kube-apiserver.yaml
+    insertbefore: "image:" 
+    line: "    - --audit-log-maxsize=100"
+    firstmatch: yes
+  tags:
+    - 1.2.21
+  
+- name: 1.2.22 Ensure that the --request-timeout argument is set as appropriate 
+  lineinfile:
+    path: /etc/kubernetes/manifests/kube-apiserver.yaml
+    insertbefore: "image:" 
+    line: "    - --request-timeout=300s"
+    firstmatch: yes
+  tags:
+    - 1.2.22
+
+- name: 1.2.23 Ensure that the --service-account-lookup argument is set to true
+  lineinfile:
+    path: /etc/kubernetes/manifests/kube-apiserver.yaml
+    insertbefore: "image:" 
+    line: "    - --service-account-lookup=true"
+    firstmatch: yes
+  tags:
+    - 1.2.23
+
+- name: 1.2.29 Ensure that the --encryption-provider-config argument is set as appropriate
+  block:
+    - name: Copy config file
+      copy:
+        src: encryptionconfig.yaml
+        dest: /var/lib/minikube/certs/encryptionconfig.yaml
+    - name: Add new argument
+      lineinfile:
+        path: /etc/kubernetes/manifests/kube-apiserver.yaml
+        insertbefore: "image:" 
+        line: '    - --encryption-provider-config=/var/lib/minikube/certs/encryptionconfig.yaml'
+        firstmatch: yes
+  tags:
+    - 1.2.29
+    - 1.2.30
+
+- name: 1.2.31 Ensure that the API Server only makes use of Strong Cryptographic Ciphers 
+  lineinfile:
+    path: /etc/kubernetes/manifests/kube-apiserver.yaml
+    insertbefore: "image:" 
+    line: "    - --tls-cipher-suites=TLS_AES_128_GCM_SHA256,TLS_AES_256_GCM_SHA384,TLS_CHACHA20_POLY1305_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256,TLS_RSA_WITH_3DES_EDE_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_256_GCM_SHA384"
+    firstmatch: yes
+  tags:
+    - 1.2.31
+
+- name: 1.3.1 Ensure that the --terminated-pod-gc-threshold argument is set as appropriate 
+  lineinfile:
+    path: /etc/kubernetes/manifests/kube-controller-manager.yaml
+    insertbefore: "image:" 
+    line: "    - --terminated-pod-gc-threshold=10"
+    firstmatch: yes
+  tags:
+    - 1.3.1
+
+- name: 1.3.2 Ensure that the --profiling argument is set to false
+  lineinfile:
+    path: /etc/kubernetes/manifests/kube-controller-manager.yaml
+    insertbefore: "image:" 
+    line: "    - --profiling=false"
+    firstmatch: yes
+  tags:
+    - 1.3.2
+
+- name: 1.3.6 Ensure that the RotateKubeletServerCertificate argument is set to true 
+  lineinfile:
+    path: /etc/kubernetes/manifests/kube-controller-manager.yaml
+    insertbefore: "image:" 
+    line: "    - --feature-gates=RotateKubeletServerCertificate=true"
+    firstmatch: yes
+  tags:
+    - 1.3.6
+
+- name: 1.4.1 Ensure that the --profiling argument is set to false
+  lineinfile:
+    path: /etc/kubernetes/manifests/kube-scheduler.yaml
+    insertbefore: "image:" 
+    line: "    - --profiling=false"
+    firstmatch: yes
+  tags:
+    - 1.4.1
