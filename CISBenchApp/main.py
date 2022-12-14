@@ -13,6 +13,7 @@ if __name__ == '__main__':
         # config_get("remediation", "path")
         # config_get("data_store", "dir")
         UPLOAD_FOLDER = config_get("data_store", "dir")
+        app.config['TEMPLATES_AUTO_RELOAD'] = True
         # app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
         app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
         app.run(host=config_get("web_server", "host"), port=int(config_get("web_server", "port")), debug=False, threaded=True)

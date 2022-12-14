@@ -29,8 +29,10 @@ def create_app():
 
     from .views import views
     from .bench import bench
+    from .harden import harden
 
     app.register_blueprint(views, url_prefix='/')
-    app.register_blueprint(bench, url_prefix='/')
-
+    app.register_blueprint(bench, url_prefix='/bench')
+    app.register_blueprint(harden, url_prefix='/harden')
+    
     return app

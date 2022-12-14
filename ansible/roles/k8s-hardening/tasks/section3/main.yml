@@ -1,0 +1,34 @@
+- name: 3.2.1 Ensure that a minimal audit policy is created
+  block:
+    - name: create directory with parent directories
+      file:
+        path: /home/docker/audit/
+        state: directory
+    - name: Copy config file
+      copy:
+        src: policy.yaml
+        dest: /home/docker/audit/policy.yaml
+    - name: Set config parameter
+      lineinfile:
+        path: /etc/kubernetes/manifests/kube-apiserver.yaml
+        insertbefore: "image:" 
+        line: "    - --audit-policy-file=/home/docker/audit/policy.yaml"
+        firstmatch: yes
+    - name: Update volume section 1
+      lineinfile:
+        path: /etc/kubernetes/manifests/kube-apiserver.yaml
+        insertafter: "volumeMounts:" 
+        line: "    - mountPath: /home/docker/audit/policy.yaml\n      name: audit\n      readOnly: true\n    - mountPath: /home/docker/audit/audit.log\n      name: audit-log\n      readOnly: false"
+        firstmatch: yes
+    - name: Update volume section 2
+      lineinfile:
+        path: /etc/kubernetes/manifests/kube-apiserver.yaml
+        insertafter: "volumes:" 
+        line: "  - hostPath:\n      path: /home/docker/audit/policy.yaml\n      type: File\n    name: audit\n  - hostPath:\n      path: /home/docker/audit/audit.log\n      type: FileOrCreate\n    name: audit-log"
+        firstmatch: yes
+  tags:
+    - 3.2.1
+    # - 1.2.18
+    # - 1.2.19
+    # - 1.2.20
+    # - 1.2.21 

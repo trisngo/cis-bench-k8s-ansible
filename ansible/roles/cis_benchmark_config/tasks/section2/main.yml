@@ -1,6 +1,0 @@
-- name: 2.3 Ensure that the --auto-tls argument is not set to true
-  lineinfile:
-    path: /etc/kubernetes/manifests/etcd.yaml
-    insertbefore: "image:" 
-    line: "    - --auto-tls=false"
-    firstmatch: yes

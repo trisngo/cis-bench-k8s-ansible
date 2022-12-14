@@ -1,0 +1,126 @@
+- name: 4.1.1 Ensure that the kubelet service file permissions are set to 600 or more restrictive
+  ansible.builtin.file:
+    path: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+    mode: '0600'
+  tags:
+    - 4.1.1
+  notify:
+    - Restart kubelet service
+
+
+- name: 4.1.7 Ensure that the certificate authorities file permissions are set to 600 or more restrictive
+  ansible.builtin.file:
+    path: /var/lib/minikube/certs/ca.crt
+    mode: '0600'
+  tags:
+    - 4.1.7
+  notify:
+    - Restart kubelet service
+
+- name: 4.1.8 Ensure that the client certificate authorities file ownership is set to root:root
+  ansible.builtin.file:
+    path: /var/lib/minikube/certs/ca.crt
+    owner: root
+    group: root
+  tags:
+    - 4.1.8
+  notify:
+    - Restart kubelet service
+
+- name: 4.1.9 If the kubelet config.yaml configuration file is being used validate permissions set to 600 or more restrictive
+  ansible.builtin.file:
+    path: /var/lib/kubelet/config.yaml
+    mode: '0600'
+  tags:
+    - 4.1.9
+  notify:
+    - Restart kubelet service
+
+- name: 4.2.4 Verify that the --read-only-port argument is set to 0
+  lineinfile:
+    path: /var/lib/kubelet/config.yaml
+    insertbefore: "rotateCertificates: true"
+    line: 'readOnlyPort: 0'
+    firstmatch: yes
+  tags:
+    - 4.2.4
+  notify:
+    - Restart kubelet service
+
+- name: 4.2.5 Ensure that the --streaming-connection-idle-timeout argument is not set to 0
+  lineinfile:
+    path: /var/lib/kubelet/config.yaml
+    regexp: "streamingConnectionIdleTimeout: 0s"
+    line: 'streamingConnectionIdleTimeout: 4h'
+    firstmatch: yes
+  tags:
+    - 4.2.5
+  notify:
+    - Restart kubelet service
+
+- name: 4.2.6 Ensure that the --protect-kernel-defaults argument is set to true
+  lineinfile:
+    path: /var/lib/kubelet/config.yaml
+    insertbefore: "rotateCertificates: true"
+    line: 'protectKernelDefaults: true'
+    firstmatch: yes
+  tags:
+    - 4.2.6
+  notify:
+    - Restart kubelet service
+    
+- name: 4.2.7 Ensure that the --make-iptables-util-chains argument is set to true
+  lineinfile:
+    path: /var/lib/kubelet/config.yaml
+    insertafter: "imageMinimumGCAge: 0s"
+    line: 'makeIPTablesUtilChains: true'
+    firstmatch: yes
+  tags:
+    - 4.2.7
+  notify:
+    - Restart kubelet service
+
+- name: 4.2.8 Ensure that the --hostname-override argument is not set
+  replace:
+    path: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+    regexp: '(--hostname-override=[^\s]+\s)'
+    replace: ''
+  tags:
+    - 4.2.8
+  notify:
+    - Restart kubelet service
+  
+- name: 4.2.9 Ensure that the --event-qps argument is set to 0 or a level which ensures appropriate event capture
+  lineinfile:
+    path: /var/lib/kubelet/config.yaml
+    insertafter: "evictionPressureTransitionPeriod: 0s"
+    line: 'eventRecordQPS: 5'
+    firstmatch: yes
+  tags:
+    - 4.2.9
+  notify:
+    - Restart kubelet service
+
+- name: 4.2.12 Verify that the RotateKubeletServerCertificate argument is set to true 
+  lineinfile:
+    path: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+    backrefs: yes
+    regexp: "(.*--node-ip=[^\n]+)" 
+    line: '\1 --feature-gates=RotateKubeletServerCertificate=true'
+    firstmatch: yes
+  tags:
+    - 4.2.12
+  notify:
+    - Restart kubelet service
+
+- name: 4.2.13 Ensure that the Kubelet only makes use of Strong Cryptographic Ciphers
+  lineinfile:
+    path: /var/lib/kubelet/config.yaml
+    insertafter: "syncFrequency: 0s"
+    line: 'tlsCipherSuites: [TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256]'
+    firstmatch: yes
+  tags:
+    - 4.2.9
+  notify:
+    - Restart kubelet service
+
