@@ -1,6 +1,6 @@
 ---
 # defaults file for cis_benchmark
-report_default_path: /home/trind/ansible-projects/cis-bench-k8s-ansible/CISBenchApp/application/templates/result/minikube
+report_default_path: /home/ubuntu/Desktop/cis-bench-k8s-ansible/CISBenchApp/application/templates/result/minikube
 section1: "Section 1"
 section2: "Section 2"
 section3: "Section 3"
