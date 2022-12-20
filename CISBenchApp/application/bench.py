@@ -62,7 +62,7 @@ def upload(name):
             ip_index = request.form.get('ip')
             filename = secure_filename(file.filename)
             unique_filename = make_unique(filename)
-            file.save(os.path.join("/home/trind/ansible-projects/cis-bench-k8s-ansible/CISBenchApp/upload", unique_filename))
+            file.save(os.path.join("/home/ubuntu/Desktop/cis-bench-k8s-ansible/CISBenchApp/upload", unique_filename))
             session['filename_%s' % ip_index] = unique_filename
             return redirect(url_for('bench.upload_key_mini'))
     return render_template("upload.html", name=name)
@@ -110,7 +110,7 @@ def writeInventory_mini(listIP, listFile):
 
     file_name = config_get("ansible", "inventory")
 
-    masterSsh = os.path.join("/home/trind/ansible-projects/cis-bench-k8s-ansible/CISBenchApp/upload", listFile[0])
+    masterSsh = os.path.join("/home/ubuntu/Desktop/cis-bench-k8s-ansible/CISBenchApp/upload", listFile[0])
 
     cmd = ["chmod", "600", "%s" % masterSsh]
     subprocess.run(cmd)
@@ -121,7 +121,7 @@ def writeInventory_mini(listIP, listFile):
     hosts_data += "[workers]\n" 
 
     for i in range(1,len(listIP)):
-        workerSsh = os.path.join("/home/trind/ansible-projects/cis-bench-k8s-ansible/CISBenchApp/upload", listFile[i])
+        workerSsh = os.path.join("/home/ubuntu/Desktop/cis-bench-k8s-ansible/CISBenchApp/upload", listFile[i])
         cmd = ["chmod", "600", "%s" % workerSsh]
         subprocess.run(cmd)
         hosts_data += "%s ansible_ssh_private_key_file=%s\n" % (listIP[i], workerSsh)
