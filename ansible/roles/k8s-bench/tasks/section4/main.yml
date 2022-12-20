@@ -314,11 +314,11 @@
       changed_when: false
     - name: Add passed task to list 4.2.13 
       set_fact:
-        section1_tasks: '{{ section4_tasks + [{ "task_number":"4.2.13","task_description":"Ensure that the API Server only makes use of Strong Cryptographic Ciphers","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
+        section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.13","task_description":"Ensure that the API Server only makes use of Strong Cryptographic Ciphers","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout != 'Argument is not set or not appropriately configured'
     - name: Add failed task to list 4.2.13 
       set_fact:
-        section1_tasks: '{{ section4_tasks + [{ "task_number":"4.2.13","task_description":"Ensure that the API Server only makes use of Strong Cryptographic Ciphers","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
+        section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.13","task_description":"Ensure that the API Server only makes use of Strong Cryptographic Ciphers","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == 'Argument is not set or not appropriately configured'
 - name: Count Section 4 passed tasks
   set_fact:
