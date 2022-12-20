@@ -16,4 +16,3 @@ inventory=/mnt/c/Users/ngodu/cis-bench-k8s-ansible/ansible/inventory/hosts
 [minikube]
 bench=/mnt/c/Users/ngodu/cis-bench-k8s-ansible/ansible/minikube_benchmark.yml
 config=/mnt/c/Users/ngodu/cis-bench-k8s-ansible/ansible/minikube_hardening.yml
-result_dir=/mnt/c/Users/ngodu/cis-bench-k8s-ansible/CISBenchApp/application/templates/minikube

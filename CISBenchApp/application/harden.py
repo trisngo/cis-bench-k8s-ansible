@@ -28,7 +28,6 @@ harden = Blueprint('harden', __name__)
 #         return jsonify(respJson(-500, "Something went wrong!"))
 
 
-
 @harden.route('/submit', methods=['POST']) #POST
 def harden_option():
     # post_data = '{"task": ["1.1.20"]}'
