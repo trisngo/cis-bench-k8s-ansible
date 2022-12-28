@@ -94,12 +94,15 @@ def run_bench():
             listFile.append(session.get("filename_%s" % i))
     print(listIP)
     print(listFile)
-
-    now = datetime.datetime.now()
-    dt = now.strftime("%d/%m/%Y %H:%M:%S")
-    session['bench_time'] = dt
     writeInventory_mini(listIP, listFile)
+    return render_template('result.html')
+
+@bench.route('/benchmark',methods=['GET'])
+def bench_mini():
     try:
+        now = datetime.datetime.now()
+        dt = now.strftime("%d/%m/%Y %H:%M:%S")
+        session['bench_time'] = dt
         cmd = ["%s" % (config_get("ansible", "bin")),"-i" ,"%s" % (config_get("ansible", "inventory")),"%s" % (config_get("minikube", "bench"))]
         def inner():
             proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,)
@@ -140,6 +143,7 @@ def writeInventory_mini(listIP, listFile):
                 "workers\n" + \
                 "[k8s:vars]\n" + \
                 "ansible_user=docker\n" + \
+                "ansible_ssh_common_args='-o StrictHostKeyChecking=no'\n" + \
                 "[local]\n" + \
                 "localhost ansible_connection=local"
     with open(file_name, 'w') as configfile:
