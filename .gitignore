@@ -175,5 +175,3 @@ venv*
 CISBenchApp/venv*
 CISBenchApp/logs/playbook_logs/playbook_*
 CISBenchApp/logs/access_*
-CISBenchApp/upload
-CISBenchApp/application/templates/result/minikube

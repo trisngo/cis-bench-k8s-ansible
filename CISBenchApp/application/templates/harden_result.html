@@ -1,18 +1,30 @@
-<h1>Finish hardening</h1>
-
-<br>
-&nbsp;&nbsp;Description:
-<br>
-<textarea id="stackoverflow" name="stackoverflow_review" rows="35" cols="55">   
-   {% for line in b_lines %}
-      {{ line }}
-   {% endfor %}
-</textarea>
-
-<form action="{{ url_for('bench.run_bench' ) }}">
-    <input type="submit" value="Run bench again" />
-</form>
-
-<form action="{{ url_for('bench.enter_ip_mini' ) }}">
-    <input type="submit" value="Run bench with another configuration" />
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benchmark progress</title>
+    <script>
+        window.onload = function(){
+            var nav_div = document.getElementById("nav");
+            nav_div.style.display = "block";
+        }
+    </script>
+</head>
+<body>
+    <div id="nav" style="display: none;">
+    <h1 style="text-align: center;">Navigation</h1>
+    <form action="{{ url_for('bench.run_bench' ) }}" style="text-align: center;">
+        <input type="submit" value="Run benchmark again" style="padding: 10px" />
+    </form>
+    <br>
+    <form action="{{ url_for('bench.enter_ip_mini') }}" style="text-align: center;">
+        <input type="submit" value="Run bench with another configuration" style="padding: 10px" />
+    </form>
+    </div>
+    <h1 style="text-align: center;">Harden progress</h1>
+    <br>
+    <iframe src="{{ url_for('harden.stream_harden_config') }}" height="700" width="900" style="display: block; overflow:hidden; margin: 0 auto; border: 3px solid green; padding: 10px;"></iframe>
+</body>
+</html>

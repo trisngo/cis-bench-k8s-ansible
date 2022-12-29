@@ -1,10 +1,9 @@
-from flask import Blueprint, Flask, render_template, request, flash, jsonify, redirect, url_for, session
-
+from flask import Blueprint, Flask, render_template, request, flash, jsonify, redirect, url_for, session, Response
 import sys, json, datetime, time, hashlib, urllib.request, urllib.parse, subprocess, importlib, configparser, os
-# from flask import Flask, jsonify, request, redirect, abort
 from werkzeug.utils import secure_filename
 from uuid import uuid4
 from . import mylogging, config_get, respJson
+from jinja2 import Environment,FileSystemLoader
 
 bench = Blueprint('bench', __name__)
 
@@ -95,16 +94,29 @@ def run_bench():
             listFile.append(session.get("filename_%s" % i))
     print(listIP)
     print(listFile)
-
-    now = datetime.datetime.now()
-    dt = now.strftime("%d/%m/%Y %H:%M:%S")
-    session['bench_time'] = dt
-    print("Request received1")
     writeInventory_mini(listIP, listFile)
-    bench_mini()
-    print("Request received2")
+    return render_template('result.html')
 
-    return render_template("run_bench.html")
+@bench.route('/benchmark',methods=['GET'])
+def bench_mini():
+    try:
+        now = datetime.datetime.now()
+        dt = now.strftime("%d/%m/%Y %H:%M:%S")
+        session['bench_time'] = dt
+        cmd = ["%s" % (config_get("ansible", "bin")),"-i" ,"%s" % (config_get("ansible", "inventory")),"%s" % (config_get("minikube", "bench"))]
+        def inner():
+            proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,)
+            for line in proc.stdout:
+                yield line.rstrip().decode("utf-8")  + '<br/>'
+
+        mylogging("INFO: Run bench playbook succeed")
+        env = Environment(loader=FileSystemLoader('application/templates'))
+        tmpl = env.get_template('benchmark_progress.html')
+        return Response(tmpl.generate(result=inner()),mimetype='text/html')
+
+    except Exception as ex:
+        mylogging("ERROR: %s" %ex)
+        return jsonify(respJson(-500, "Something went wrong!"))
 
 def writeInventory_mini(listIP, listFile):
 
@@ -122,6 +134,7 @@ def writeInventory_mini(listIP, listFile):
 
     for i in range(1,len(listIP)):
         workerSsh = os.path.join(config_get("data_store", "dir"), listFile[i])
+
         cmd = ["chmod", "600", "%s" % workerSsh]
         subprocess.run(cmd)
         hosts_data += "%s ansible_ssh_private_key_file=%s\n" % (listIP[i], workerSsh)
@@ -131,26 +144,11 @@ def writeInventory_mini(listIP, listFile):
                 "workers\n" + \
                 "[k8s:vars]\n" + \
                 "ansible_user=docker\n" + \
+                "ansible_ssh_common_args='-o StrictHostKeyChecking=no'\n" + \
                 "[local]\n" + \
                 "localhost ansible_connection=local"
     with open(file_name, 'w') as configfile:
         configfile.write(hosts_data)
-
-def bench_mini():
-    try:
-        now = datetime.datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
-        cmd = ["%s" % (config_get("ansible", "bin")),"-i" ,"%s" % (config_get("ansible", "inventory")),"%s" % (config_get("minikube", "bench"))]
-        file_name = "logs/playbook_logs/playbook_%s.log" % now
-        
-        with open(file_name, "w") as w_file:
-            subprocess.run(cmd, stdout=w_file)
-    
-        mylogging("INFO: Run bench playbook succeed")
-        return jsonify(respJson(0, "Run bench playbook succeed, view at %s" % file_name))
-
-    except Exception as ex:
-        mylogging("ERROR: %s" %ex)
-        return jsonify(respJson(-500, "Something went wrong!"))
 
 @bench.route('/result/<name>', methods=['GET'])
 def result(name):
