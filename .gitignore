@@ -171,8 +171,9 @@ cython_debug/
 # End of https://www.toptal.com/developers/gitignore/api/flask
 
 tmp
+CISBenchApp/upload
+CISBenchApp/logs
 report/
 venv*
 CISBenchApp/venv*
-CISBenchApp/logs/playbook_logs/playbook_*
-CISBenchApp/logs/access_*
+CISBenchApp/logs
