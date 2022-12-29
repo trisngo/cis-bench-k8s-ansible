@@ -177,5 +177,5 @@ report/
 venv*
 CISBenchApp/venv*
 CISBenchApp/logs
-*hosts
+ansible/inventory/hosts
 CISBenchApp/conf/main.conf
