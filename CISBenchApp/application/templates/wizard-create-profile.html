@@ -1,35 +1,26 @@
-<!-- <!doctype html>
-<h1>Get Started</h1>
-
-<form action="{{ url_for('bench.enter_ip_mini' ) }}">
-    <input type="submit" value="Enter ip node" />
-</form>
-
-</form> -->
 <!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<link rel="apple-touch-icon" sizes="76x76" href="static/assets/img/apple-icon.png" />
-	<link rel="icon" type="image/png" href="static/assets/img/favicon.png" />
+	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png" />
+	<link rel="icon" type="image/png" href="assets/img/favicon.png" />
 	<title>Material Bootstrap Wizard by Creative Tim | Free Boostrap Wizard</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
 	<!-- CSS Files -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="static/assets/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="static/assets/css/paper-bootstrap-wizard.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="assets/css/paper-bootstrap-wizard.css" rel="stylesheet" />
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
-	<link href="static/assets/css/demo.css" rel="stylesheet" />
+	<link href="assets/css/demo.css" rel="stylesheet" />
 
 	<!-- Fonts and Icons -->
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-	<link href="static/assets/css/themify-icons.css" rel="stylesheet">
+	<link href="assets/css/themify-icons.css" rel="stylesheet">
 	
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -45,12 +36,12 @@
 	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6"
 	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<!-- End Google Tag Manager (noscript) -->
-	<div class="image-container set-full-height" style="background-image: url('static/assets/img/paper-1.jpeg')">
+	<div class="image-container set-full-height" style="background-image: url('assets/img/paper-1.jpeg')">
 	    <!--   Creative Tim Branding   -->
 	    <a href="https://creative-tim.com">
 	         <div class="logo-container">
 	            <div class="logo">
-	                <img src="static/assets/img/new_logo.png">
+	                <img src="assets/img/new_logo.png">
 	            </div>
 	            <div class="brand">
 	                Creative Tim
@@ -77,7 +68,7 @@
 		                <!--        You can switch " data-color="orange" "  with one of the next bright colors: "blue", "green", "orange", "red", "azure"          -->
 
 		                    	<div class="wizard-header text-center">
-		                        	<h3 class="wizard-title">Enter nodes information</h3>
+		                        	<h3 class="wizard-title">Create your profile</h3>
 									<p class="category">This information will let us know more about you.</p>
 		                    	</div>
 
@@ -87,19 +78,19 @@
 									</div>
 									<ul>
 			                            <li>
+											<a href="#about" data-toggle="tab">
+												<div class="icon-circle">
+													<i class="ti-user"></i>
+												</div>
+												About
+											</a>
+										</li>
+			                            <li>
 											<a href="#account" data-toggle="tab">
 												<div class="icon-circle">
 													<i class="ti-settings"></i>
 												</div>
 												Work
-											</a>
-										</li>
-                                        <li>
-											<a href="#about" data-toggle="tab">
-												<div class="icon-circle">
-													<i class="ti-user"></i>
-												</div>
-												Information
 											</a>
 										</li>
 			                            <li>
@@ -113,29 +104,59 @@
 			                        </ul>
 								</div>
 		                        <div class="tab-content">
+		                            <div class="tab-pane" id="about">
+		                            	<div class="row">
+											<h5 class="info-text"> Please tell us more about yourself.</h5>
+											<div class="col-sm-4 col-sm-offset-1">
+												<div class="picture-container">
+													<div class="picture">
+														<img src="assets/img/default-avatar.jpg" class="picture-src" id="wizardPicturePreview" title="" />
+														<input type="file" id="wizard-picture">
+													</div>
+													<h6>Choose Picture</h6>
+												</div>
+											</div>
+											<div class="col-sm-6">
+												<div class="form-group">
+													<label>First Name <small>(required)</small></label>
+													<input name="firstname" type="text" class="form-control" placeholder="Andrew...">
+												</div>
+												<div class="form-group">
+													<label>Last Name <small>(required)</small></label>
+													<input name="lastname" type="text" class="form-control" placeholder="Smith...">
+												</div>
+											</div>
+											<div class="col-sm-10 col-sm-offset-1">
+												<div class="form-group">
+													<label>Email <small>(required)</small></label>
+													<input name="email" type="email" class="form-control" placeholder="andrew@creative-tim.com">
+												</div>
+											</div>
+										</div>
+		                            </div>
 		                            <div class="tab-pane" id="account">
-		                                <h5 class="info-text"> What platform do you want to do the benchmark? </h5>
+		                                <h5 class="info-text"> What are you doing? (checkboxes) </h5>
 		                                <div class="row">
 		                                    <div class="col-sm-8 col-sm-offset-2">
-		                                        <div class="col-sm">
-		                                            <div class="choice" data-toggle="wizard-radio">
-		                                                <input type="radio" name="jobb" value="Design">
+		                                        <div class="col-sm-4">
+		                                            <div class="choice" data-toggle="wizard-checkbox">
+		                                                <input type="checkbox" name="jobb" value="Design">
 		                                                <div class="card card-checkboxes card-hover-effect">
 		                                                    <i class="ti-paint-roller"></i>
-															<p>Minikube</p>
+															<p>Design</p>
 		                                                </div>
 		                                            </div>
 		                                        </div>
-		                                        <div class="col-sm">
-		                                            <div class="choice" data-toggle="wizard-radio">
-		                                                <input type="radio" name="jobb" value="Code">
+		                                        <div class="col-sm-4">
+		                                            <div class="choice" data-toggle="wizard-checkbox">
+		                                                <input type="checkbox" name="jobb" value="Code">
 		                                                <div class="card card-checkboxes card-hover-effect">
 		                                                    <i class="ti-pencil-alt"></i>
-															<p>AKS</p>
+															<p>Code</p>
 		                                                </div>
 		                                            </div>
 		                                        </div>
-		                                        <!-- <div class="col-sm-4">
+		                                        <div class="col-sm-4">
 		                                            <div class="choice" data-toggle="wizard-checkbox">
 		                                                <input type="checkbox" name="jobb" value="Develop">
 		                                                <div class="card card-checkboxes card-hover-effect">
@@ -143,63 +164,16 @@
 															<p>Develop</p>
 		                                                </div>
 		                                            </div>
-		                                        </div> -->
+		                                        </div>
 		                                    </div>
 		                                </div>
-		                            </div>
-                                    <div class="tab-pane" id="about">
-		                            	<div class="row">
-											<h5 class="info-text"> Please enter your node IP and upload SSH key.</h5>
-											<div class="col-sm-8">
-                                                <div class="col-sm-4">
-                                                    <div class="form-group">
-                                                        <label>Node type</label><br>
-                                                        <select name="country" class="form-control">
-                                                            <option disabled="" selected="">- type -</option>
-                                                            <option value="master"> Master </option>
-                                                            <option value="node"> Node </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-												<div class="form-group col-sm-8">
-													<label>IP Address <small>(required)</small></label>
-													<input name="firstname" type="text" class="form-control" placeholder="Andrew...">
-												</div>
-
-											</div>
-                                            <div class="col-sm-4">
-												<!-- <div class="picture-container">
-													<div class="picture">
-														<img src="static/assets/img/default-avatar.jpg" class="picture-src" id="wizardPicturePreview" title="" />
-														<input type="file" id="wizard-picture">
-													</div>
-													<h6>Choose Picture</h6>
-												</div> -->
-                                                <div class="mb-3">
-                                                    <label for="formFile" class="form-label">SSH Key</label>
-                                                    <input class="form-control" type="file" id="formFile">
-                                                </div>
-											</div>
-                                            <!-- <div class="col-sm-10 col-sm-offset-1">
-												<div class="form-group">
-													<label>Email <small>(required)</small></label>
-													<input name="email" type="email" class="form-control" placeholder="andrew@creative-tim.com">
-												</div>
-											</div> -->
-										</div>
 		                            </div>
 		                            <div class="tab-pane" id="address">
 		                                <div class="row">
 		                                    <div class="col-sm-12">
-		                                        <h5 class="info-text"> Do you want to continue? </h5>
+		                                        <h5 class="info-text"> Are you living in a nice area? </h5>
 		                                    </div>
-                                            <div class="col-sm-12 col-sm-offset-1">
-		                                        <div class="form-group">
-		                                            <label>Confirm</label>
-		                                            <p class="description">"The place is really nice. We use it every sunday when we go fishing. It is so awesome."</p>
-		                                        </div>
-		                                    </div>
-		                                    <!-- <div class="col-sm-7 col-sm-offset-1">
+		                                    <div class="col-sm-7 col-sm-offset-1">
 		                                    	<div class="form-group">
 		                                            <label>Street Name</label>
 		                                            <input type="text" class="form-control" placeholder="5h Avenue">
@@ -232,7 +206,7 @@
 		                                                <option value="...">...</option>
 		                                            </select>
 		                                        </div>
-		                                    </div> -->
+		                                    </div>
 		                                </div>
 		                            </div>
 		                        </div>
@@ -259,22 +233,72 @@
 	            Made with <i class="fa fa-heart heart"></i> by <a href="https://www.creative-tim.com">Creative Tim</a>. Free download <a href="https://www.creative-tim.com/product/paper-bootstrap-wizard">here.</a>
 	        </div>
 	    </div>
+		<div class="fixed-plugin">
+			<div class="dropdown open">
+				<a href="#" data-toggle="dropdown">
+					<i class="fa fa-cog fa-2x"> </i>
+				</a>
+				<ul class="dropdown-menu">
+					<li class="header-title">Examples</li>
+					<li class="active">
+						<a href="wizard-create-profile.html">
+						   <img src="assets/img/wizard-create-profile.png">
+						   Create Profile
+						</a>
+					</li>
+					<li>
+						<a href="wizard-find-desk.html">
+						   <img src="assets/img/wizard-find-desk.png">
+						   Find Desk
+						</a>
+					</li>
+					<li>
+						<a href="wizard-list-place.html">
+						   <img src="assets/img/wizard-list-place.png">
+						   List Your Place
+						</a>
+					</li>
+					<li class="header-title">Colors</li>
+					<li class="adjustments-line">
+						<a href="javascript:void(0)" class="switch-trigger">
+							<div class="text-center">
+								<span class="badge filter badge-blue" data-color="blue"></span>
+								<span class="badge filter badge-azure" data-color="azure"></span>
+								<span class="badge filter badge-green" data-color="green"></span>
+								<span class="badge filter badge-orange active" data-color="orange"></span>
+								<span class="badge filter badge-red" data-color="red"></span>
+							</div>
+							<div class="clearfix"></div>
+						</a>
+					</li>
+				   <li class="tutorial">
+						<div class="text-center">
+							<a href="documentation/elements.html" target="_blank" class="btn btn-default btn-fill btn-block">Documentation</a>
+						</div>
+					</li>
+					<li class="license">
+						Personal License
+						<div class="text-center">
+							<a href="https://www.creative-tim.com/product/paper-bootstrap-wizard" target="_blank" class="btn btn-info btn-fill btn-block">Download, it's free!</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
 	</div>
 
 </body>
 
 	<!--   Core JS Files   -->
-	<script src="static/assets/js/jquery-2.2.4.min.js" type="text/javascript"></script>
-	<script src="static/assets/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="static/assets/js/jquery.bootstrap.wizard.js" type="text/javascript"></script>
+	<script src="assets/js/jquery-2.2.4.min.js" type="text/javascript"></script>
+	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="assets/js/jquery.bootstrap.wizard.js" type="text/javascript"></script>
 
 	<!--  Plugin for the Wizard -->
-	<script src="static/assets/js/demo.js" type="text/javascript"></script>
-	<script src="static/assets/js/paper-bootstrap-wizard.js" type="text/javascript"></script>
+	<script src="assets/js/demo.js" type="text/javascript"></script>
+	<script src="assets/js/paper-bootstrap-wizard.js" type="text/javascript"></script>
 
 	<!--  More information about jquery.validate here: https://jqueryvalidation.org/	 -->
-	<script src="static/assets/js/jquery.validate.min.js" type="text/javascript"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
-
+	<script src="assets/js/jquery.validate.min.js" type="text/javascript"></script>
 
 </html>
