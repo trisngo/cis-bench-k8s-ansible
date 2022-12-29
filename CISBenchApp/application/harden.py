@@ -1,10 +1,11 @@
-from flask import Blueprint, Flask, render_template, request, flash, jsonify, redirect, url_for, session
+from flask import Blueprint, Flask, render_template, request, flash, jsonify, redirect, url_for, session, Response
 
 import sys, json, datetime, time, hashlib, urllib.request, urllib.parse, subprocess, importlib, configparser, os
 # from flask import Flask, jsonify, request, redirect, abort
 from werkzeug.utils import secure_filename
 from uuid import uuid4
 from . import mylogging, config_get, respJson
+from jinja2 import Environment,FileSystemLoader
 
 harden = Blueprint('harden', __name__)
 
@@ -62,22 +63,27 @@ def harden_option():
 
 @harden.route('/run', methods=['GET'])
 def run_harden():
+    return render_template("harden_result.html")
+
+@harden.route('/stream_harden')
+def stream_harden_config():
     try:
-        now = datetime.datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
-
-        file_name = "logs/playbook_logs/playbook_%s.log" % now
         tags_list = session['tags']
-        for t in tags_list:
-            cmd = ["%s" % (config_get("ansible", "bin")),"-i" ,"%s" % (config_get("ansible", "inventory")),"%s" % (config_get("minikube", "config")), "--tags", "%s" % t]
-            with open(file_name, "w") as w_file:
-                subprocess.run(cmd, stdout=w_file)
+        all_tags = ""
+        for tag in tags_list:
+            all_tags += tag + ","
+        all_tags = all_tags[:-1] 
+        cmd = ["%s" % (config_get("ansible", "bin")),"-i" ,"%s" % (config_get("ansible", "inventory")),"%s" % (config_get("minikube", "config")), "--tags", "%s" % all_tags]
+        def inner():
+            proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,)
+            for line in proc.stdout:
+                yield line.rstrip().decode("utf-8")  + '<br/>'
 
-        mylogging("INFO: Run harden playbook succeed")
-        session['harden_log'] = file_name
-        return jsonify(respJson(0, "Run succeed"))
+        env = Environment(loader=FileSystemLoader('application/templates'))
+        tmpl = env.get_template('benchmark_progress.html')
+        return Response(tmpl.generate(result=inner()),mimetype='text/html')
 
     except Exception as ex:
-        mylogging("ERROR: %s" %ex)
         return jsonify(respJson(-500, "Something went wrong!"))
 
 @harden.route('/result', methods=['GET'])
