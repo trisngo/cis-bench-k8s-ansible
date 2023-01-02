@@ -2,18 +2,21 @@
 host=0.0.0.0
 port=9000
 
+[working_dir]
+path = /home/b1tcuit
+
 [logging]
-dir=/home/trind/ansible-projects/cis-bench-k8s-ansible/CISBenchApp/logs
-playbook_dir=/home/trind/ansible-projects/cis-bench-k8s-ansible/CISBenchApp/logs/playbook_logs
+dir=${working_dir:path}/cis-bench-k8s-ansible/CISBenchApp/logs
+playbook_dir=${working_dir:path}/cis-bench-k8s-ansible/CISBenchApp/logs/playbook_logs
 
 [data_store]
-dir=/home/trind/ansible-projects/cis-bench-k8s-ansible/CISBenchApp/upload
+dir=${working_dir:path}/cis-bench-k8s-ansible/CISBenchApp/upload
 
 [ansible]
-bin=/home/trind/.local/bin/ansible-playbook
-inventory=/home/trind/ansible-projects/cis-bench-k8s-ansible/ansible/inventory/hosts
+bin=/home/b1tcuit/.local/bin/ansible-playbook
+inventory=${working_dir:path}/cis-bench-k8s-ansible/ansible/inventory/hosts
 
 [minikube]
-bench=/home/trind/ansible-projects/cis-bench-k8s-ansible/ansible/minikube_benchmark.yml
-config=/home/trind/ansible-projects/cis-bench-k8s-ansible/ansible/minikube_hardening.yml
-result_dir=/home/trind/ansible-projects/cis-bench-k8s-ansible/CISBenchApp/application/templates/result/minikube
+bench=${working_dir:path}/cis-bench-k8s-ansible/ansible/minikube_benchmark.yml
+config=${working_dir:path}/cis-bench-k8s-ansible/ansible/minikube_hardening.yml
+result_dir=${working_dir:path}/cis-bench-k8s-ansible/CISBenchApp/application/templates/result/minikube
