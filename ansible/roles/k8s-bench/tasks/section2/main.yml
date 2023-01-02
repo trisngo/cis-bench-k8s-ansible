@@ -4,11 +4,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 2.1 to passed list
       set_fact:
         section2_tasks: '{{ section2_tasks + [{ "task_number":"2.1","task_description":"Ensure that the --cert-file and --key-file arguments are set as appropriate","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout_lines|length == 2
-    - name: Add failed task to list 
+    - name: Add task 2.1 to failed list
       set_fact:
         section2_tasks: '{{ section2_tasks + [{ "task_number":"2.1","task_description":"Ensure that the --cert-file and --key-file arguments are set as appropriate","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout_lines|length < 2
@@ -18,11 +18,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 2.2 to passed list
       set_fact:
         section2_tasks: '{{ section2_tasks + [{ "task_number":"2.2","task_description":"Ensure that the --client-cert-auth argument is set to true","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'true' in result.stdout"
-    - name: Add failed task to list 
+    - name: Add task 2.2 to failed list
       set_fact:
         section2_tasks: '{{ section2_tasks + [{ "task_number":"2.2","task_description":"Ensure that the --client-cert-auth argument is set to true","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'true' not in result.stdout"
@@ -32,11 +32,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 2.3 to passed list
       set_fact:
         section2_tasks: '{{ section2_tasks + [{ "task_number":"2.3","task_description":"Ensure that the --auto-tls argument is not set to true","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'true' not in result.stdout"
-    - name: Add failed task to list 
+    - name: Add task 2.3 to failed list
       set_fact:
         section2_tasks: '{{ section2_tasks + [{ "task_number":"2.3","task_description":"Ensure that the --auto-tls argument is not set to true","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'true' in result.stdout and result.stdout != 'Argument is not set to true'"
@@ -46,11 +46,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 2.4 to passed list
       set_fact:
         section2_tasks: '{{ section2_tasks + [{ "task_number":"2.4","task_description":"Ensure that the --peer-cert-file and --peer-key-file arguments are set as appropriate","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout_lines|length == 2
-    - name: Add failed task to list 
+    - name: Add task 2.4 to failed list
       set_fact:
         section2_tasks: '{{ section2_tasks + [{ "task_number":"2.4","task_description":"Ensure that the --peer-cert-file and --peer-key-file arguments are set as appropriate","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout_lines|length < 2
@@ -60,11 +60,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 2.5 to passed list
       set_fact:
         section2_tasks: '{{ section2_tasks + [{ "task_number":"2.5","task_description":"Ensure that the --peer-client-cert-auth argument is set to true","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'true' in result.stdout"
-    - name: Add failed task to list 
+    - name: Add task 2.5 to failed list
       set_fact:
         section2_tasks: '{{ section2_tasks + [{ "task_number":"2.5","task_description":"Ensure that the --peer-client-cert-auth argument is set to true","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'true' not in result.stdout"
@@ -74,11 +74,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 2.6 to passed list
       set_fact:
         section2_tasks: '{{ section2_tasks + [{ "task_number":"2.6","task_description":"Ensure that the --peer-auto-tls argument is not set to true","task_status":"PASSED","configuration":"Argument is not set to true","script":"" }] }}'
       when: "'false' in result.stdout or result.stdout == 'Argument is not set'"
-    - name: Add failed task to list 
+    - name: Add task 2.6 to failed list
       set_fact:
         section2_tasks: '{{ section2_tasks + [{ "task_number":"2.6","task_description":"Ensure that the --peer-auto-tls argument is not set to true","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'false' not in result.stdout and result.stdout != 'Argument is not set'"
@@ -92,14 +92,14 @@
       register: file2
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 2.7 to passed list
       set_fact:
         section2_tasks: '{{ section2_tasks + [{ "task_number":"2.7","task_description":"Ensure that a unique Certificate Authority is used for etcd","task_status":"PASSED","configuration":file1.stdout + " - " + file2.stdout ,"script":"" }] }}'
       when: file1.stdout != '' and file2.stdout != '' and file1.stdout != file2.stdout
-    - name: Add failed task to list 
+    - name: Add task 2.7 to failed list
       set_fact:
         section2_tasks: '{{ section2_tasks + [{ "task_number":"2.7","task_description":"Ensure that a unique Certificate Authority is used for etcd","task_status":"FAILED","configuration":"Unique Certificate Authority is not used for etcd","script":"Fix it" }] }}'
-      when: 
+      when:
         - file1.stdout == '' or file2.stdout == ''
         - file1.stdout != '' and file2.stdout != '' and file1.stdout == file2.stdout
 - name: Count Section 2 passed tasks

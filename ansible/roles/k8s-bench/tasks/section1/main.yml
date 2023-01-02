@@ -6,11 +6,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.1.1 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.1","task_description":"Ensure that the API server pod specification file permissions are set to 600 or more restrictive","task_status":"PASSED","configuration":"/etc/kubernetes/manifests/kube-apiserver.yaml: " + result.stdout,"script":"" }] }}'
       when: result.stdout == '600'
-    - name: Add failed task to list 
+    - name: Add task 1.1.1 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.1","task_description":"Ensure that the API server pod specification file permissions are set to 600 or more restrictive","task_status":"FAILED","configuration":"/etc/kubernetes/manifests/kube-apiserver.yaml: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != '600'
@@ -20,11 +20,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.1.2 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.2","task_description":"Ensure that the API server pod specification file ownership is set to root:root","task_status":"PASSED","configuration":"/etc/kubernetes/manifests/kube-apiserver.yaml: " + result.stdout,"script":"" }] }}'
       when: result.stdout == 'root:root'
-    - name: Add failed task to list 
+    - name: Add task 1.1.2 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.2","task_description":"Ensure that the API server pod specification file ownership is set to root:root","task_status":"FAILED","configuration":"/etc/kubernetes/manifests/kube-apiserver.yaml: "+ result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != 'root:root'
@@ -34,11 +34,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.1.3 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.3","task_description":"Ensure that the controller manager pod specification file permissions are set to 600 or more restrictive","task_status":"PASSED","configuration":"/etc/kubernetes/manifests/kube-controller-manager.yaml: " + result.stdout,"script":"" }] }}'
       when: result.stdout == '600'
-    - name: Add failed task to list 
+    - name: Add task 1.1.3 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.3","task_description":"Ensure that the controller manager pod specification file permissions are set to 600 or more restrictive","task_status":"FAILED","configuration":"/etc/kubernetes/manifests/kube-controller-manager.yaml: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != '600'
@@ -48,11 +48,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.1.4 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.4","task_description":"Ensure that the controller manager pod specification file ownership is set to root:root","task_status":"PASSED","configuration":"/etc/kubernetes/manifests/kube-controller-manager.yaml: " + result.stdout,"script":"" }] }}'
       when: result.stdout == 'root:root'
-    - name: Add failed task to list 
+    - name: Add task 1.1.4 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.4","task_description":"Ensure that the controller manager pod specification file ownership is set to root:root","task_status":"FAILED","configuration":"/etc/kubernetes/manifests/kube-controller-manager.yaml: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != 'root:root'
@@ -62,11 +62,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.1.5 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.5","task_description":"Ensure that the scheduler pod specification file permissions are set to 600 or more restrictive","task_status":"PASSED","configuration":"/etc/kubernetes/manifests/kube-scheduler.yaml: " + result.stdout,"script":"" }] }}'
       when: result.stdout == '600'
-    - name: Add failed task to list 
+    - name: Add task 1.1.5 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.5","task_description":"Ensure that the scheduler pod specification file permissions are set to 600 or more restrictive","task_status":"FAILED","configuration":"/etc/kubernetes/manifests/kube-scheduler.yaml: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != '600'
@@ -76,11 +76,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.1.6 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.6","task_description":"Ensure that the scheduler pod specification file ownership is set to root:root","task_status":"PASSED","configuration":"/etc/kubernetes/manifests/kube-scheduler.yaml: " + result.stdout,"script":"" }] }}'
       when: result.stdout == 'root:root'
-    - name: Add failed task to list 
+    - name: Add task 1.1.6 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.6","task_description":"Ensure that the scheduler pod specification file ownership is set to root:root","task_status":"FAILED","configuration":"/etc/kubernetes/manifests/kube-scheduler.yaml: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != 'root:root'
@@ -90,11 +90,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.1.7 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.7","task_description":"Ensure that the etcd pod specification file permissions are set to 600 or more restrictive","task_status":"PASSED","configuration":"/etc/kubernetes/manifests/etcd.yaml: " + result.stdout,"script":"" }] }}'
       when: result.stdout == '600'
-    - name: Add failed task to list 
+    - name: Add task 1.1.7 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.7","task_description":"Ensure that the etcd pod specification file permissions are set to 600 or more restrictive","task_status":"FAILED","configuration":"/etc/kubernetes/manifests/etcd.yaml: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != '600'
@@ -104,11 +104,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.1.8 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.8","task_description":"Ensure that the etcd pod specification file ownership is set to root:root","task_status":"PASSED","configuration":"/etc/kubernetes/manifests/etcd.yaml: " + result.stdout,"script":"" }] }}'
       when: result.stdout == 'root:root'
-    - name: Add failed task to list 
+    - name: Add task 1.1.8 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.8","task_description":"Ensure that the etcd pod specification file ownership is set to root:root","task_status":"FAILED","configuration":"/etc/kubernetes/manifests/etcd.yaml: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != 'root:root'
@@ -118,11 +118,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.1.9 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.9","task_description":"Ensure that the Container Network Interface file permissions are set to 600 or more restrictive","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout == 'All files permission is 600'
-    - name: Add failed task to list 
+    - name: Add task 1.1.9 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.9","task_description":"Ensure that the Container Network Interface file permissions are set to 600 or more restrictive","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != 'All files permission is 600'
@@ -132,11 +132,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.1.10 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.10","task_description":"Ensure that the Container Network Interface file ownership is set to root:root","task_status":"PASSED","configuration":"All files ownership is root:root","script":"" }] }}'
       when: result.stdout == ''
-    - name: Add failed task to list 
+    - name: Add task 1.1.10 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.10","task_description":"Ensure that the Container Network Interface file ownership is set to root:root","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != ''
@@ -146,11 +146,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.1.11 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.11","task_description":"Ensure that the etcd data directory permissions are set to 700 or more restrictive","task_status":"PASSED","configuration":"/var/lib/minikube/etcd: " + result.stdout,"script":"" }] }}'
       when: result.stdout == '700'
-    - name: Add failed task to list 
+    - name: Add task 1.1.11 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.11","task_description":"Ensure that the etcd data directory permissions are set to 700 or more restrictive","task_status":"FAILED","configuration":"/var/lib/minikube/etcd: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != '700'
@@ -160,11 +160,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.1.13 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.13","task_description":"Ensure that the admin.conf file permissions are set to 600","task_status":"PASSED","configuration":"/etc/kubernetes/admin.conf: " + result.stdout,"script":"" }] }}'
       when: result.stdout == '600'
-    - name: Add failed task to list 
+    - name: Add task 1.1.13 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.13","task_description":"Ensure that the admin.conf file permissions are set to 600","task_status":"FAILED","configuration":"/etc/kubernetes/admin.conf: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != '600'
@@ -174,11 +174,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.1.14 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.14","task_description":"Ensure that the admin.conf file ownership is set to root:root","task_status":"PASSED","configuration":"/etc/kubernetes/admin.conf: " + result.stdout,"script":"" }] }}'
       when: result.stdout == 'root:root'
-    - name: Add failed task to list 
+    - name: Add task 1.1.14 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.14","task_description":"Ensure that the admin.conf file ownership is set to root:root","task_status":"FAILED","configuration":"/etc/kubernetes/admin.conf: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != 'root:root'
@@ -188,11 +188,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.1.15 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.15","task_description":"Ensure that the scheduler.conf file permissions are set to 600 or more restrictive","task_status":"PASSED","configuration":"/etc/kubernetes/scheduler.conf: " + result.stdout,"script":"" }] }}'
       when: result.stdout == '600'
-    - name: Add failed task to list 
+    - name: Add task 1.1.15 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.15","task_description":"Ensure that the scheduler.conf file permissions are set to 600 or more restrictive","task_status":"FAILED","configuration":"/etc/kubernetes/scheduler.conf: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != '600'
@@ -202,11 +202,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.1.16 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.16","task_description":"Ensure that the scheduler.conf file ownership is set to root:root","task_status":"PASSED","configuration":"/etc/kubernetes/scheduler.conf: " + result.stdout,"script":"" }] }}'
       when: result.stdout == 'root:root'
-    - name: Add failed task to list 
+    - name: Add task 1.1.16 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.16","task_description":"Ensure that the scheduler.conf file ownership is set to root:root","task_status":"FAILED","configuration":"/etc/kubernetes/scheduler.conf: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != 'root:root'
@@ -216,11 +216,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.1.17 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.17","task_description":"Ensure that the controller-manager.conf file permissions are set to 600 or more restrictive","task_status":"PASSED","configuration":"/etc/kubernetes/controller-manager.conf: " + result.stdout,"script":"" }] }}'
       when: result.stdout == '600'
-    - name: Add failed task to list 
+    - name: Add task 1.1.17 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.17","task_description":"Ensure that the controller-manager.conf file permissions are set to 600 or more restrictive","task_status":"FAILED","configuration":"/etc/kubernetes/controller-manager.conf: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != '600'
@@ -230,11 +230,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.1.18 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.18","task_description":"Ensure that the controller-manager.conf file ownership is set to root:root","task_status":"PASSED","configuration":"/etc/kubernetes/controller-manager.conf: " + result.stdout,"script":"" }] }}'
       when: result.stdout == 'root:root'
-    - name: Add failed task to list 
+    - name: Add task 1.1.18 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.18","task_description":"Ensure that the controller-manager.conf file ownership is set to root:root","task_status":"FAILED","configuration":"/etc/kubernetes/controller-manager.conf: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != 'root:root'
@@ -244,11 +244,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.1.19 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.19","task_description":"Ensure that the Kubernetes PKI directory and file ownership is set to root:root","task_status":"PASSED","configuration":"/var/lib/minikube/certs/: root:root","script":"" }] }}'
       when: result.stdout == ''
-    - name: Add failed task to list 
+    - name: Add task 1.1.19 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.19","task_description":"Ensure that the Kubernetes PKI directory and file ownership is set to root:root","task_status":"FAILED","configuration":"/var/lib/minikube/certs/: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != ''
@@ -258,11 +258,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.1.20 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.20","task_description":"Ensure that the Container Network Interface file permissions are set to 600 or more restrictive","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout == 'All files permission is 600'
-    - name: Add failed task to list 
+    - name: Add task 1.1.20 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.20","task_description":"Ensure that the Container Network Interface file permissions are set to 600 or more restrictive","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != 'All files permission is 600'
@@ -272,11 +272,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.1.21 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.21","task_description":"Ensure that the Kubernetes PKI key file permissions are set to 600","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout == 'All files permission is 600'
-    - name: Add failed task to list 
+    - name: Add task 1.1.21 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.1.21","task_description":"Ensure that the Kubernetes PKI key file permissions are set to 600","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != 'All files permission is 600'
@@ -286,11 +286,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.2 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.2","task_description":"Ensure that the --token-auth-file parameter is not set","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout == 'Argument is not set'
-    - name: Add failed task to list 
+    - name: Add task 1.2.2 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.2","task_description":"Ensure that the --token-auth-file parameter is not set","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != 'Argument is not set'
@@ -300,11 +300,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.2 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.3","task_description":"Ensure that the --DenyServiceExternalIPs is not set","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout == 'Argument is not set'
-    - name: Add failed task to list 
+    - name: Add task 1.2.3 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.3","task_description":"Ensure that the --DenyServiceExternalIPs is not set","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != 'Argument is not set'
@@ -314,11 +314,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.4 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.4","task_description":"Ensure that the --kubelet-client-certificate and --kubeletclient-key arguments are set as appropriate","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout_lines|length == 2
-    - name: Add failed task to list 
+    - name: Add task 1.2.4 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.4","task_description":"Ensure that the --kubelet-client-certificate and --kubeletclient-key arguments are set as appropriate","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout_lines|length < 2
@@ -328,11 +328,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.5 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.5","task_description":"Ensure that the --kubelet-certificate-authority argument is set as appropriate","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout != 'Argument is not set'
-    - name: Add failed task to list 
+    - name: Add task 1.2.5 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.5","task_description":"Ensure that the --kubelet-certificate-authority argument is set as appropriate","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == 'Argument is not set'
@@ -342,11 +342,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.6 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.6","task_description":"Ensure that the --authorization-mode argument is not set to AlwaysAllow","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'AlwaysAllow' not in result.stdout"
-    - name: Add failed task to list 
+    - name: Add task 1.2.6 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.6","task_description":"Ensure that the --authorization-mode argument is not set to AlwaysAllow","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'AlwaysAllow' in result.stdout"
@@ -356,11 +356,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.7 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.7","task_description":"Ensure that the --authorization-mode argument includes Node","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'Node' in result.stdout"
-    - name: Add failed task to list 
+    - name: Add task 1.2.7 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.7","task_description":"Ensure that the --authorization-mode argument includes Node","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'Node' not in result.stdout"
@@ -370,11 +370,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.8 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.8","task_description":"Ensure that the --authorization-mode argument includes RBAC","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'RBAC' in result.stdout"
-    - name: Add failed task to list 
+    - name: Add task 1.2.8 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.8","task_description":"Ensure that the --authorization-mode argument includes RBAC","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'RBAC' not in result.stdout"
@@ -384,11 +384,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.9 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.9","task_description":"Ensure that the admission control plugin EventRateLimit is set","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'EventRateLimit' in result.stdout"
-    - name: Add failed task to list 
+    - name: Add task 1.2.9 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.9","task_description":"Ensure that the admission control plugin EventRateLimit is set","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'EventRateLimit' not in result.stdout"
@@ -398,11 +398,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.10 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.10","task_description":"Ensure that the admission control plugin AlwaysAdmit is not set","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'AlwaysAdmit' not in result.stdout"
-    - name: Add failed task to list 
+    - name: Add task 1.2.10 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.10","task_description":"Ensure that the admission control plugin AlwaysAdmit is not set","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'AlwaysAdmit' in result.stdout"
@@ -412,11 +412,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.11 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.11","task_description":"Ensure that the admission control plugin AlwaysPullImages","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'AlwaysPullImages' in result.stdout"
-    - name: Add failed task to list 
+    - name: Add task 1.2.11 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.11","task_description":"Ensure that the admission control plugin AlwaysPullImages","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'AlwaysPullImages' not in result.stdout"
@@ -426,11 +426,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.12 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.12","task_description":"Ensure that the admission control plugin SecurityContextDeny is set if PodSecurityPolicy is not used","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'SecurityContextDeny' in result.stdout"
-    - name: Add failed task to list 
+    - name: Add task 1.2.12 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.12","task_description":"Ensure that the admission control plugin SecurityContextDeny is set if PodSecurityPolicy is not used","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'SecurityContextDeny' not in result.stdout"
@@ -440,11 +440,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.13 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.13","task_description":"Ensure that the admission control plugin ServiceAccount is set","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'ServiceAccount' not in result.stdout"
-    - name: Add failed task to list 
+    - name: Add task 1.2.13 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.13","task_description":"Ensure that the admission control plugin ServiceAccount is set","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'ServiceAccount' in result.stdout"
@@ -454,11 +454,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.14 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.14","task_description":"Ensure that the admission control plugin NamespaceLifecycle is set","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'NamespaceLifecycle' not in result.stdout"
-    - name: Add failed task to list 
+    - name: Add task 1.2.14 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.14","task_description":"Ensure that the admission control plugin NamespaceLifecycle is set","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'NamespaceLifecycle' in result.stdout"
@@ -468,11 +468,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.15 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.15","task_description":"Ensure that the admission control plugin NodeRestriction is set","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'NodeRestriction' in result.stdout"
-    - name: Add failed task to list 
+    - name: Add task 1.2.15 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.15","task_description":"Ensure that the admission control plugin NodeRestriction is set","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'NodeRestriction' not in result.stdout"
@@ -482,11 +482,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.16 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.16","task_description":"Ensure that the --secure-port argument is not set to 0","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout == '' or result.stdout != '--secure-port=0'
-    - name: Add failed task to list 
+    - name: Add task 1.2.16 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.16","task_description":"Ensure that the --secure-port argument is not set to 0","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == '--secure-port=0'
@@ -496,11 +496,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.17 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.17","task_description":"Ensure that the --profiling argument is set to false","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'false' in result.stdout"
-    - name: Add failed task to list 
+    - name: Add task 1.2.17 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.17","task_description":"Ensure that the --profiling argument is set to false","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'false' not in result.stdout"
@@ -510,11 +510,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.18 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.18","task_description":"Ensure that the --audit-log-path argument is set","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout != 'Argument is not set'
-    - name: Add failed task to list 
+    - name: Add task 1.2.8 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.18","task_description":"Ensure that the --audit-log-path argument is set","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == 'Argument is not set'
@@ -524,11 +524,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.19 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.19","task_description":"Ensure that the --audit-log-maxage argument is set to 30 or as appropriate","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout != 'Argument is not set'
-    - name: Add failed task to list 
+    - name: Add task 1.2.19 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.19","task_description":"Ensure that the --audit-log-maxage argument is set to 30 or as appropriate","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == 'Argument is not set'
@@ -538,11 +538,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.20 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.20","task_description":"Ensure that the --audit-log-maxbackup argument is set to 10 or as appropriate","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout != 'Argument is not set'
-    - name: Add failed task to list 
+    - name: Add task 1.2.20 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.20","task_description":"Ensure that the --audit-log-maxbackup argument is set to 10 or as appropriate","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == 'Argument is not set'
@@ -552,11 +552,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.21 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.21","task_description":"Ensure that the --audit-log-maxsize argument is set to 100 or as appropriate","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout != 'Argument is not set'
-    - name: Add failed task to list 
+    - name: Add task 1.2.21 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.21","task_description":"Ensure that the --audit-log-maxsize argument is set to 100 or as appropriate","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == 'Argument is not set'
@@ -566,11 +566,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: AAdd task 1.2.22 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.22","task_description":"Ensure that the --request-timeout argument is set as appropriate","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout != 'Argument is not set'
-    - name: Add failed task to list 
+    - name: Add task 1.2.22 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.22","task_description":"Ensure that the --request-timeout argument is set as appropriate","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == 'Argument is not set'
@@ -580,11 +580,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.23 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.23","task_description":"Ensure that the --service-account-lookup argument is set to true","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'true' in result.stdout"
-    - name: Add failed task to list 
+    - name: Add task 1.2.23 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.23","task_description":"Ensure that the --service-account-lookup argument is set to true","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'true' not in result.stdout"
@@ -594,11 +594,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.24 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.24","task_description":"Ensure that the --service-account-key-file argument is set as appropriate","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout != 'Argument is not set'
-    - name: Add failed task to list 
+    - name: Add task 1.2.24 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.24","task_description":"Ensure that the --service-account-key-file argument is set as appropriate","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == 'Argument is not set'
@@ -608,11 +608,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.25 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.25","task_description":"Ensure that the --etcd-certfile and --etcd-keyfile arguments are set as appropriate","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout_lines|length == 2
-    - name: Add failed task to list 
+    - name: Add task 1.2.25 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.25","task_description":"Ensure that the --etcd-certfile and --etcd-keyfile arguments are set as appropriate","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout_lines|length < 2
@@ -622,11 +622,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.26 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.26","task_description":"Ensure that the --tls-cert-file and --tls-private-key-file arguments are set as appropriate","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout_lines|length == 2
-    - name: Add failed task to list 
+    - name: Add task 1.2.26 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.26","task_description":"Ensure that the --tls-cert-file and --tls-private-key-file arguments are set as appropriate","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout_lines|length < 2
@@ -636,11 +636,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.27 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.27","task_description":"Ensure that the --client-ca-file argument is set as appropriate","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout != 'Argument is not set'
-    - name: Add failed task to list 
+    - name: Add task 1.2.27 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.27","task_description":"Ensure that the --client-ca-file argument is set as appropriate","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == 'Argument is not set'
@@ -650,11 +650,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.28 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.28","task_description":"Ensure that the --etcd-cafile argument is set as appropriate","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout != 'Argument is not set'
-    - name: Add failed task to list 
+    - name: Add task 1.2.28 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.28","task_description":"Ensure that the --etcd-cafile argument is set as appropriate","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == 'Argument is not set'
@@ -664,11 +664,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.29 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.29","task_description":"Ensure that the --encryption-provider-config argument is set as appropriate","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout != 'Argument is not set'
-    - name: Add failed task to list 
+    - name: Add task 1.2.29 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.29","task_description":"Ensure that the --encryption-provider-config argument is set as appropriate","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == 'Argument is not set'
@@ -678,11 +678,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.30 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.30","task_description":"Ensure that encryption providers are appropriately configured","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout != 'Argument is not set or not appropriately configured'
-    - name: Add failed task to list 
+    - name: Add task 1.2.30 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.30","task_description":"Ensure that encryption providers are appropriately configured","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == 'Argument is not set or not appropriately configured'
@@ -692,11 +692,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.2.31 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.31","task_description":"Ensure that the API Server only makes use of Strong Cryptographic Ciphers","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout != 'Argument is not set or not appropriately configured'
-    - name: Add failed task to list 
+    - name: Add task 1.2.31 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.2.31","task_description":"Ensure that the API Server only makes use of Strong Cryptographic Ciphers","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == 'Argument is not set or not appropriately configured'
@@ -706,11 +706,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.3.1 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.3.1","task_description":"Ensure that the --terminated-pod-gc-threshold argument is set as appropriate","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout != 'Argument is not set'
-    - name: Add failed task to list 
+    - name: Add task 1.3.1 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.3.1","task_description":"Ensure that the --terminated-pod-gc-threshold argument is set as appropriate","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == 'Argument is not set'
@@ -720,11 +720,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.3.2 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.3.2","task_description":"Ensure that the --profiling argument is set to false","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'false' in result.stdout"
-    - name: Add failed task to list 
+    - name: Add task 1.3.2 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.3.2","task_description":"Ensure that the --profiling argument is set to false","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'false' not in result.stdout"
@@ -734,11 +734,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.3.3 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.3.3","task_description":"Ensure that the --use-service-account-credentials argument is set to true","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'true' in result.stdout"
-    - name: Add failed task to list 
+    - name: Add task 1.3.3 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.3.3","task_description":"Ensure that the --use-service-account-credentials argument is set to true","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'true' not in result.stdout"
@@ -748,11 +748,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.3.4 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.3.4","task_description":"Ensure that the --service-account-private-key-file argument is set as appropriate","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout != 'Argument is not set'
-    - name: Add failed task to list 
+    - name: Add task 1.3.4 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.3.4","task_description":"Ensure that the --service-account-private-key-file argument is set as appropriate","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == 'Argument is not set'
@@ -762,11 +762,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.3.5 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.3.5","task_description":"Ensure that the --root-ca-file argument is set as appropriate","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout != 'Argument is not set'
-    - name: Add failed task to list 
+    - name: Add task 1.3.5 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.3.5","task_description":"Ensure that the --root-ca-file argument is set as appropriate","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == 'Argument is not set'
@@ -776,11 +776,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.3.6 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.3.6","task_description":"Ensure that the RotateKubeletServerCertificate argument is set to true","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout != 'Argument is not set'
-    - name: Add failed task to list 
+    - name: Add task 1.3.6 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.3.6","task_description":"Ensure that the RotateKubeletServerCertificate argument is set to true","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == 'Argument is not set'
@@ -790,11 +790,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.3.7 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.3.7","task_description":"Ensure that the --bind-address argument is set to 127.0.0.1","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'127.0.0.1' in result.stdout"
-    - name: Add failed task to list 
+    - name: Add task 1.3.7 to failed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.3.7","task_description":"Ensure that the --bind-address argument is set to 127.0.0.1","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'127.0.0.1' not in result.stdout"
@@ -804,11 +804,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.4.1 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.4.1","task_description":"Ensure that the --profiling argument is set to false","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'false' in result.stdout"
-    - name: Add failed task to list 
+    - name: Add task 1.4.1 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.4.1","task_description":"Ensure that the --profiling argument is set to false","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'false' not in result.stdout"
@@ -818,11 +818,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 
+    - name: Add task 1.4.2 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.4.2","task_description":"Ensure that the --bind-address argument is set to 127.0.0.1","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'127.0.0.1' in result.stdout"
-    - name: Add failed task to list 
+    - name: Add task 1.4.2 to passed list
       set_fact:
         section1_tasks: '{{ section1_tasks + [{ "task_number":"1.4.2","task_description":"Ensure that the --bind-address argument is set to 127.0.0.1","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'127.0.0.1' not in result.stdout"

@@ -4,11 +4,11 @@
       register: result
       changed_when: false
       ignore_errors: yes
-    - name: Add passed task to list
+    - name: Add task 4.1.1 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.1","task_description":"Ensure that the kubelet service file permissions are set to 600 or more restrictive","task_status":"PASSED","configuration":"/etc/systemd/system/kubelet.service.d/10-kubeadm.conf: " + result.stdout,"script":"" }] }}'
       when: result.stdout == '600'
-    - name: Add failed task to list
+    - name: Add task 4.1.1 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.1","task_description":"Ensure that the kubelet service file permissions are set to 600 or more restrictive","task_status":"FAILED","configuration":"/etc/systemd/system/kubelet.service.d/10-kubeadm.conf: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != '600'
@@ -18,11 +18,11 @@
       register: result
       changed_when: false
       ignore_errors: yes
-    - name: Add passed task to list
+    - name: Add task 4.1.2 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.2","task_description":"Ensure that the kubelet service file ownership is set to root:root","task_status":"PASSED","configuration":"/etc/systemd/system/kubelet.service.d/10-kubeadm.conf: " + result.stdout,"script":"" }] }}'
       when: result.stdout == 'root:root'
-    - name: Add failed task to list
+    - name: Add task 4.1.2 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.2","task_description":"Ensure that the kubelet service file ownership is set to root:root","task_status":"FAILED","configuration":"/etc/systemd/system/kubelet.service.d/10-kubeadm.conf: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != 'root:root'
@@ -32,11 +32,11 @@
       register: result
       changed_when: false
       ignore_errors: yes
-    - name: Add passed task to list
+    - name: Add task 4.1.3 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.3","task_description":"If proxy kubeconfig file exists ensure permissions are set to 600 or more restrictive","task_status":"PASSED","configuration":"kubeconfig file not exists","script":"" }] }}'
       when: result.stdout == '600' or result.stdout == 'kubeconfig file not exists'
-    - name: Add failed task to list
+    - name: Add task 4.1.3 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.3","task_description":"If proxy kubeconfig file exists ensure permissions are set to 600 or more restrictive","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != '600' and result.stdout != 'kubeconfig file not exists'
@@ -46,11 +46,11 @@
       register: result
       changed_when: false
       ignore_errors: yes
-    - name: Add passed task to list
+    - name: Add task 4.1.4 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.4","task_description":"If proxy kubeconfig file exists ensure ownership is set to root:root","task_status":"PASSED","configuration":"kubeconfig file not exists","script":"" }] }}'
       when: result.stdout == 'root:root' or result.stdout == 'kubeconfig file not exists'
-    - name: Add failed task to list
+    - name: Add task 4.1.4 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.4","task_description":"If proxy kubeconfig file exists ensure ownership is set to root:root","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != 'root:root' and result.stdout != 'kubeconfig file not exists'
@@ -60,11 +60,11 @@
       register: result
       changed_when: false
       ignore_errors: yes
-    - name: Add passed task to list
+    - name: Add task 4.1.5 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.5","task_description":"Ensure that the --kubeconfig kubelet.conf file permissions are set to 600 or more restrictive","task_status":"PASSED","configuration":"/etc/kubernetes/kubelet.conf: " + result.stdout,"script":"" }] }}'
       when: result.stdout == '600'
-    - name: Add failed task to list
+    - name: Add task 4.1.5 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.5","task_description":"Ensure that the --kubeconfig kubelet.conf file permissions are set to 600 or more restrictive","task_status":"FAILED","configuration":"/etc/kubernetes/kubelet.conf: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != '600'
@@ -74,11 +74,11 @@
       register: result
       changed_when: false
       ignore_errors: yes
-    - name: Add passed task to list
+    - name: Add task 4.1.6 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.6","task_description":"Ensure that the --kubeconfig kubelet.conf file ownership is set to root:root","task_status":"PASSED","configuration":"/etc/kubernetes/kubelet.conf: " + result.stdout,"script":"" }] }}'
       when: result.stdout == 'root:root'
-    - name: Add failed task to list
+    - name: Add task 4.1.6 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.6","task_description":"Ensure that the --kubeconfig kubelet.conf file ownership is set to root:root","task_status":"FAILED","configuration":"/etc/kubernetes/kubelet.conf: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != 'root:root'
@@ -88,11 +88,11 @@
       register: result
       changed_when: false
       ignore_errors: yes
-    - name: Add passed task to list
+    - name: Add task 4.1.7 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.7","task_description":"Ensure that the certificate authorities file permissions are set to 600 or more restrictive","task_status":"PASSED","configuration":"clientCAFile: " + result.stdout,"script":"" }] }}'
       when: result.stdout == '600'
-    - name: Add failed task to list
+    - name: Add task 4.1.7 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.7","task_description":"Ensure that the certificate authorities file permissions are set to 600 or more restrictive","task_status":"FAILED","configuration":"clientCAFile: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != '600'
@@ -102,11 +102,11 @@
       register: result
       changed_when: false
       ignore_errors: yes
-    - name: Add passed task to list
+    - name: Add task 4.1.8 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.8","task_description":"Ensure that the client certificate authorities file ownership is set to root:root","task_status":"PASSED","configuration":"clientCAFile: " + result.stdout,"script":"" }] }}'
       when: result.stdout == 'root:root'
-    - name: Add failed task to list
+    - name: Add task 4.1.8 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.8","task_description":"Ensure that the client certificate authorities file ownership is set to root:root","task_status":"FAILED","configuration":"clientCAFile: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != 'root:root'
@@ -116,11 +116,11 @@
       register: result
       changed_when: false
       ignore_errors: yes
-    - name: Add passed task to list
+    - name: Add task 4.1.9 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.9","task_description":"If the kubelet config.yaml configuration file is being used validate permissions set to 600 or more restrictive","task_status":"PASSED","configuration":"/var/lib/kubelet/config.yaml: " + result.stdout,"script":"" }] }}'
       when: result.stdout == '600'
-    - name: Add failed task to list
+    - name: Add task 4.1.9 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.9","task_description":"If the kubelet config.yaml configuration file is being used validate permissions set to 600 or more restrictive","task_status":"FAILED","configuration":"/var/lib/kubelet/config.yaml: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != '600'
@@ -130,11 +130,11 @@
       register: result
       changed_when: false
       ignore_errors: yes
-    - name: Add passed task to list
+    - name: Add task 4.1.10 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.10","task_description":"If the kubelet config.yaml configuration file is being used validate file ownership is set to root:root","task_status":"PASSED","configuration":"/var/lib/kubelet/config.yaml: " + result.stdout,"script":"" }] }}'
       when: result.stdout == 'root:root'
-    - name: Add failed task to list 
+    - name: Add task 4.1.10 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.1.10","task_description":"If the kubelet config.yaml configuration file is being used validate file ownership is set to root:root","task_status":"FAILED","configuration":"/var/lib/kubelet/config.yaml: " + result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != 'root:root'
@@ -144,11 +144,11 @@
       register: result
       changed_when: false
       ignore_errors: yes
-    - name: Add passed task to list
+    - name: Add task 4.2.1 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.1","task_description":"Ensure that the --anonymous-auth argument is set to false","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'false' in result.stdout"
-    - name: Add failed task to list
+    - name: Add task 4.2.1 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.1","task_description":"Ensure that the --anonymous-auth argument is set to false","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'false' not in result.stdout"
@@ -158,11 +158,11 @@
       register: result
       changed_when: false
       ignore_errors: yes
-    - name: Add passed task to list
+    - name: Add task 4.2.2 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.2","task_description":"Ensure that the --authorization-mode argument is not set to AlwaysAllow","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'AlwaysAllow' not in result.stdout"
-    - name: Add failed task to list
+    - name: Add task 4.2.2 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.2","task_description":"Ensure that the --authorization-mode argument is not set to AlwaysAllow","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'AlwaysAllow' in result.stdout"
@@ -172,11 +172,11 @@
       register: result
       changed_when: false
       ignore_errors: yes
-    - name: Add passed task to list
+    - name: Add task 4.2.3 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.3","task_description":"Ensure that the --client-ca-file argument is set as appropriate","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout != ''
-    - name: Add failed task to list
+    - name: Add task 4.2.3 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.3","task_description":"Ensure that the --client-ca-file argument is set as appropriate","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == ''
@@ -186,11 +186,11 @@
       register: result
       changed_when: false
       ignore_errors: yes
-    - name: Add passed task to list
+    - name: Add task 4.2.4 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.4","task_description":"Verify that the --read-only-port argument is set to 0","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout == '0'
-    - name: Add failed task to list
+    - name: Add task 4.2.4 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.4","task_description":"Verify that the --read-only-port argument is set to 0","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != '0'
@@ -200,11 +200,11 @@
       register: result
       changed_when: false
       ignore_errors: yes
-    - name: Add passed task to list
+    - name: Add task 4.2.5 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.5","task_description":"Ensure that the --streaming-connection-idle-timeout argument is not set to 0","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout != "0" and result.stdout != "Argument is not set"
-    - name: Add failed task to list
+    - name: Add task 4.2.5 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.5","task_description":"Ensure that the --streaming-connection-idle-timeout argument is not set to 0","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == "0" or result.stdout == "Argument is not set"
@@ -214,11 +214,11 @@
       register: result
       changed_when: false
       ignore_errors: yes
-    - name: Add passed task to list
+    - name: Add task 4.2.6 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.6","task_description":"Ensure that the --protect-kernel-defaults argument is set to true","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'true' in result.stdout"
-    - name: Add failed task to list
+    - name: Add task 4.2.6 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.6","task_description":"Ensure that the --protect-kernel-defaults argument is set to true","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'true' not in result.stdout"
@@ -228,11 +228,11 @@
       register: result
       changed_when: false
       ignore_errors: yes
-    - name: Add passed task to list
+    - name: Add task 4.2.7 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.7","task_description":"Ensure that the --make-iptables-util-chains argument is set to true","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'true' in result.stdout"
-    - name: Add failed task to list
+    - name: Add task 4.2.7 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.7","task_description":"Ensure that the --make-iptables-util-chains argument is set to true","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'true' not in result.stdout"
@@ -242,11 +242,11 @@
       register: result
       changed_when: false
       ignore_errors: yes
-    - name: Add passed task to list
+    - name: Add task 4.2.8 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.8","task_description":"Ensure that the --hostname-override argument is not set","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout == 'Argument is not set'
-    - name: Add failed task to list
+    - name: Add task 4.2.8 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.8","task_description":"Ensure that the --hostname-override argument is not set","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout != 'Argument is not set'
@@ -256,11 +256,11 @@
       register: result
       changed_when: false
       ignore_errors: yes
-    - name: Add passed task to list
+    - name: Add task 4.2.9 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.9","task_description":"Ensure that the --event-qps argument is set to 0 or a level which ensures appropriate event capture","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout != "Argument is not set"
-    - name: Add failed task to list
+    - name: Add task 4.2.9 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.9","task_description":"Ensure that the --event-qps argument is set to 0 or a level which ensures appropriate event capture","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == "Argument is not set"
@@ -270,11 +270,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add failed task to list
+    - name: Add task 4.2.10 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.10","task_description":"Ensure that the --tls-cert-file and --tls-private-key-file arguments are set as appropriate","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout_lines|length == 2
-    - name: Add failed task to list
+    - name: Add task 4.2.10 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.10","task_description":"Ensure that the --tls-cert-file and --tls-private-key-file arguments are set as appropriate","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout_lines|length < 2
@@ -284,11 +284,11 @@
       register: result
       changed_when: false
       ignore_errors: yes
-    - name: Add passed task to list
+    - name: Add task 4.2.11 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.11","task_description":"Ensure that the --rotate-certificates argument is not set to false","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'true' in result.stdout"
-    - name: Add failed task to list
+    - name: Add task 4.2.11 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.11","task_description":"Ensure that the --rotate-certificates argument is not set to false","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'true' not in result.stdout"
@@ -298,11 +298,11 @@
       register: result
       changed_when: false
       ignore_errors: yes
-    - name: Add passed task to list
+    - name: Add task 4.2.12 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.12","task_description":"Verify that the RotateKubeletServerCertificate argument is set to true","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: "'true' in result.stdout"
-    - name: Add failed task to list
+    - name: Add task 4.2.12 to failed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.12","task_description":"Verify that the RotateKubeletServerCertificate argument is set to true","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: "'true' not in result.stdout"
@@ -312,11 +312,11 @@
       register: result
       ignore_errors: yes
       changed_when: false
-    - name: Add passed task to list 4.2.13 
+    - name: Add task 4.2.13 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.13","task_description":"Ensure that the API Server only makes use of Strong Cryptographic Ciphers","task_status":"PASSED","configuration":result.stdout,"script":"" }] }}'
       when: result.stdout != 'Argument is not set or not appropriately configured'
-    - name: Add failed task to list 4.2.13 
+    - name: Add task 4.2.13 to passed list
       set_fact:
         section4_tasks: '{{ section4_tasks + [{ "task_number":"4.2.13","task_description":"Ensure that the API Server only makes use of Strong Cryptographic Ciphers","task_status":"FAILED","configuration":result.stdout,"script":"Fix it" }] }}'
       when: result.stdout == 'Argument is not set or not appropriately configured'
