@@ -128,7 +128,7 @@ transparent = true;
                     wizard.find('[data-toggle="wizard-radio"]').removeClass('active');
                     $(this).addClass('active');
                     $(wizard).find('[type="radio"]').removeAttr('checked');
-                    $(this).find('[type="radio"]').attr('checked','true');
+                    $(this).find('[type="radio"]').prop('checked',true);
                 });
 
                 $('[data-toggle="wizard-checkbox"]').click(function(){

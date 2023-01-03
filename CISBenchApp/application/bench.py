@@ -13,6 +13,25 @@ def make_unique(string):
     ident = uuid4().__str__()
     return f"{ident}-{string}"
 
+
+@bench.route('/input', methods=['GET', 'POST'])
+def handle_input():
+    if request.method == 'POST':
+        multi_dict = request.form
+        print(multi_dict)
+        for key in multi_dict:
+            print(multi_dict.get(key))
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        if file:
+            flash("have file")
+    return '''
+        <!doctype html>
+        <h1>OK</h1>
+        '''
+
 @bench.route('/enter_ip_mini', methods=['GET', 'POST'])
 def enter_ip_mini():
     post_data = '{"task": ["3.1.1", "3.2.2", "3.3.1"]}'
