@@ -3,6 +3,8 @@
 - name: Minikube Benchmark
   hosts: k8s
   become: true
-
+  # edit report path
+  vars:
+    report_default_path: "{{ playbook_dir }}"
   roles:
       - k8s-bench

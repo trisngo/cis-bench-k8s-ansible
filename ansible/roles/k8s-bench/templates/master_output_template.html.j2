@@ -13,6 +13,12 @@
     <h2 style="margin-left:15px"> Master node: '{{ "{{ ip_address }}" }}' </h2>	
     <h2 style="margin-left:15px"> Benchmark time: '{{ "{{ bench_time }}" }}' </h2>	
     <h2 style="margin-left:15px"> Score: {{ master_passed_tasks_count }}/{{ section1_tasks|length + section2_tasks|length + section3_tasks|length }} </h2>	
+    <br>
+    <div style="text-align:center;">
+    <button type="button" class="submit" id="worker_result" style="padding:10px; margin:5px">Switch to worker result</button>
+    <button type="button" class="submit" id="submit_task" style="padding:10px; margin:5px">Submit tasks</button>
+    <button type="button" class="submit" id="submit_run" style="padding:10px; margin:5px">Run remediation</button>
+    </div>
     <br>	
     <table border="1" cellpadding="10" style="margin-left:auto;margin-right:auto">
         <tr style="background:#fbfcae">
@@ -127,8 +133,6 @@
         </tr>
         {% endfor %}
     </table>
-    <button type="button" class="submit" id="submit_task">Submit tasks</button>
-    <button type="button" class="submit" id="submit_run">Run remediation</button>
 </body>
 <script>
 $(function () {
@@ -140,6 +144,12 @@ $(function () {
                 return; 
             } 
             tasks.push(event.target.id); 
+        });
+
+        $("#worker_result").on("click",function(e){ 
+            if (e.target !== e.currentTarget) return;
+            e.preventDefault();
+            window.location = '{{ "{{url_for('bench.result', name='worker')}}" }}'
         });
     
         $("#submit_task").on('click', function (e) {
@@ -166,14 +176,7 @@ $(function () {
             if (e.target !== e.currentTarget) return;
             e.preventDefault();
             var clickElementId = e.target.id;
-            $.ajax({
-                type: 'GET',
-                url: '{{ "{{url_for('harden.run_harden')}}" }}',
-                success: function (json) {
-                    window.location = '{{ "{{url_for('harden.result_harden')}}" }}';
-                },
-                error: function (xhr, errmsg, err) { }
-            });
+            window.location = '{{ "{{url_for('harden.run_harden')}}" }}';
         })
     });
 
