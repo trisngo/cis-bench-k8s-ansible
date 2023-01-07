@@ -36,6 +36,7 @@ def create_app():
     prepare_dir(config_get("logging", "playbook_dir"))
     prepare_dir(config_get("data_store", "dir"))
     prepare_dir(config_get("minikube", "result_dir"))
+    prepare_dir(config_get("aks", "result_dir"))
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'hjshjhdjah kjshkjdhjs'
 

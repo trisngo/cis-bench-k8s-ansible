@@ -3,6 +3,15 @@ full_color = true;
 
 $(document).ready(function(){
 
+    $("#btnSubmit").click(function() {
+        // disable button
+        $(this).prop("disabled", true);
+        $("#btnPrevious").prop("disabled", true);
+        // add spinner to button
+        $("#bench_form").submit();
+        $(this).attr('value', 'Initializing');
+    });
+
     $('#cta-num-select').on('change', function() {
         var noi = +$(this).val() || 0;
         noi = noi < 1 ? 1 : noi;
@@ -22,6 +31,31 @@ $(document).ready(function(){
         }
         }).trigger('change');
     
+    $('#cta-num-select2').on('change', function() {
+        var noi = +$(this).val() || 0;
+        noi = noi < 1 ? 1 : noi;
+        
+        var e = $('.cta-block2'),
+            $first = e.first();
+        e.slice(noi).remove();
+        for (var i = e.length; i < noi; i++) {
+            var newinput= $first.clone();
+            newinput.find('input').each(function() {
+                this.name= this.name.replace('0', i);
+            });
+            newinput.insertAfter('.cta-block2:last');
+        }
+        }).trigger('change');
+        
+    $('[data-toggle="wizard-radio"]').click(function(){
+        // alert($(this).find('[type="radio"]').attr('id'));
+        $(".form").hide();
+        var id = $(this).find('[type="radio"]').attr('id')
+        $("#" + id + "_form").show(); 
+    });
+
+    $(".form").hide();
+
     $('.item-chooser').on('change', function() {
         var $this = $(this),
             $container = $this.closest('.cta-block'),

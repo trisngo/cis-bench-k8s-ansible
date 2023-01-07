@@ -244,7 +244,7 @@ kubectl cp "$SSH_PUB_KEY_FILE" "${SSH_POD_NAME}:/root/.ssh/authorized_keys"
 kubectl exec "$SSH_POD_NAME" -- chown root:root /root/.ssh/authorized_keys
 kubectl exec "$SSH_POD_NAME" -- chmod 700 /root/.ssh/
 kubectl exec "$SSH_POD_NAME" -- chmod 600 /root/.ssh/authorized_keys
-chmod 400 "/home/trind/.ssh/${SSH_KEY_FILE_NAME}"
+chmod 400 "${HOME}/.ssh/${SSH_KEY_FILE_NAME}"
 
 if [[ -z "$COMMAND" ]]; then
     echo "No command passed, running in interactive mode"

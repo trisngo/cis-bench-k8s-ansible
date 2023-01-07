@@ -1,2 +1,4 @@
 ---
-# defaults file for aks-remediation
+kubeletkubeconfig: "/var/lib/kubelet/kubeconfig"
+kubeletconf: "/etc/default/kubelet"
+kubeletbin: "kubelet"

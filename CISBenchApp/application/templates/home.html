@@ -1,11 +1,3 @@
-<!-- <!doctype html>
-<h1>Get Started</h1>
-
-<form action="{{ url_for('bench.enter_ip_mini' ) }}">
-    <input type="submit" value="Enter ip node" />
-</form>
-
-</form> -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -73,7 +65,7 @@
 		            <div class="wizard-container">
 
 		                <div class="card wizard-card" data-color="orange" id="wizardProfile">
-		                    <form action="{{ url_for('bench.handle_input' ) }}" method="POST">
+		                    <form action="{{ url_for('bench.handle_input' ) }}" method="post" id="bench_form" enctype=multipart/form-data>
 		                    	<div class="wizard-header text-center">
 		                        	<h3 class="wizard-title">Enter nodes information</h3>
 									<p class="category">This information will let us know more about you.</p>
@@ -117,7 +109,7 @@
 		                                    <div class="col-sm-8 col-sm-offset-2">
 		                                        <div class="col-sm">
 		                                            <div class="choice" data-toggle="wizard-radio">
-		                                                <input type="radio" name="platform" value="Minikube">
+		                                                <input type="radio" name="platform" id="minikube" value="Minikube">
 		                                                <div class="card card-checkboxes card-hover-effect">
 		                                                    <i class="ti-paint-roller"></i>
 															<p>Minikube</p>
@@ -126,7 +118,7 @@
 		                                        </div>
 		                                        <div class="col-sm">
 		                                            <div class="choice" data-toggle="wizard-radio">
-		                                                <input type="radio" name="platform" value="AKS">
+		                                                <input type="radio" name="platform" id="aks" value="AKS">
 		                                                <div class="card card-checkboxes card-hover-effect">
 		                                                    <i class="ti-pencil-alt"></i>
 															<p>AKS</p>
@@ -137,39 +129,67 @@
 		                                </div>
 		                            </div>
                                     <div class="tab-pane" id="about">
-		                            	<div class="row">
-											<h5 class="info-text"> Please enter your node IP and upload SSH key.</h5>
-											<div class="col-sm-8">
-												<label for="cta-num-select">Show Items:</label>
-												<input id="cta-num-select" name="cta-num-select" type="text" value="3" size="2">
-											</div>
-											<div class="cta-block">
+										<div class="form" id="minikube_form">
+											<div class="row">
+												<h5 class="info-text"> Please enter your node IP and upload SSH key.</h5>
 												<div class="col-sm-8">
+													<label for="cta-num-select">Show Items:</label>
+													<input id="cta-num-select" name="cta-num-select" type="text" value="2" size="2">
+												</div>
+												<div class="cta-block">
+													<div class="col-sm-8">
+														<div class="col-sm-4">
+															<div class="form-group">
+																<label>Node type</label><br>
+																<select name="type0" class="form-control">
+																	<option disabled selected>- type -</option>
+																	<option value="master"> Master </option>
+																	<option value="node"> Node </option>
+																</select>
+															</div>
+														</div>
+														<div class="form-group col-sm-8">
+															<label>IP Address <small>(required)</small></label>
+															<input name="ipadd0" type="text" class="form-control" placeholder="127.0.0.1...">
+														</div>
+		
+													</div>
 													<div class="col-sm-4">
-														<div class="form-group">
-															<label>Node type</label><br>
-															<select name="type0" class="form-control">
-																<option disabled="" selected="">- type -</option>
-																<option value="master"> Master </option>
-																<option value="node"> Node </option>
-															</select>
+		
+														<div class="mb-3">
+															<label for="formFile" class="form-label">SSH Key</label>
+															<input class="form-control" type="file" name="file0" id="file0">
 														</div>
 													</div>
-													<div class="form-group col-sm-8">
-														<label>IP Address <small>(required)</small></label>
-														<input name="ipadd0" type="text" class="form-control" placeholder="127.0.0.1...">
-													</div>
-	
 												</div>
-												<div class="col-sm-4">
-	
-													<div class="mb-3">
-														<label for="formFile" class="form-label">SSH Key</label>
-														<input class="form-control" type="file" name="file0" id="formFile">
+											</div>
+										</div>
+										<div class="form" id="aks_form">
+											<div class="row">
+												<h5 class="info-text">Please enter your AKS Resource Group and Cluster's name</h5>
+												<h6 class="info-text">Make sure your host running this tool have Azure CLI connected to Azure API </h5>
+												<div class="form-group">
+													<label>Resource Group <small>(required)</small></label>
+													<input name="az_rg" type="text" class="form-control" placeholder="MyResourceGroup">
+												</div>
+												<div class="form-group">
+													<label>Cluster's name <small>(required)</small></label>
+													<input name="az_aks_cluster" type="text" class="form-control" placeholder="MyManagedCluster">
+												</div>
+												<h5 class="info-text"> Please enter your worker node IP.</h5>
+												<div class="col-sm-8">
+													<label for="cta-num-select2">Show Items:</label>
+													<input id="cta-num-select2" name="cta-num-select" type="text" value="2" size="2">
+												</div>
+												<div class="cta-block2">
+													<div>
+														<div class="form-group">
+															<label>IP Address <small>(required)</small></label>
+															<input name="ipadd_aks0" type="text" class="form-control" placeholder="127.0.0.1...">
+														</div>
 													</div>
 												</div>
 											</div>
-											
 										</div>
 		                            </div>
 		                            <div class="tab-pane" id="address">
@@ -189,11 +209,11 @@
 		                        <div class="wizard-footer">
 		                            <div class="pull-right">
 		                                <input type='button' class='btn btn-next btn-fill btn-warning btn-wd' name='next' value='Next' />
-		                                <input type='submit' class='btn btn-finish btn-fill btn-warning btn-wd' name='finish' value='Finish' />
-		                            </div>
+		                                <input type='submit' class='btn btn-finish btn-fill btn-warning btn-wd' id="btnSubmit" name='finish' value='Finish' />
+									</div>
 
 		                            <div class="pull-left">
-		                                <input type='button' class='btn btn-previous btn-default btn-wd' name='previous' value='Previous' />
+		                                <input type='button' class='btn btn-previous btn-default btn-wd' id="btnPrevious" name='previous' value='Previous' />
 		                            </div>
 		                            <div class="clearfix"></div>
 		                        </div>

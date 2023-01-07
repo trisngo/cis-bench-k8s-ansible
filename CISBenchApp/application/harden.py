@@ -67,12 +67,14 @@ def run_harden():
 @harden.route('/stream_harden')
 def stream_harden_config():
     try:
+        platform = session['platform']
+        print(platform)
         tags_list = session['tags']
         all_tags = ""
         for tag in tags_list:
             all_tags += tag + ","
         all_tags = all_tags[:-1] 
-        cmd = ["%s" % (config_get("ansible", "bin")),"-i" ,"%s" % (config_get("ansible", "inventory")),"%s" % (config_get("minikube", "config")), "--tags", "%s" % all_tags]
+        cmd = ["%s" % (config_get("ansible", "bin")),"-i" ,"%s" % (config_get("ansible", "inventory")),"%s" % (config_get(platform.lower(), "config")), "--tags", "%s" % all_tags]
         def inner():
             proc = subprocess.Popen(cmd,stdout=subprocess.PIPE,)
             for line in proc.stdout:

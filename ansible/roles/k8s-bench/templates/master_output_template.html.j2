@@ -1,25 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Output</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<body>
-    <h1 style="text-align:center">CIS Benchmark Report</h1>	
-    <br>	
-    <h2 style="margin-left:15px"> Master node: '{{ "{{ ip_address }}" }}' </h2>	
-    <h2 style="margin-left:15px"> Benchmark time: '{{ "{{ bench_time }}" }}' </h2>	
-    <h2 style="margin-left:15px"> Score: {{ master_passed_tasks_count }}/{{ section1_tasks|length + section2_tasks|length + section3_tasks|length }} </h2>	
-    <br>
-    <div style="text-align:center;">
-    <button type="button" class="submit" id="worker_result" style="padding:10px; margin:5px">Switch to worker result</button>
-    <button type="button" class="submit" id="submit_task" style="padding:10px; margin:5px">Submit tasks</button>
-    <button type="button" class="submit" id="submit_run" style="padding:10px; margin:5px">Run remediation</button>
-    </div>
-    <br>	
+{{ "{% extends 'result_base.html' %}" }}
+
+{{ "{% block score %}" }} {{ master_passed_tasks_count }}/{{ section1_tasks|length + section2_tasks|length + section3_tasks|length }} {{ "{% endblock %}" }}
+
+{{ "{% block content %}" }}
     <table border="1" cellpadding="10" style="margin-left:auto;margin-right:auto">
         <tr style="background:#fbfcae">
             <th colspan="5">{{ section1 }}</th>
@@ -133,54 +116,4 @@
         </tr>
         {% endfor %}
     </table>
-</body>
-<script>
-$(function () {
-    let tasks = []; 
-
-    $(document).ready(function () {
-        $(".remediation").on("click",function(event){ 
-            if(tasks.indexOf(event.target.id) != -1){ 
-                return; 
-            } 
-            tasks.push(event.target.id); 
-        });
-
-        $("#worker_result").on("click",function(e){ 
-            if (e.target !== e.currentTarget) return;
-            e.preventDefault();
-            window.location = '{{ "{{url_for('bench.result', name='worker')}}" }}'
-        });
-    
-        $("#submit_task").on('click', function (e) {
-            if (e.target !== e.currentTarget) return;
-            e.preventDefault();
-            var clickElementId = e.target.id;
-            $.ajax({
-                type: 'POST',
-                url: '{{ "{{url_for('harden.harden_option')}}" }}',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                data: JSON.stringify(tasks),
-                success: (response) => {
-                    console.log(response);
-                },
-                error: function (xhr, errmsg, err) {
-                    console.error(errmsg);
-                }
-            });
-        })
-
-        $("#submit_run").on("click",function(e){ 
-            if (e.target !== e.currentTarget) return;
-            e.preventDefault();
-            var clickElementId = e.target.id;
-            window.location = '{{ "{{url_for('harden.run_harden')}}" }}';
-        })
-    });
-
-});
-</script>
-
-</html>
+{{ "{% endblock %}" }}

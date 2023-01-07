@@ -1,5 +1,4 @@
 ---
-
 - name: "SECTION | 5.1 | Image Registry and Image Scanning"
   import_tasks: cis_5.1.x.yml
 
@@ -17,3 +16,9 @@
 
 - name: "SECTION | 5.6 | Other Cluster Configurations"
   import_tasks: cis_5.6.x.yml
+
+- name: Count Section 5 passed tasks
+  set_fact:
+    passed_tasks_count: '{{ passed_tasks_count | int + 1 }}'
+  loop: "{{ section5_tasks | flatten(levels=1) }}"
+  when: item.task_status == "PASSED"
