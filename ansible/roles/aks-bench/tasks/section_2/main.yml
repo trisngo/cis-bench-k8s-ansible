@@ -1,8 +1,8 @@
----
-- name: "SECTION | 2.1 | Logging"
-  import_tasks: cis_2.1.x.yml
-- name: Count Section 2 passed tasks
-  set_fact:
-    passed_tasks_count: '{{ passed_tasks_count | int + 1 }}'
-  loop: "{{ section2_tasks | flatten(levels=1) }}"
-  when: item.task_status == "PASSED"
+# ---
+# - name: "SECTION | 2.1 | Logging"
+#   import_tasks: cis_2.1.x.yml
+# - name: Count Section 2 passed tasks
+#   set_fact:
+#     passed_tasks_count: '{{ passed_tasks_count | int + 1 }}'
+#   loop: "{{ section2_tasks | flatten(levels=1) }}"
+#   when: item.task_status == "PASSED"

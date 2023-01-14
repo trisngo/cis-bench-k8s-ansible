@@ -31,7 +31,7 @@ def handle_input():
                 #print(key,val)
                 if key.startswith("type"):
                     type_dict[key] = val
-                if key.startswith("ipadd"):
+                if key.startswith("ipadd_mini"):
                     ipadd_dict[key] = val
 
             print("Type dictionary is: ", type_dict)
@@ -153,7 +153,7 @@ def writeInventory_mini(dictIP, dictFilename):
     subprocess.run(cmd)
 
     hosts_data = "[masters]\n" + \
-                "%s ansible_ssh_private_key_file=%s\n" % (dictIP["ipadd0"], masterSsh)
+                "%s ansible_ssh_private_key_file=%s\n" % (dictIP["ipadd_mini0"], masterSsh)
 
     hosts_data += "[workers]\n" 
 
@@ -162,7 +162,7 @@ def writeInventory_mini(dictIP, dictFilename):
 
         cmd = ["chmod", "600", "%s" % workerSsh]
         subprocess.run(cmd)
-        hosts_data += "%s ansible_ssh_private_key_file=%s\n" % (dictIP["ipadd" + str(i)], workerSsh)
+        hosts_data += "%s ansible_ssh_private_key_file=%s\n" % (dictIP["ipadd_mini" + str(i)], workerSsh)
 
     hosts_data += "[k8s:children]\n" + \
                 "masters\n" + \

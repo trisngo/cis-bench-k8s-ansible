@@ -24,11 +24,11 @@
 	<link href="static/assets/css/themify-icons.css" rel="stylesheet">
 	
 	<!-- Google Tag Manager -->
-	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	<!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','GTM-NKDMSK6');</script>
+	})(window,document,'script','dataLayer','GTM-NKDMSK6');</script> -->
 	<!-- End Google Tag Manager -->
 	</head>
 
@@ -110,7 +110,8 @@
 		                                            <div class="choice" data-toggle="wizard-radio">
 		                                                <input type="radio" name="platform" id="minikube" value="Minikube">
 		                                                <div class="card card-checkboxes card-hover-effect">
-		                                                    <i class="ti-star"></i>															<p>Minikube</p>
+		                                                    <i class="ti-star"></i>															
+															<p>Minikube</p>
 		                                                </div>
 		                                            </div>
 		                                        </div>
@@ -148,7 +149,7 @@
 														</div>
 														<div class="form-group col-sm-8">
 															<label>IP Address <small>(required)</small></label>
-															<input name="ipadd0" type="text" class="form-control" placeholder="127.0.0.1...">
+															<input name="ipadd_mini0" type="text" class="form-control" placeholder="127.0.0.1...">
 														</div>
 		
 													</div>
@@ -195,7 +196,7 @@
 		                                    <div class="col-sm-12">
 		                                        <h5 class="info-text"> Do you want to continue? </h5>
 		                                    </div>
-                                            <div class="col-sm-12 col-sm-offset-1">
+                                            <div class="col-sm-10 col-sm-offset-1">
 		                                        <div class="form-group">
 		                                            <label>Confirm</label>
 		                                            <p class="description">"Our tool will connect to your cluster as soon as you click Finish, please make sure the information you entered above is correct so we can connect. Are you sure you want to continue?"</p>

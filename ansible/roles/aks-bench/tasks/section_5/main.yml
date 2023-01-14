@@ -1,24 +1,24 @@
----
-- name: "SECTION | 5.1 | Image Registry and Image Scanning"
-  import_tasks: cis_5.1.x.yml
+# ---
+# - name: "SECTION | 5.1 | Image Registry and Image Scanning"
+#   import_tasks: cis_5.1.x.yml
 
-- name: "SECTION | 5.2 | Access and identity options for Azure Kubernetes Service (AKS)"
-  import_tasks: cis_5.2.x.yml
+# - name: "SECTION | 5.2 | Access and identity options for Azure Kubernetes Service (AKS)"
+#   import_tasks: cis_5.2.x.yml
 
-- name: "SECTION | 5.3 | Key Management Service (KMS)"
-  import_tasks: cis_5.3.x.yml
+# - name: "SECTION | 5.3 | Key Management Service (KMS)"
+#   import_tasks: cis_5.3.x.yml
 
-- name: "SECTION | 5.4 | Cluster Networking"
-  import_tasks: cis_5.4.x.yml
+# - name: "SECTION | 5.4 | Cluster Networking"
+#   import_tasks: cis_5.4.x.yml
 
-- name: "SECTION | 5.5 | Authentication and Authorization"
-  import_tasks: cis_5.5.x.yml
+# - name: "SECTION | 5.5 | Authentication and Authorization"
+#   import_tasks: cis_5.5.x.yml
 
-- name: "SECTION | 5.6 | Other Cluster Configurations"
-  import_tasks: cis_5.6.x.yml
+# - name: "SECTION | 5.6 | Other Cluster Configurations"
+#   import_tasks: cis_5.6.x.yml
 
-- name: Count Section 5 passed tasks
-  set_fact:
-    passed_tasks_count: '{{ passed_tasks_count | int + 1 }}'
-  loop: "{{ section5_tasks | flatten(levels=1) }}"
-  when: item.task_status == "PASSED"
+# - name: Count Section 5 passed tasks
+#   set_fact:
+#     passed_tasks_count: '{{ passed_tasks_count | int + 1 }}'
+#   loop: "{{ section5_tasks | flatten(levels=1) }}"
+#   when: item.task_status == "PASSED"

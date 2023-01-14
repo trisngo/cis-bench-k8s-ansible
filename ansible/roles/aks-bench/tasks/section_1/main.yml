@@ -1,13 +1,13 @@
----
-- name: "SECTION | 1 | Master (Control Plane) Components"
-  block:
-      - name: Get NOT SCORED result
-        set_fact:
-          section1_tasks: '{{ section1_tasks | default([]) + [{ "task_number":"1.0.0","task_description":"Master (Control Plane) Components","task_status":"NOT SCORED","configuration":"","script":"" }] }}'
+# ---
+# - name: "SECTION | 1 | Master (Control Plane) Components"
+#   block:
+#       - name: Get NOT SCORED result
+#         set_fact:
+#           section1_tasks: '{{ section1_tasks | default([]) + [{ "task_number":"1.0.0","task_description":"Master (Control Plane) Components","task_status":"NOT SCORED","configuration":"","script":"" }] }}'
 
-  delegate_to: 127.0.0.1
-- name: Count Section 1 passed tasks
-  set_fact:
-    passed_tasks_count: '{{ passed_tasks_count | int + 1 }}'
-  loop: "{{ section1_tasks | flatten(levels=1) }}"
-  when: item.task_status == "PASSED"
+#   delegate_to: 127.0.0.1
+# - name: Count Section 1 passed tasks
+#   set_fact:
+#     passed_tasks_count: '{{ passed_tasks_count | int + 1 }}'
+#   loop: "{{ section1_tasks | flatten(levels=1) }}"
+#   when: item.task_status == "PASSED"
