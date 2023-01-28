@@ -5,6 +5,6 @@
   become: true
   # edit report path
   vars:
-    report_default_path: "/home/trind/ansible-projects/cis-bench-k8s-ansible/CISBenchApp/application/templates/result/minikube"
+    report_default_path: "/home/ubuntu/Desktop/cis-bench-k8s-ansible/CISBenchApp/application/templates/result/minikube"
   roles:
       - k8s-bench
