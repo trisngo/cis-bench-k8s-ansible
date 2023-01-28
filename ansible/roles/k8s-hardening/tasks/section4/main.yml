@@ -131,4 +131,3 @@
     - 4.2.13
   notify:
     - Restart kubelet service
-

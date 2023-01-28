@@ -3,14 +3,6 @@
   tags:
     - 1.1.9
 
-- name: 1.1.12 Ensure that the etcd data directory ownership is set to etcd:etcd
-  ansible.builtin.file:
-    path: /var/lib/minikube/etcd
-    owner: root
-    group: root
-  tags:
-    - 1.1.12
-
 - name: 1.1.20 Ensure that the Kubernetes PKI certificate file permissions are set to 600 or more restrictive (Manual)
   ansible.builtin.shell: chmod 600 /var/lib/minikube/certs/*.crt
   tags:
