@@ -6,19 +6,22 @@
 <body>
 <h1 style="text-align: center;">Result dashboard</h1>
 {% for key, val in ipadd_dict.items() %}
-    {% if key == 'ipadd0' %}
+    {% if key.endswith("0") %}
         <form action="{{ url_for('bench.result') }}" style="text-align: center;">
             <input type="hidden" name="ipadd" value="{{ val }}">
-            <input type="submit" value="Go to master result" style="padding: 10px"/>
+            <input type="submit" value="Master node ({{ val }}) benchmark result" style="padding: 10px"/>
         </form>
         <br>
     {% else %}
         <form action="{{ url_for('bench.result') }}" style="text-align: center;">
             <input type="hidden" name="ipadd" value="{{ val }}">
-            <input type="submit" value="Go to worker result" onclick="this.form.action += '?ipadd={{ val }}'" style="padding: 10px"/>
+            <input type="submit" value="Worker node ({{ val }}) benchmark result" onclick="this.form.action += '?ipadd={{ val }}'" style="padding: 10px"/>
         </form>
         <br>
     {% endif %}
 {% endfor %}
+<form action="{{ url_for('bench.handle_input') }}" style="text-align: center;">
+    <input type="submit" value="Run bench with another configuration" style="padding: 10px" />
+</form>
 </body>
 </html>

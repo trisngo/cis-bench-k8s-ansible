@@ -17,6 +17,7 @@ def make_unique(string):
 @bench.route('/input', methods=['GET', 'POST'])
 def handle_input():
     if request.method == 'POST':
+        session.clear()
         platform = request.form.get('platform')
         session['platform'] = platform.lower()
         print(platform)
@@ -212,7 +213,7 @@ def result():
         ipadd = request.args.get("ipadd")
         return render_template("result/minikube/%s_benchmark_%s.html" % (ipadd,date), ip_address=ipadd, bench_time=bench_time)
     else:
-        print("IPadd Argument not provided")
+        print("IPadd Argument not provided, go to Dashboard")
         ipadd_dict = session['ipadd_dict']
-        return render_template("result.html", ipadd_dict=ipadd_dict)
+        return render_template("result_dashboard.html", ipadd_dict=ipadd_dict)
 

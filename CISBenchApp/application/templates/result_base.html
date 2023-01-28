@@ -10,12 +10,12 @@
 <body>
     <h1 style="text-align:center">CIS Benchmark Report</h1>	
     <br>	
-    <h2 style="margin-left:15px"> Master node: {{ ip_address }} </h2>	
+    <h2 style="margin-left:15px"> Node address: {{ ip_address }} </h2>	
     <h2 style="margin-left:15px"> Benchmark time: {{ bench_time }} </h2>	
     <h2 style="margin-left:15px"> Score: {% block score %} {% endblock %}  </h2>	
     <br>
     <div style="text-align:center;">
-    <button type="button" class="submit" id="result_dashboard" style="padding:10px; margin:5px">Go to another result</button>
+    <button type="button" class="submit" id="result_dashboard" style="padding:10px; margin:5px">Result dashboard</button>
     <button type="button" class="submit" id="submit_task" style="padding:10px; margin:5px">Submit tasks</button>
     <button type="button" class="submit" id="submit_run" style="padding:10px; margin:5px">Run remediation</button>
     </div>
