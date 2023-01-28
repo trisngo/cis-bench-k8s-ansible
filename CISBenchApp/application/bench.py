@@ -103,7 +103,7 @@ def writeInventory_aks(dictIP):
                 "aks_workers\n" + \
                 "[aks:vars]\n" + \
                 "ansible_user=azureuser\n" + \
-                f"ansible_ssh_common_args='-o ProxyCommand=\"ssh -i {keyPath} -p 2022 -W %h:%p root@127.0.0.1\" -o StrictHostKeyChecking=no'\n" + \
+                f"ansible_ssh_common_args='-o ProxyCommand=\"ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i {keyPath} -p 2022 -W %h:%p root@127.0.0.1\" -o StrictHostKeyChecking=no'\n" + \
                 "[local]\n" + \
                 "localhost ansible_connection=local"
     with open(file_name, 'w') as configfile:

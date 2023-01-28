@@ -246,10 +246,62 @@ kubectl exec "$SSH_POD_NAME" -- chmod 700 /root/.ssh/
 kubectl exec "$SSH_POD_NAME" -- chmod 600 /root/.ssh/authorized_keys
 chmod 400 "${HOME}/.ssh/${SSH_KEY_FILE_NAME}"
 
-if [[ -z "$COMMAND" ]]; then
-    echo "No command passed, running in interactive mode"
-    kubectl exec -it "$SSH_POD_NAME" -- /bin/bash -c "ssh -i /$SSH_KEY_FILE_NAME -o StrictHostKeyChecking=no azureuser@$INSTANCE_IP"
-else
-    echo "Running command non-interactively"
-    kubectl exec "$SSH_POD_NAME" -- /bin/bash -c "ssh -i /$SSH_KEY_FILE_NAME -o StrictHostKeyChecking=no azureuser@$INSTANCE_IP '$COMMAND'" > "$OUTPUT_FILE"
-fi
+# if [[ -z "$COMMAND" ]]; then
+#     echo "No command passed, running in interactive mode"
+#     kubectl exec -it "$SSH_POD_NAME" -- /bin/bash -c "ssh -i /$SSH_KEY_FILE_NAME -o StrictHostKeyChecking=no azureuser@$INSTANCE_IP"
+# else
+#     echo "Running command non-interactively"
+#     kubectl exec "$SSH_POD_NAME" -- /bin/bash -c "ssh -i /$SSH_KEY_FILE_NAME -o StrictHostKeyChecking=no azureuser@$INSTANCE_IP '$COMMAND'" > "$OUTPUT_FILE"
+# fi
+
+
+# Add SSHKey to another Node if exist
+NODE_ARR=($(kubectl get node -o jsonpath="{.items[1:].metadata.labels['kubernetes\.io/hostname']}"))
+
+for NODE_NAME in $NODE_ARR; do
+    CONTAINING_VMSS=""
+    for VMSS in $VMSS_LIST; do
+        INSTANCE_ID=$(az vmss list-instances \
+            --resource-group "$NODE_RESOURCE_GROUP" \
+            --name "$VMSS" \
+            --query "[?osProfile.computerName == '$NODE_NAME'].{instanceId:instanceId}" -o tsv)
+        if [[ -n "$INSTANCE_ID" ]]; then
+            CONTAINING_VMSS="$VMSS"
+            break
+        fi
+    done
+
+    if [[ -z "$CONTAINING_VMSS" ]]; then
+        echo "Unable to locate node $NODE_NAME in any VMSS"
+        exit 1
+    else
+        echo "Found $NODE_NAME in $CONTAINING_VMSS"
+    fi
+
+
+    echo "Instance ID is $INSTANCE_ID"
+
+    ACCESS_EXTENSION=$(az vmss show \
+        --resource-group "$NODE_RESOURCE_GROUP" \
+        --name "$CONTAINING_VMSS" \
+        --instance-id $INSTANCE_ID \
+        --query "instanceView.extensions[?name == 'VMAccessForLinux']" -o tsv)
+
+    if [[ -z "$ACCESS_EXTENSION" || -n "$CREATED_KEY_FILE" ]]; then
+        echo "Access extension does not exist or new key generated, adding to VM"
+        az vmss extension set \
+            --resource-group "$NODE_RESOURCE_GROUP" \
+            --vmss-name "$CONTAINING_VMSS" \
+            --name "VMAccessForLinux" \
+            --publisher "Microsoft.OSTCExtensions" \
+            --version "1.4" \
+            --protected-settings "{\"username\":\"azureuser\", \"ssh_key\":\"$(cat ${SSH_KEY_FILE}.pub)\"}" > /dev/null
+
+        az vmss update-instances \
+            --resource-group "$NODE_RESOURCE_GROUP" \
+            --name "$CONTAINING_VMSS" \
+            --instance-ids "$INSTANCE_ID"
+    else
+        echo "Access extension already exists"
+    fi
+done

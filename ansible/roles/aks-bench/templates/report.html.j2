@@ -5,80 +5,6 @@
 {{ "{% block content %}" }}
     <table border="1" cellpadding="10" style="margin-left:auto;margin-right:auto">
         <tr style="background:#fbfcae">
-            <th colspan="5">{{ section1 }}</th>
-        </tr>
-        <tr style="background:#85eddf">
-            <td style="text-align:center">Task number</td>
-            <td style="text-align:center">Description</td>
-            <td style="text-align:center">Task status</td>
-            <td style="text-align:center">Your configuration</td>
-            <td style="text-align:center">Hardening</td>
-        </tr>
-        {% for section1_task in section1_tasks %}
-        <tr>
-            <td>
-                {{ section1_task["task_number"] }}
-            </td>
-            <td style="max-width:500px;word-wrap: break-word;">
-                {{ section1_task["task_description"] }}
-            </td>
-            {% if section1_task["task_status"]=="PASSED" %}  
-            <td style="background: #c0ebc6; text-align: center;">
-            {% elif section1_task["task_status"]=="FAILED" %}
-            <td style="background: #ebcfc0; text-align: center;">
-             {% else %}
-            <td style="background: #f6f7d2; text-align: center;">
-            {% endif %}            
-                {{ section1_task["task_status"] }}
-            </td>
-            <td style="max-width:400px; word-wrap: break-word;">{{ section1_task["configuration"] | replace("\n","<br>") }}</td>
-            {% if section1_task["script"]=="Fix it" %} 	
-            <td style="text-align:center">
-            <button type="button" class="remediation" id={{ section1_task["task_number"] }} style="background:yellow;text-decoration:none;padding:10px;font-weight:bold">Fix it</button>
-            </td>	
-            {% else %}	
-            <td>{{ section1_task["script"] }}</td>	
-            {% endif %}   
-        </tr>
-        {% endfor %}
-        <tr style="background:#fbfcae">
-            <th colspan="5">{{ section2 }}</th>
-        </tr>
-        <tr style="background:#85eddf">
-            <td style="text-align:center">Task number</td>
-            <td style="text-align:center">Description</td>
-            <td style="text-align:center">Task status</td>
-            <td style="text-align:center">Your configuration</td>
-            <td style="text-align:center">Hardening</td>
-        </tr>
-        {% for section2_task in section2_tasks %}
-        <tr>
-            <td>
-                {{ section2_task["task_number"] }}
-            </td>
-            <td style="max-width:500px;word-wrap: break-word;">
-                {{ section2_task["task_description"] }}
-            </td>
-            {% if section2_task["task_status"]=="PASSED" %}  
-            <td style="background: #c0ebc6; text-align: center;">
-            {% elif section2_task["task_status"]=="FAILED" %}
-            <td style="background: #ebcfc0; text-align: center;">
-             {% else %}
-            <td style="background: #f6f7d2; text-align: center;">
-            {% endif %}    
-                {{ section2_task["task_status"] }}
-            </td>
-            <td style="max-width:400px;word-wrap: break-word;">{{ section2_task["configuration"] | replace("\n","<br>") }}</td>
-            {% if section2_task["script"]=="Fix it" %} 	
-            <td style="text-align:center">
-            <button type="button" class="remediation" id={{ section2_task["task_number"] }} style="background:yellow;text-decoration:none;padding:10px;font-weight:bold">Fix it</button>
-            </td>	
-            {% else %}	
-            <td>{{ section2_task["script"] }}</td>	
-            {% endif %}  
-        </tr>
-        {% endfor %}
-        <tr style="background:#fbfcae">
             <th colspan="5">{{ section3 }}</th>
         </tr>
         <tr style="background:#85eddf">
@@ -116,7 +42,7 @@
         </tr>
         {% endfor %}
         <tr style="background:#fbfcae">
-            <th colspan="5">{{ section3 }}</th>
+            <th colspan="5">{{ section4 }}</th>
         </tr>
         <tr style="background:#85eddf">
             <td style="text-align:center">Task number</td>
@@ -149,43 +75,6 @@
             </td>	
             {% else %}	
             <td>{{ section4_task["script"] }}</td>	
-            {% endif %}  
-        </tr>
-        {% endfor %}
-        <tr style="background:#fbfcae">
-            <th colspan="5">{{ section3 }}</th>
-        </tr>
-        <tr style="background:#85eddf">
-            <td style="text-align:center">Task number</td>
-            <td style="text-align:center">Description</td>
-            <td style="text-align:center">Task status</td>
-            <td style="text-align:center">Your configuration</td>
-            <td style="text-align:center">Hardening</td>
-        </tr>
-        {% for section5_task in section5_tasks %}
-        <tr>
-            <td>
-                {{ section5_task["task_number"] }}
-            </td>
-            <td style="max-width:500px;word-wrap: break-word;">
-                {{ section5_task["task_description"] }}
-            </td>
-            {% if section5_task["task_status"]=="PASSED" %}  
-            <td style="background: #c0ebc6; text-align: center;">
-            {% elif section5_task["task_status"]=="FAILED" %}
-            <td style="background: #ebcfc0; text-align: center;">
-             {% else %}
-            <td style="background: #f6f7d2; text-align: center;">
-            {% endif %}    
-                {{ section5_task["task_status"] }}
-            </td>
-            <td style="max-width:400px;word-wrap: break-word;">{{ section5_task["configuration"] | replace("\n","<br>") }}</td>
-            {% if section5_task["script"]=="Fix it" %} 	
-            <td style="text-align:center">
-            <button type="button" class="remediation" id={{ section5_task["task_number"] }} style="background:yellow;text-decoration:none;padding:10px;font-weight:bold">Fix it</button>
-            </td>	
-            {% else %}	
-            <td>{{ section5_task["script"] }}</td>	
             {% endif %}  
         </tr>
         {% endfor %}

@@ -233,7 +233,7 @@
 
       - name: Get FAILED result
         set_fact:
-          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.11","task_description":"Ensure that the RotateKubeletServerCertificate argument is set to true (Manual)","task_status":"FAILED","configuration":"Argument is not set","script":"" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.11","task_description":"Ensure that the RotateKubeletServerCertificate argument is set to true (Manual)","task_status":"FAILED","configuration":"Argument is not set","script":"Fix it" }] }}'
         when: 
           - "'--rotate-kubelet-server-certificate=true' not in result32bin.stdout"
           - "'--rotate-kubelet-server-certificate=true' not in result32cfg.stdout"
