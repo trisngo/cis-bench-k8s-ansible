@@ -5,3 +5,9 @@
 
 - name: "SECTION | 3.2 | Kubelet"
   import_tasks: cis_3.2.x.yml
+
+- name: Count Section 3 passed tasks
+  set_fact:
+    passed_tasks_count: '{{ passed_tasks_count | int + 1 }}'
+  loop: "{{ section3_tasks | flatten(levels=1) }}"
+  when: item.task_status == "PASSED"

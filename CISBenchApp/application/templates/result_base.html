@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Output</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1 style="text-align:center">CIS Benchmark Report</h1>	
+    <br>	
+    <h2 style="margin-left:15px"> Master node: {{ ip_address }} </h2>	
+    <h2 style="margin-left:15px"> Benchmark time: {{ bench_time }} </h2>	
+    <h2 style="margin-left:15px"> Score: {% block score %} {% endblock %}  </h2>	
+    <br>
+    <div style="text-align:center;">
+    <button type="button" class="submit" id="result_dashboard" style="padding:10px; margin:5px">Go to another result</button>
+    <button type="button" class="submit" id="submit_task" style="padding:10px; margin:5px">Submit tasks</button>
+    <button type="button" class="submit" id="submit_run" style="padding:10px; margin:5px">Run remediation</button>
+    </div>
+    <br>	
+    {% block content %} {% endblock %}
+</body>
+<script>
+$(function () {
+    let tasks = []; 
+
+    $(document).ready(function () {
+        $(".remediation").on("click",function(event){ 
+            if(tasks.indexOf(event.target.id) != -1){ 
+                return; 
+            } 
+            tasks.push(event.target.id); 
+        });
+
+        $("#result_dashboard").on("click",function(e){ 
+            if (e.target !== e.currentTarget) return;
+            e.preventDefault();
+            window.location = "{{url_for('bench.result')}}"
+        });
+    
+        $("#submit_task").on('click', function (e) {
+            if (e.target !== e.currentTarget) return;
+            e.preventDefault();
+            var clickElementId = e.target.id;
+            $.ajax({
+                type: 'POST',
+                url: "{{url_for('harden.harden_option')}}",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: JSON.stringify(tasks),
+                success: (response) => {
+                    console.log(response);
+                },
+                error: function (xhr, errmsg, err) {
+                    console.error(errmsg);
+                }
+            });
+        })
+
+        $("#submit_run").on("click",function(e){ 
+            if (e.target !== e.currentTarget) return;
+            e.preventDefault();
+            var clickElementId = e.target.id;
+            window.location = "{{url_for('harden.run_harden')}}";
+        })
+    });
+
+});
+</script>
+
+</html>

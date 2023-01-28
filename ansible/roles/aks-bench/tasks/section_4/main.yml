@@ -1,22 +1,27 @@
 ---
-
 - name: "SECTION | 4.1 | RBAC and Service Accounts"
   import_tasks: cis_4.1.x.yml
 
 - name: "SECTION | 4.2 | Pod Security Policies"
   import_tasks: cis_4.2.x.yml
 
-- name: "SECTION | 4.3 | Azure Policy / OPA"
-  import_tasks: cis_4.3.x.yml
+# - name: "SECTION | 4.3 | Azure Policy / OPA"
+#   import_tasks: cis_4.3.x.yml
 
-- name: "SECTION | 4.4 | CNI Plugin"
-  import_tasks: cis_4.4.x.yml
+# - name: "SECTION | 4.4 | CNI Plugin"
+#   import_tasks: cis_4.4.x.yml
 
-- name: "SECTION | 4.5 | Secrets Management"
-  import_tasks: cis_4.5.x.yml
+# - name: "SECTION | 4.5 | Secrets Management"
+#   import_tasks: cis_4.5.x.yml
 
-- name: "SECTION | 4.6 | Extensible Admission Control"
-  import_tasks: cis_4.6.x.yml
+# - name: "SECTION | 4.6 | Extensible Admission Control"
+#   import_tasks: cis_4.6.x.yml
 
-- name: "SECTION | 4.7 | General Policies"
-  import_tasks: cis_4.7.x.yml
+# - name: "SECTION | 4.7 | General Policies"
+#   import_tasks: cis_4.7.x.yml
+
+- name: Count Section 4 passed tasks
+  set_fact:
+    passed_tasks_count: '{{ passed_tasks_count | int + 1 }}'
+  loop: "{{ section4_tasks | flatten(levels=1) }}"
+  when: item.task_status == "PASSED"

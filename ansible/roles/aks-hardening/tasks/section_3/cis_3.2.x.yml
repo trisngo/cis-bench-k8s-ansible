@@ -8,6 +8,8 @@
           replace: "--anonymous-auth=false"
         notify:
         - restart kubelet
+  tags:
+      - 3.2.1
 
 - name: "3.2.2 | Ensure that the --authorization-mode argument is not set to AlwaysAllow (Manual)"
   block:
@@ -18,6 +20,8 @@
           replace: "--authorization-mode=Webhook"
         notify:
         - restart kubelet
+  tags:
+      - 3.2.2
 
 # - name: "3.2.3 | Ensure that the --client-ca-file argument is set as appropriate (Manual)"
 #   block:
@@ -29,7 +33,8 @@
 #           line: "\1 --client-ca-file={{ client-ca-file-path }}""
 #         notify:
 #         - restart kubelet
-
+  # tags:
+  #     - 3.2.3
 - name: "3.2.4 | Ensure that the --read-only-port is secured (Manual)"
   block:
       - name: append --read-only-port to existing list of KUBELET_ARGS
@@ -40,6 +45,8 @@
           line: '\1 --read-only-port=0'
         notify:
         - restart kubelet
+  tags:
+      - 3.2.4
 
 - name: "3.2.5 | Ensure that the --streaming-connection-idle-timeout argument is not set to 0 (Manual)"
   block:
@@ -51,6 +58,8 @@
           line: '\1 --streaming-connection-idle-timeout=4h0m0s'
         notify:
         - restart kubelet
+  tags:
+      - 3.2.5
 
 - name: "3.2.6 | Ensure that the --protect-kernel-defaults argument is set to true (Manual)"
   block:
@@ -62,6 +71,8 @@
           line: '\1 --protect-kernel-defaults=true'
         notify:
         - restart kubelet
+  tags:
+      - 3.2.6
 
 - name: "3.2.7 | Ensure that the --make-iptables-util-chains argument is set to true (Manual)"
   block:
@@ -73,7 +84,8 @@
           line: '\1 --make-iptables-util-chains=true'
         notify:
         - restart kubelet
-
+  tags:
+      - 3.2.7
 
 - name: "3.2.8 | Ensure that the --hostname-override argument is not set (Manual)"
   block:
@@ -84,6 +96,8 @@
           replace: ""
         notify:
         - restart kubelet
+  tags:
+      - 3.2.8
 
 - name: "3.2.9 | Ensure that the --eventRecordQPS argument is set to 0 or a level which ensures appropriate event capture (Manual)"
   block:
@@ -95,6 +109,8 @@
           line: '\1 --event-qps=0 '
         notify:
         - restart kubelet
+  tags:
+      - 3.2.9
 
 - name: "3.2.10 | Ensure that the --rotate-certificates argument is not set to false (Manual)"
   block:
@@ -105,6 +121,8 @@
           replace: "--rotate-certificates=true"
         notify:
         - restart kubelet
+  tags:
+      - 3.2.10
 
 - name: "3.2.11 | Ensure that the RotateKubeletServerCertificate argument is set to true (Manual)"
   block:
@@ -116,3 +134,5 @@
           line: '\1 --rotate-kubelet-server-certificate=true'
         notify:
         - restart kubelet
+  tags:
+      - 3.2.11

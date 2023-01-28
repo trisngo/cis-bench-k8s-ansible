@@ -1,0 +1,9 @@
+---
+
+- name: AKS Hardening
+  hosts: aks
+  become: true
+  gather_facts: no
+
+  roles:
+      - aks-hardening
