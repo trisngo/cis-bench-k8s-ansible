@@ -15,25 +15,15 @@
 
 - name: "3.2.1 | Ensure that the --anonymous-auth argument is set to false (Manual)"
   block:
-      # - debug:
-      #     msg: "{% if result32bin.stdout == '--anonymous-auth=false' or result32cfg.stdout == '--anonymous-auth=false' %} 3.2.1 | PASSED | Ensure that the --anonymous-auth argument is set to false (Manual){% else %}3.2.1 | FAILED | Ensure that the --anonymous-auth argument is set to false (Manual){% endif %}"
-
-      # - lineinfile:
-      #     line:  "{% if result32bin.stdout == '--anonymous-auth=false' or result32cfg.stdout == '--anonymous-auth=false' %} 3.2.1,Ensure that the --anonymous-auth argument is set to false (Manual),PASSED{% else %}3.2.1,Ensure that the --anonymous-auth argument is set to false (Manual),FAILED{% endif %}"
-      #     dest: "{{ csv_path }}/{{ csv_filename }}"
-      #     create: true
-      #     state: present
-      #   delegate_to: 127.0.0.1
-
       - name: Get PASSED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.1","task_description":"Ensure that the --anonymous-auth argument is set to false (Manual)","status":"PASSED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.1","task_description":"Ensure that the --anonymous-auth argument is set to false (Manual)","task_status":"PASSED","configuration":"","script":"" }] }}'
         when: 
           - "'--anonymous-auth=false' in result32bin.stdout,result32cfg.stdout"
 
       - name: Get FAILED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.1","task_description":"Ensure that the --anonymous-auth argument is set to false (Manual)","status":"FAILED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.1","task_description":"Ensure that the --anonymous-auth argument is set to false (Manual)","task_status":"FAILED","configuration":"Argument is not set","script":"Fix it" }] }}'
         when: 
           - "'--anonymous-auth=false' not in result32bin.stdout"
           - "'--anonymous-auth=false' not in result32cfg.stdout"
@@ -47,29 +37,19 @@
 
 - name: "3.2.2 | Ensure that the --authorization-mode argument is not set to AlwaysAllow (Manual)"
   block:
-      # - debug: 
-      #     msg: "{% if ('--authorization-mode=AlwaysAllow' not in result32bin.stdout) and ('--authorization-mode=AlwaysAllow' not in result32cfg.stdout) %}3.2.2 | PASSED | Ensure that the --authorization-mode argument is not set to AlwaysAllow (Manual){% else %}3.2.2 | FAILED | Ensure that the --authorization-mode argument is not set to AlwaysAllow (Manual){% endif %}"
 
-      # - lineinfile:
-      #     line: "{% if ('--authorization-mode=AlwaysAllow' not in result32bin.stdout) and ('--authorization-mode=AlwaysAllow' not in result32cfg.stdout) %}3.2.2,Ensure that the --authorization-mode argument is not set to AlwaysAllow (Manual),PASSED{% else %}3.2.2,Ensure that the --authorization-mode argument is not set to AlwaysAllow (Manual),FAILED{% endif %}"
-      #     dest: "{{ csv_path }}/{{ csv_filename }}"
-      #     create: true
-      #     state: present
-      #   delegate_to: 127.0.0.1
-  
       - name: Get PASSED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.2","task_description":"Ensure that the --authorization-mode argument is not set to AlwaysAllow (Manual)","status":"PASSED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.2","task_description":"Ensure that the --authorization-mode argument is not set to AlwaysAllow (Manual)","task_status":"PASSED","configuration":"","script":"" }] }}'
         when: 
           - "'--authorization-mode=AlwaysAllow' not in result32bin.stdout"
           - "'--authorization-mode=AlwaysAllow' not in result32cfg.stdout"
 
       - name: Get FAILED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.2","task_description":"Ensure that the --authorization-mode argument is not set to AlwaysAllow (Manual)","status":"FAILED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.2","task_description":"Ensure that the --authorization-mode argument is not set to AlwaysAllow (Manual)","task_status":"FAILED","configuration":"Argument is set to AlwaysAllow","script":"Fix it" }] }}'
         when: 
           - "('--authorization-mode=AlwaysAllow' in result32bin.stdout) or ('--authorization-mode=AlwaysAllow' in result32cfg.stdout)"
-
   tags:
       - level
       - rule_3.2.2
@@ -78,25 +58,15 @@
 
 - name: "3.2.3 | Ensure that the --client-ca-file argument is set as appropriate (Manual)"
   block:
-      # - debug: 
-      #     msg: "{% if ('--client-ca-file' in result32bin.stdout) or ('--client-ca-file' in result32cfg.stdout) %}3.2.3 | PASSED | Ensure that the --client-ca-file argument is set as appropriate (Manual){% else %}3.2.3 | FAILED | Ensure that the --client-ca-file argument is set as appropriate (Manual){% endif %}"
-
-      # - lineinfile:
-      #     line: "{% if ('--client-ca-file' in result32bin.stdout) or ('--client-ca-file' in result32cfg.stdout) %}3.2.3,Ensure that the --client-ca-file argument is set as appropriate (Manual),PASSED{% else %}3.2.3,Ensure that the --client-ca-file argument is set as appropriate (Manual),FAILED{% endif %}"
-      #     dest: "{{ csv_path }}/{{ csv_filename }}"
-      #     create: true
-      #     state: present
-      #   delegate_to: 127.0.0.1
-
       - name: Get PASSED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.3","task_description":"Ensure that the --client-ca-file argument is set as appropriate (Manual)","status":"PASSED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.3","task_description":"Ensure that the --client-ca-file argument is set as appropriate (Manual)","task_status":"PASSED","configuration":"","script":"" }] }}'
         when: 
           - "'--client-ca-file' in result32bin.stdout,result32cfg.stdout"
 
       - name: Get FAILED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.3","task_description":"Ensure that the --client-ca-file argument is set as appropriate (Manual)","status":"FAILED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.3","task_description":"Ensure that the --client-ca-file argument is set as appropriate (Manual)","task_status":"FAILED","configuration":"Argument is not set","script":"Fix" }] }}'
         when: 
           - "'--client-ca-file' not in result32bin.stdout" 
           - "'--client-ca-file' not in result32cfg.stdout"
@@ -109,25 +79,15 @@
 
 - name: "3.2.4 | Ensure that the --read-only-port is secured (Manual)"
   block:
-      # - debug: 
-      #     msg: "{% if ('--read-only-port=0' in result32bin.stdout) or ('--read-only-port=0' in result32cfg.stdout) %}3.2.4 | PASSED | Ensure that the --read-only-port is secured (Manual){% else %}3.2.4 | FAILED | Ensure that the --read-only-port is secured (Manual){% endif %}"
-
-      # - lineinfile:
-      #     line: "{% if ('--read-only-port=0' in result32bin.stdout) or ('--read-only-port=0' in result32cfg.stdout) %}3.2.4,Ensure that the --read-only-port is secured (Manual),PASSED{% else %}3.2.4,Ensure that the --read-only-port is secured (Manual),FAILED{% endif %}"
-      #     dest: "{{ csv_path }}/{{ csv_filename }}"
-      #     create: true
-      #     state: present
-      #   delegate_to: 127.0.0.1
-
       - name: Get PASSED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.4","task_description":"Ensure that the --read-only-port is secured (Manual)","status":"PASSED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.4","task_description":"Ensure that the --read-only-port is secured (Manual)","task_status":"PASSED","configuration":"","script":"" }] }}'
         when: 
           - "'--read-only-port=0' in result32bin.stdout,result32cfg.stdout"
 
       - name: Get FAILED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.4","task_description":"Ensure that the --read-only-port is secured (Manual)","status":"FAILED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.4","task_description":"Ensure that the --read-only-port is secured (Manual)","task_status":"FAILED","configuration":"Argument is not set","script":"" }] }}'
         when: 
           - "'--read-only-port=0' not in result32bin.stdout"
           - "'--read-only-port=0' not in result32cfg.stdout"
@@ -140,26 +100,16 @@
 
 - name: "3.2.5 | Ensure that the --streaming-connection-idle-timeout argument is not set to 0 (Manual)"
   block:
-      # - debug: 
-      #     msg: "{% if ('--streaming-connection-idle-timeout=0' not in result32bin.stdout) and ('--streaming-connection-idle-timeout=0' not in result32cfg.stdout) %}3.2.5 | PASSED | Ensure that the --streaming-connection-idle-timeout argument is not set to 0 (Manual){% else %}3.2.5 | FAILED | Ensure that the --streaming-connection-idle-timeout argument is not set to 0 (Manual){% endif %}"
-
-      # - lineinfile:
-      #     line: "{% if ('--streaming-connection-idle-timeout=0' not in result32bin.stdout) and ('--streaming-connection-idle-timeout=0' not in result32cfg.stdout) %}3.2.5,Ensure that the --streaming-connection-idle-timeout argument is not set to 0 (Manual),PASSED{% else %}3.2.5,Ensure that the --streaming-connection-idle-timeout argument is not set to 0 (Manual),FAILED{% endif %}"
-      #     dest: "{{ csv_path }}/{{ csv_filename }}"
-      #     create: true
-      #     state: present
-      #   delegate_to: 127.0.0.1
-
       - name: Get PASSED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.5","task_description":"Ensure that the --streaming-connection-idle-timeout argument is not set to 0 (Manual)","status":"PASSED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.5","task_description":"Ensure that the --streaming-connection-idle-timeout argument is not set to 0 (Manual)","task_status":"PASSED","configuration":"","script":"" }] }}'
         when: 
           - "'--streaming-connection-idle-timeout=0' not in result32bin.stdout" 
           - "'--streaming-connection-idle-timeout=0' not in result32cfg.stdout"
 
       - name: Get FAILED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.5","task_description":"Ensure that the --streaming-connection-idle-timeout argument is not set to 0 (Manual)","status":"FAILED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.5","task_description":"Ensure that the --streaming-connection-idle-timeout argument is not set to 0 (Manual)","task_status":"FAILED","configuration":"Argument is set to 0","script":"Fix it" }] }}'
         when: 
           - "'--streaming-connection-idle-timeout=0' in result32bin.stdout,result32cfg.stdout"
 
@@ -171,25 +121,15 @@
 
 - name: "3.2.6 | Ensure that the --protect-kernel-defaults argument is set to true (Manual)"
   block:
-      # - debug: 
-      #     msg: "{% if ('--protect-kernel-defaults=true' in result32bin.stdout) or ('--protect-kernel-defaults=true' in result32cfg.stdout) %}3.2.6 | PASSED | Ensure that the --protect-kernel-defaults argument is set to true (Manual){% else %}3.2.6 | FAILED | Ensure that the --protect-kernel-defaults argument is set to true (Manual){% endif %}"
-
-      # - lineinfile:
-      #     line: "{% if ('--protect-kernel-defaults=true' in result32bin.stdout) or ('--protect-kernel-defaults=true' in result32cfg.stdout) %}3.2.6 | PASSED | Ensure that the --protect-kernel-defaults argument is set to true (Manual){% else %}3.2.6 | FAILED | Ensure that the --protect-kernel-defaults argument is set to true (Manual){% endif %}"
-      #     dest: "{{ csv_path }}/{{ csv_filename }}"
-      #     create: true
-      #     state: present
-      #   delegate_to: 127.0.0.1
-
       - name: Get PASSED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.6","task_description":"Ensure that the --protect-kernel-defaults argument is set to true (Manual)","status":"PASSED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.6","task_description":"Ensure that the --protect-kernel-defaults argument is set to true (Manual)","task_status":"PASSED","configuration":"","script":"" }] }}'
         when: 
           - "'--protect-kernel-defaults=true' in result32bin.stdout, result32cfg.stdout"
 
       - name: Get FAILED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.6","task_description":"Ensure that the --protect-kernel-defaults argument is set to true (Manual)","status":"FAILED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.6","task_description":"Ensure that the --protect-kernel-defaults argument is set to true (Manual)","task_status":"FAILED","configuration":"Argument is not set","script":"Fix it" }] }}'
         when: 
           - "'--protect-kernel-defaults=true' not in result32bin.stdout"
           - "'--protect-kernel-defaults=true' not in result32cfg.stdout"
@@ -202,25 +142,15 @@
 
 - name: "3.2.7 | Ensure that the --make-iptables-util-chains argument is set to true (Manual)"
   block:
-      # - debug: 
-      #     msg: "{% if ('--make-iptables-util-chains=true' in result32bin.stdout) or ('--make-iptables-util-chains=true' in result32cfg.stdout) %}3.2.7 | PASSED | Ensure that the --make-iptables-util-chains argument is set to true (Manual){% else %}3.2.7 | FAILED | Ensure that the --make-iptables-util-chains argument is set to true (Manual){% endif %}"
-
-      # - lineinfile:
-      #     line: "{% if ('--make-iptables-util-chains=true' in result32bin.stdout) or ('--make-iptables-util-chains=true' in result32cfg.stdout) %}3.2.7 | PASSED | Ensure that the --make-iptables-util-chains argument is set to true (Manual){% else %}3.2.7 | FAILED | Ensure that the --make-iptables-util-chains argument is set to true (Manual){% endif %}"
-      #     dest: "{{ csv_path }}/{{ csv_filename }}"
-      #     create: true
-      #     state: present
-      #   delegate_to: 127.0.0.1
-
       - name: Get PASSED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.7","task_description":"Ensure that the --make-iptables-util-chains argument is set to true (Manual)","status":"PASSED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.7","task_description":"Ensure that the --make-iptables-util-chains argument is set to true (Manual)","task_status":"PASSED","configuration":"","script":"" }] }}'
         when: 
           - "'--make-iptables-util-chains=true' in result32bin.stdout, result32cfg.stdout"
 
       - name: Get FAILED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.7","task_description":"Ensure that the --make-iptables-util-chains argument is set to true (Manual)","status":"FAILED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.7","task_description":"Ensure that the --make-iptables-util-chains argument is set to true (Manual)","task_status":"FAILED","configuration":"Argument is not set","script":"Fix it" }] }}'
         when: 
           - "'--make-iptables-util-chains=true' not in result32bin.stdout"
           - "'--make-iptables-util-chains=true' not in result32cfg.stdout"
@@ -233,30 +163,18 @@
 
 - name: "3.2.8 | Ensure that the --hostname-override argument is not set (Manual)"
   block:
-      # - debug: 
-      #     msg: "{% if ('--hostname-override' not in result32bin.stdout) and ('--hostname-override' not in result32cfg.stdout) %}3.2.8 | PASSED | Ensure that the --hostname-override argument is not set (Manual){% else %}3.2.8 | FAILED | Ensure that the --hostname-override argument is not set (Manual){% endif %}"
-
-      # - lineinfile:
-      #     line: "{% if ('--hostname-override' not in result32bin.stdout) and ('--hostname-override' not in result32cfg.stdout) %}3.2.8 | PASSED | Ensure that the --hostname-override argument is not set (Manual){% else %}3.2.8 | FAILED | Ensure that the --hostname-override argument is not set (Manual){% endif %}"
-      #     dest: "{{ csv_path }}/{{ csv_filename }}"
-      #     create: true
-      #     state: present
-      #   delegate_to: 127.0.0.1
-
       - name: Get PASSED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.8","task_description":"Ensure that the --hostname-override argument is not set (Manual)","status":"PASSED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.8","task_description":"Ensure that the --hostname-override argument is not set (Manual)","task_status":"PASSED","configuration":"","script":"" }] }}'
         when: 
           - "'--hostname-override' not in result32bin.stdout"
           - "'--hostname-override' not in result32cfg.stdout"
 
       - name: Get FAILED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.8","task_description":"Ensure that the --hostname-override argument is not set (Manual)","status":"FAILED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.8","task_description":"Ensure that the --hostname-override argument is not set (Manual)","task_status":"FAILED","configuration":"Argument is set","script":"Fix it" }] }}'
         when: 
           - "'--hostname-override' in result32bin.stdout,result32cfg.stdout"
-
-
   tags:
       - level
       - rule_3.2.8
@@ -265,25 +183,15 @@
 
 - name: "3.2.9 | Ensure that the --eventRecordQPS argument is set to 0 or a level which ensures appropriate event capture (Manual)"
   block:
-      # - debug: 
-      #     msg: "{% if ('--event-qps=0' in result32bin.stdout) or ('--event-qps=0' in result32cfg.stdout) %}3.2.9 | PASSED | Ensure that the --eventRecordQPS argument is set to 0 or a level which ensures appropriate event capture (Manual){% else %}3.2.9 | FAILED | Ensure that the --eventRecordQPS argument is set to 0 or a level which ensures appropriate event capture (Manual){% endif %}"
-
-      # - lineinfile:
-      #     line: "{% if ('--event-qps=0' in result32bin.stdout) or ('--event-qps=0' in result32cfg.stdout) %}3.2.9 | PASSED | Ensure that the --eventRecordQPS argument is set to 0 or a level which ensures appropriate event capture (Manual){% else %}3.2.9 | FAILED | Ensure that the --eventRecordQPS argument is set to 0 or a level which ensures appropriate event capture (Manual){% endif %}"
-      #     dest: "{{ csv_path }}/{{ csv_filename }}"
-      #     create: true
-      #     state: present
-      #   delegate_to: 127.0.0.1
-  
       - name: Get PASSED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.9","task_description":"Ensure that the --eventRecordQPS argument is set to 0 or a level which ensures appropriate event capture (Manual)","status":"PASSED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.9","task_description":"Ensure that the --eventRecordQPS argument is set to 0 or a level which ensures appropriate event capture (Manual)","task_status":"PASSED","configuration":"","script":"Fix it" }] }}'
         when: 
           - "'--event-qps=0' in result32bin.stdout, result32cfg.stdout"
 
       - name: Get FAILED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.9","task_description":"Ensure that the --eventRecordQPS argument is set to 0 or a level which ensures appropriate event capture (Manual)","status":"FAILED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.9","task_description":"Ensure that the --eventRecordQPS argument is set to 0 or a level which ensures appropriate event capture (Manual)","task_status":"FAILED","configuration":"","script":"Fix it" }] }}'
         when: 
           - "'--event-qps=0' not in result32bin.stdout"
           - "'--event-qps=0' not in result32cfg.stdout"
@@ -296,26 +204,16 @@
 
 - name: "3.2.10 | Ensure that the --rotate-certificates argument is not set to false (Manual)"
   block:
-      # - debug: 
-      #     msg: "{% if ('--rotate-certificates=false' not in result32bin.stdout) and ('--rotate-certificates=false' not in result32cfg.stdout) %}3.2.10| PASSED | Ensure that the --rotate-certificates argument is not set to false (Manual){% else %}3.2.10| PASSED | Ensure that the --rotate-certificates argument is not set to false (Manual){% endif %}"
-
-      # - lineinfile:
-      #     line: "{% if ('--rotate-certificates=false' not in result32bin.stdout) and ('--rotate-certificates=false' not in result32cfg.stdout) %}3.2.10| PASSED | Ensure that the --rotate-certificates argument is not set to false (Manual){% else %}3.2.10| PASSED | Ensure that the --rotate-certificates argument is not set to false (Manual){% endif %}"
-      #     dest: "{{ csv_path }}/{{ csv_filename }}"
-      #     create: true
-      #     state: present
-      #   delegate_to: 127.0.0.1
-
       - name: Get PASSED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.10","task_description":"Ensure that the --rotate-certificates argument is not set to false (Manual)","status":"PASSED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.10","task_description":"Ensure that the --rotate-certificates argument is not set to false (Manual)","task_status":"PASSED","configuration":"","script":"" }] }}'
         when: 
           - "'--rotate-certificates=false' not in result32bin.stdout"
           - "'--rotate-certificates=false' not in result32cfg.stdout"
 
       - name: Get FAILED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.10","task_description":"Ensure that the --rotate-certificates argument is not set to false (Manual)","status":"FAILED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.10","task_description":"Ensure that the --rotate-certificates argument is not set to false (Manual)","task_status":"FAILED","configuration":"Argument is set to false","script":"Fix it" }] }}'
         when: 
           - "'--rotate-certificates=false' in result32bin.stdout,result32cfg.stdout"
 
@@ -327,25 +225,15 @@
 
 - name: "3.2.11 | Ensure that the RotateKubeletServerCertificate argument is set to true (Manual)"
   block:
-      # - debug: 
-      #     msg: "{% if ('--rotate-kubelet-server-certificate=true' in result32bin.stdout) or ('--rotate-kubelet-server-certificate=true' in result32cfg.stdout) %}3.2.11| PASSED | Ensure that the RotateKubeletServerCertificate argument is set to true (Manual){% else %}3.2.11| FAILED | Ensure that the RotateKubeletServerCertificate argument is set to true (Manual){% endif %}"
-
-      # - lineinfile:
-      #     line: "{% if ('--rotate-kubelet-server-certificate=true' in result32bin.stdout) or ('--rotate-kubelet-server-certificate=true' in result32cfg.stdout) %}3.2.11| PASSED | Ensure that the RotateKubeletServerCertificate argument is set to true (Manual){% else %}3.2.11| FAILED | Ensure that the RotateKubeletServerCertificate argument is set to true (Manual){% endif %}"
-      #     dest: "{{ csv_path }}/{{ csv_filename }}"
-      #     create: true
-      #     state: present
-      #   delegate_to: 127.0.0.1
-
       - name: Get PASSED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.11","task_description":"Ensure that the RotateKubeletServerCertificate argument is set to true (Manual)","status":"PASSED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.11","task_description":"Ensure that the RotateKubeletServerCertificate argument is set to true (Manual)","task_status":"PASSED","configuration":"","script":"" }] }}'
         when: 
           - "'--rotate-kubelet-server-certificate=true' in result32bin.stdout, result32cfg.stdout"
 
       - name: Get FAILED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"3.2.11","task_description":"Ensure that the RotateKubeletServerCertificate argument is set to true (Manual)","status":"FAILED","configuration":"","remediation":"Script here" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.11","task_description":"Ensure that the RotateKubeletServerCertificate argument is set to true (Manual)","task_status":"FAILED","configuration":"Argument is not set","script":"" }] }}'
         when: 
           - "'--rotate-kubelet-server-certificate=true' not in result32bin.stdout"
           - "'--rotate-kubelet-server-certificate=true' not in result32cfg.stdout"

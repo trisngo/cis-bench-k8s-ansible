@@ -1,5 +1,5 @@
 from flask import Flask
-from os import path
+from os import path, makedirs
 
 import sys, json, datetime, time, hashlib, urllib.request, urllib.parse, subprocess, importlib
 from configparser import ConfigParser
@@ -22,8 +22,21 @@ def config_get(section, name):
     parser.OPTCRE
     parser.read("conf/main.conf")
     return parser.get(section, name)
-    
+
+def prepare_dir(p):
+
+    isExist = path.exists(p)
+    if not isExist:
+        # Create a new directory because it does not exist
+        makedirs(p)
+        print("The new directory is created!")
+
 def create_app():
+    prepare_dir(config_get("logging", "dir"))
+    prepare_dir(config_get("logging", "playbook_dir"))
+    prepare_dir(config_get("data_store", "dir"))
+    prepare_dir(config_get("minikube", "result_dir"))
+    prepare_dir(config_get("aks", "result_dir"))
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'hjshjhdjah kjshkjdhjs'
 

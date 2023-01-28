@@ -8,9 +8,10 @@
           msg: "4.7.1 | NOT SCORED | Create administrative boundaries between resources using namespaces (Manual)."
       - name: Get NOT SCORED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"4.7.1","task_description":"Create administrative boundaries between resources using namespaces (Manual)","status":"NOT SCORED","configuration":"","remediation":"Script here" }] }}'
+          section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.7.1","task_description":"Create administrative boundaries between resources using namespaces (Manual)","task_status":"NOT SCORED","configuration":"","script":"" }] }}'
 
   delegate_to: 127.0.0.1
+  become: false
 
 - name: "4.7.2 | Apply Security Context to Your Pods and Containers (Manual)"
   block:
@@ -18,9 +19,10 @@
           msg: "4.7.2 | NOT SCORED | Apply Security Context to Your Pods and Containers (Manual)."
       - name: Get NOT SCORED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"4.7.2","task_description":"Apply Security Context to Your Pods and Containers (Manual)","status":"NOT SCORED","configuration":"","remediation":"Script here" }] }}'
+          section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.7.2","task_description":"Apply Security Context to Your Pods and Containers (Manual)","task_status":"NOT SCORED","configuration":"","script":"" }] }}'
 
   delegate_to: 127.0.0.1
+  become: false
 
 - name: "4.7.3 | The default namespace should not be used (Manual)"
   block:
@@ -31,6 +33,7 @@
           msg: "4.7.3 | NOT SCORED | The default namespace should not be used (Manual)."
       - name: Get NOT SCORED result
         set_fact:
-          report_data: '{{ report_data | default([]) + [{ "task_number":"4.7.3","task_description":"The default namespace should not be used (Manual)","status":"NOT SCORED","configuration":"","remediation":"Script here" }] }}'
+          section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.7.3","task_description":"The default namespace should not be used (Manual)","task_status":"NOT SCORED","configuration":"","script":"" }] }}'
 
   delegate_to: 127.0.0.1
+  become: false
