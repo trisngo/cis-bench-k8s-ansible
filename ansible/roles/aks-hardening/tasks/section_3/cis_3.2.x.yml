@@ -25,11 +25,11 @@
 
 # - name: "3.2.3 | Ensure that the --client-ca-file argument is set as appropriate (Manual)"
 #   block:
-#       - name: append --client-ca-file to existing list of KUBELET_ARGS
+#       - name: append --client-ca-file to existing list of KUBELET_FLAGS
 #         lineinfile:
 #           path: "{{ kubeletconf }}"
 #           backrefs: yes
-#           regexp: "^(.*KUBELET_ARGS.*)$"
+#           regexp: "^(.*KUBELET_FLAGS.*)$"
 #           line: "\1 --client-ca-file={{ client-ca-file-path }}""
 #         notify:
 #         - restart kubelet
@@ -37,11 +37,11 @@
   #     - 3.2.3
 - name: "3.2.4 | Ensure that the --read-only-port is secured (Manual)"
   block:
-      - name: append --read-only-port to existing list of KUBELET_ARGS
+      - name: append --read-only-port to existing list of KUBELET_FLAGS
         lineinfile:
           path: "{{ kubeletconf }}"
           backrefs: yes
-          regexp: "^(.*KUBELET_ARGS.*)$"
+          regexp: "^(.*KUBELET_FLAGS.*)$"
           line: '\1 --read-only-port=0'
         notify:
         - restart kubelet
@@ -50,11 +50,11 @@
 
 - name: "3.2.5 | Ensure that the --streaming-connection-idle-timeout argument is not set to 0 (Manual)"
   block:
-      - name: append --streaming-connection-idle-timeout to existing list of KUBELET_ARGS
+      - name: append --streaming-connection-idle-timeout to existing list of KUBELET_FLAGS
         lineinfile:
           path: "{{ kubeletconf }}"
           backrefs: yes
-          regexp: "^(.*KUBELET_ARGS.*)$"
+          regexp: "^(.*KUBELET_FLAGS.*)$"
           line: '\1 --streaming-connection-idle-timeout=4h0m0s'
         notify:
         - restart kubelet
@@ -63,11 +63,11 @@
 
 - name: "3.2.6 | Ensure that the --protect-kernel-defaults argument is set to true (Manual)"
   block:
-      - name: append --protect-kernel-defaults to existing list of KUBELET_ARGS
+      - name: append --protect-kernel-defaults to existing list of KUBELET_FLAGS
         lineinfile:
           path: "{{ kubeletconf }}"
           backrefs: yes
-          regexp: "^(.*KUBELET_ARGS.*)$"
+          regexp: "^(.*KUBELET_FLAGS.*)$"
           line: '\1 --protect-kernel-defaults=true'
         notify:
         - restart kubelet
@@ -76,11 +76,11 @@
 
 - name: "3.2.7 | Ensure that the --make-iptables-util-chains argument is set to true (Manual)"
   block:
-      - name: append --make-iptables-util-chains to existing list of KUBELET_ARGS
+      - name: append --make-iptables-util-chains to existing list of KUBELET_FLAGS
         lineinfile:
           path: "{{ kubeletconf }}"
           backrefs: yes
-          regexp: "^(.*KUBELET_ARGS.*)$"
+          regexp: "^(.*KUBELET_FLAGS.*)$"
           line: '\1 --make-iptables-util-chains=true'
         notify:
         - restart kubelet
@@ -101,11 +101,11 @@
 
 - name: "3.2.9 | Ensure that the --eventRecordQPS argument is set to 0 or a level which ensures appropriate event capture (Manual)"
   block:
-      - name: append --event-qps to existing list of KUBELET_ARGS
+      - name: append --event-qps to existing list of KUBELET_FLAGS
         lineinfile:
           path: "{{ kubeletconf }}"
           backrefs: yes
-          regexp: "^(.*KUBELET_ARGS.*)$"
+          regexp: "^(.*KUBELET_FLAGS.*)$"
           line: '\1 --event-qps=0 '
         notify:
         - restart kubelet
@@ -126,11 +126,11 @@
 
 - name: "3.2.11 | Ensure that the RotateKubeletServerCertificate argument is set to true (Manual)"
   block:
-      - name: append --rotate-kubelet-server-certificate=true to existing list of KUBELET_ARGS
+      - name: append --rotate-kubelet-server-certificate=true to existing list of KUBELET_FLAGS
         lineinfile:
           path: "{{ kubeletconf }}"
           backrefs: yes
-          regexp: "^(.*KUBELET_ARGS.*)$"
+          regexp: "^(.*KUBELET_FLAGS.*)$"
           line: '\1 --rotate-kubelet-server-certificate=true'
         notify:
         - restart kubelet

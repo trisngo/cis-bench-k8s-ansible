@@ -8,13 +8,19 @@
 {% for key, val in ipadd_dict.items() %}
     {% if key.endswith("mini0") %}
         <form action="{{ url_for('bench.result') }}" style="text-align: center;">
-            <input type="hidden" name="ipadd" value="{{ val }}">
+            <input type="hidden" name="ipadd_mini" value="{{ val }}">
             <input type="submit" value="Master node ({{ val }}) benchmark result" style="padding: 10px"/>
         </form>
         <br>
-    {% else %}
+    {% elif "aks" in key %}
         <form action="{{ url_for('bench.result') }}" style="text-align: center;">
-            <input type="hidden" name="ipadd" value="{{ val }}">
+            <input type="hidden" name="ipadd_aks" value="{{ val }}">
+            <input type="submit" value="Worker node ({{ val }}) benchmark result" onclick="this.form.action += '?ipadd={{ val }}'" style="padding: 10px"/>
+        </form>
+        <br>
+    {% else%}
+        <form action="{{ url_for('bench.result') }}" style="text-align: center;">
+            <input type="hidden" name="ipadd_mini" value="{{ val }}">
             <input type="submit" value="Worker node ({{ val }}) benchmark result" onclick="this.form.action += '?ipadd={{ val }}'" style="padding: 10px"/>
         </form>
         <br>

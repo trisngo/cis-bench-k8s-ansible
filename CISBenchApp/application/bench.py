@@ -77,10 +77,17 @@ def check_aks_cluster(rg,name):
     return False
 
 def create_ssh_aks(rg, name):
+    cmd_cnn = "yes | az aks get-credentials --resource-group %s --name %s" % (rg, name)
+    process_cnn = subprocess.Popen(cmd_cnn, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, preexec_fn=os.setsid)
+    return_code_cnn = process_cnn.wait()
+    print("Cronnect AKS return code: ", return_code_cnn)
+
     script_path = config_get("DEFAULT", "aks_ssh")
     cmd = "bash %s -g %s -n %s -d any -c 'echo \"Finish create ssh proxy on $(hostname)\"'" % (script_path, rg, name)
     process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, preexec_fn=os.setsid)
     return_code = process.wait()
+    out, err = process.communicate()
+    print("Create ssh output: ", out)
     if return_code == 0:
         pod_ssh = "aks-ssh-session"
         cmdPortForward = "kubectl port-forward %s 2022:22" % pod_ssh
@@ -103,7 +110,7 @@ def writeInventory_aks(dictIP):
                 "aks_workers\n" + \
                 "[aks:vars]\n" + \
                 "ansible_user=azureuser\n" + \
-                f"ansible_ssh_common_args='-o ProxyCommand=\"ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i {keyPath} -p 2022 -W %h:%p root@127.0.0.1\" -o StrictHostKeyChecking=no'\n" + \
+                f"ansible_ssh_common_args='-o StrictHostKeyChecking=no -o ProxyCommand=\"ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i {keyPath} -p 2022 -W %h:%p root@127.0.0.1\"'\n" + \
                 "[local]\n" + \
                 "localhost ansible_connection=local"
     with open(file_name, 'w') as configfile:
@@ -202,16 +209,23 @@ def bench_mini():
 def result():
     today = datetime.datetime.now(datetime.timezone.utc)
     bench_time = session['bench_time']
+    # bench_time = "31/01/2023 23:13:52"
     date = today.strftime("%Y-%m-%d")
+    # date = "2023-01-31"
     multi_dict = request.args
     for key in multi_dict:
         print(multi_dict.get(key))
         print(multi_dict.getlist(key))
 
-    if 'ipadd' in request.args:
+    if 'ipadd_mini' in request.args:
         # parameter 'varname' is specified
-        ipadd = request.args.get("ipadd")
+        ipadd = request.args.get("ipadd_mini")
         return render_template("result/minikube/%s_benchmark_%s.html" % (ipadd,date), ip_address=ipadd, bench_time=bench_time)
+    elif 'ipadd_aks' in request.args:
+        ipadd = request.args.get("ipadd_aks")
+        # ipadd = "10.224.0.4"
+        print("result/aks/%s_benchmark_%s.html" % (ipadd,date))
+        return render_template("result/aks/%s_benchmark_%s.html" % (ipadd,date), ip_address=ipadd, bench_time=bench_time)
     else:
         print("IPadd Argument not provided, go to Dashboard")
         ipadd_dict = session['ipadd_dict']

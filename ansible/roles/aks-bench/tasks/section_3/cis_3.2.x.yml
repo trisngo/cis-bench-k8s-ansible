@@ -15,13 +15,13 @@
 
 - name: "3.2.1 | Ensure that the --anonymous-auth argument is set to false (Manual)"
   block:
-      - name: Get PASSED result
+      - name: Add task 3.2.1 to passed list
         set_fact:
           section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.1","task_description":"Ensure that the --anonymous-auth argument is set to false (Manual)","task_status":"PASSED","configuration":"","script":"" }] }}'
         when: 
           - "'--anonymous-auth=false' in result32bin.stdout,result32cfg.stdout"
 
-      - name: Get FAILED result
+      - name: Add task 3.2.1 to failed list
         set_fact:
           section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.1","task_description":"Ensure that the --anonymous-auth argument is set to false (Manual)","task_status":"FAILED","configuration":"Argument is not set","script":"Fix it" }] }}'
         when: 
@@ -38,14 +38,14 @@
 - name: "3.2.2 | Ensure that the --authorization-mode argument is not set to AlwaysAllow (Manual)"
   block:
 
-      - name: Get PASSED result
+      - name: Add task 3.2.2 to passed list
         set_fact:
           section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.2","task_description":"Ensure that the --authorization-mode argument is not set to AlwaysAllow (Manual)","task_status":"PASSED","configuration":"","script":"" }] }}'
         when: 
           - "'--authorization-mode=AlwaysAllow' not in result32bin.stdout"
           - "'--authorization-mode=AlwaysAllow' not in result32cfg.stdout"
 
-      - name: Get FAILED result
+      - name: Add task 3.2.2 to failed list
         set_fact:
           section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.2","task_description":"Ensure that the --authorization-mode argument is not set to AlwaysAllow (Manual)","task_status":"FAILED","configuration":"Argument is set to AlwaysAllow","script":"Fix it" }] }}'
         when: 
@@ -58,13 +58,13 @@
 
 - name: "3.2.3 | Ensure that the --client-ca-file argument is set as appropriate (Manual)"
   block:
-      - name: Get PASSED result
+      - name: Add task 3.2.3 to passed list
         set_fact:
           section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.3","task_description":"Ensure that the --client-ca-file argument is set as appropriate (Manual)","task_status":"PASSED","configuration":"","script":"" }] }}'
         when: 
           - "'--client-ca-file' in result32bin.stdout,result32cfg.stdout"
 
-      - name: Get FAILED result
+      - name: Add task 3.2.3 to failed list
         set_fact:
           section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.3","task_description":"Ensure that the --client-ca-file argument is set as appropriate (Manual)","task_status":"FAILED","configuration":"Argument is not set","script":"Fix" }] }}'
         when: 
@@ -79,13 +79,13 @@
 
 - name: "3.2.4 | Ensure that the --read-only-port is secured (Manual)"
   block:
-      - name: Get PASSED result
+      - name: Add task 3.2.4 to passed list
         set_fact:
           section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.4","task_description":"Ensure that the --read-only-port is secured (Manual)","task_status":"PASSED","configuration":"","script":"" }] }}'
         when: 
           - "'--read-only-port=0' in result32bin.stdout,result32cfg.stdout"
 
-      - name: Get FAILED result
+      - name: Add task 3.2.4 to failed list
         set_fact:
           section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.4","task_description":"Ensure that the --read-only-port is secured (Manual)","task_status":"FAILED","configuration":"Argument is not set","script":"" }] }}'
         when: 
@@ -100,18 +100,19 @@
 
 - name: "3.2.5 | Ensure that the --streaming-connection-idle-timeout argument is not set to 0 (Manual)"
   block:
-      - name: Get PASSED result
+      - name: Add task 3.2.5 to passed list
         set_fact:
           section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.5","task_description":"Ensure that the --streaming-connection-idle-timeout argument is not set to 0 (Manual)","task_status":"PASSED","configuration":"","script":"" }] }}'
         when: 
           - "'--streaming-connection-idle-timeout=0' not in result32bin.stdout" 
           - "'--streaming-connection-idle-timeout=0' not in result32cfg.stdout"
 
-      - name: Get FAILED result
+      - name: Add task 3.2.5 to failed list
         set_fact:
           section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.5","task_description":"Ensure that the --streaming-connection-idle-timeout argument is not set to 0 (Manual)","task_status":"FAILED","configuration":"Argument is set to 0","script":"Fix it" }] }}'
         when: 
-          - "'--streaming-connection-idle-timeout=0' in result32bin.stdout,result32cfg.stdout"
+          - "'--streaming-connection-idle-timeout=0' in result32bin.stdout"
+          - "'--streaming-connection-idle-timeout=0' in result32cfg.stdout"
 
   tags:
       - level
@@ -121,13 +122,14 @@
 
 - name: "3.2.6 | Ensure that the --protect-kernel-defaults argument is set to true (Manual)"
   block:
-      - name: Get PASSED result
+      - name: Add task 3.2.6 to passed list
         set_fact:
           section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.6","task_description":"Ensure that the --protect-kernel-defaults argument is set to true (Manual)","task_status":"PASSED","configuration":"","script":"" }] }}'
         when: 
-          - "'--protect-kernel-defaults=true' in result32bin.stdout, result32cfg.stdout"
+          - "'--protect-kernel-defaults=true' in result32bin.stdout"
+          - "'--protect-kernel-defaults=true' in result32cfg.stdout"
 
-      - name: Get FAILED result
+      - name: Add task 3.2.6 to failed list
         set_fact:
           section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.6","task_description":"Ensure that the --protect-kernel-defaults argument is set to true (Manual)","task_status":"FAILED","configuration":"Argument is not set","script":"Fix it" }] }}'
         when: 
@@ -142,13 +144,14 @@
 
 - name: "3.2.7 | Ensure that the --make-iptables-util-chains argument is set to true (Manual)"
   block:
-      - name: Get PASSED result
+      - name: Add task 3.2.7 to passed list
         set_fact:
           section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.7","task_description":"Ensure that the --make-iptables-util-chains argument is set to true (Manual)","task_status":"PASSED","configuration":"","script":"" }] }}'
         when: 
-          - "'--make-iptables-util-chains=true' in result32bin.stdout, result32cfg.stdout"
+          - "'--make-iptables-util-chains=true' in result32bin.stdout"
+          - "'--make-iptables-util-chains=true' in result32cfg.stdout"
 
-      - name: Get FAILED result
+      - name: Add task 3.2.7 to failed list
         set_fact:
           section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.7","task_description":"Ensure that the --make-iptables-util-chains argument is set to true (Manual)","task_status":"FAILED","configuration":"Argument is not set","script":"Fix it" }] }}'
         when: 
@@ -163,18 +166,19 @@
 
 - name: "3.2.8 | Ensure that the --hostname-override argument is not set (Manual)"
   block:
-      - name: Get PASSED result
+      - name: Add task 3.2.8 to passed list
         set_fact:
           section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.8","task_description":"Ensure that the --hostname-override argument is not set (Manual)","task_status":"PASSED","configuration":"","script":"" }] }}'
         when: 
           - "'--hostname-override' not in result32bin.stdout"
           - "'--hostname-override' not in result32cfg.stdout"
 
-      - name: Get FAILED result
+      - name: Add task 3.2.8 to failed list
         set_fact:
           section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.8","task_description":"Ensure that the --hostname-override argument is not set (Manual)","task_status":"FAILED","configuration":"Argument is set","script":"Fix it" }] }}'
         when: 
-          - "'--hostname-override' in result32bin.stdout,result32cfg.stdout"
+          - "'--hostname-override' in result32bin.stdout"
+          - "'--hostname-override' in result32cfg.stdout"
   tags:
       - level
       - rule_3.2.8
@@ -183,18 +187,19 @@
 
 - name: "3.2.9 | Ensure that the --eventRecordQPS argument is set to 0 or a level which ensures appropriate event capture (Manual)"
   block:
-      - name: Get PASSED result
+      - name: Add task 3.2.9 to passed list
         set_fact:
-          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.9","task_description":"Ensure that the --eventRecordQPS argument is set to 0 or a level which ensures appropriate event capture (Manual)","task_status":"PASSED","configuration":"","script":"Fix it" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.9","task_description":"Ensure that the --eventRecordQPS argument is set to 0 or a level which ensures appropriate event capture (Manual)","task_status":"PASSED","configuration":"","script":"" }] }}'
         when: 
-          - "'--event-qps=0' in result32bin.stdout, result32cfg.stdout"
+          - "'--event-qps' in result32bin.stdout"
+          - "'--event-qps' in result32cfg.stdout"
 
-      - name: Get FAILED result
+      - name: Add task 3.2.9 to failed list
         set_fact:
-          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.9","task_description":"Ensure that the --eventRecordQPS argument is set to 0 or a level which ensures appropriate event capture (Manual)","task_status":"FAILED","configuration":"","script":"Fix it" }] }}'
+          section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.9","task_description":"Ensure that the --eventRecordQPS argument is set to 0 or a level which ensures appropriate event capture (Manual)","task_status":"FAILED","configuration":"Argument is set","script":"Fix it" }] }}'
         when: 
-          - "'--event-qps=0' not in result32bin.stdout"
-          - "'--event-qps=0' not in result32cfg.stdout"
+          - "'--event-qps' not in result32bin.stdout"
+          - "'--event-qps' not in result32cfg.stdout"
 
   tags:
       - level
@@ -204,18 +209,19 @@
 
 - name: "3.2.10 | Ensure that the --rotate-certificates argument is not set to false (Manual)"
   block:
-      - name: Get PASSED result
+      - name: Add task 3.2.10 to passed list
         set_fact:
           section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.10","task_description":"Ensure that the --rotate-certificates argument is not set to false (Manual)","task_status":"PASSED","configuration":"","script":"" }] }}'
         when: 
           - "'--rotate-certificates=false' not in result32bin.stdout"
           - "'--rotate-certificates=false' not in result32cfg.stdout"
 
-      - name: Get FAILED result
+      - name: Add task 3.2.10 to failed list
         set_fact:
           section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.10","task_description":"Ensure that the --rotate-certificates argument is not set to false (Manual)","task_status":"FAILED","configuration":"Argument is set to false","script":"Fix it" }] }}'
         when: 
-          - "'--rotate-certificates=false' in result32bin.stdout,result32cfg.stdout"
+          - "'--rotate-certificates=false' in result32bin.stdout"
+          - "'--rotate-certificates=false' in result32bin.stdout"
 
   tags:
       - level
@@ -225,13 +231,14 @@
 
 - name: "3.2.11 | Ensure that the RotateKubeletServerCertificate argument is set to true (Manual)"
   block:
-      - name: Get PASSED result
+      - name: Add task 3.2.11 to passed list
         set_fact:
           section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.11","task_description":"Ensure that the RotateKubeletServerCertificate argument is set to true (Manual)","task_status":"PASSED","configuration":"","script":"" }] }}'
         when: 
-          - "'--rotate-kubelet-server-certificate=true' in result32bin.stdout, result32cfg.stdout"
+          - "'--rotate-kubelet-server-certificate=true' in result32bin.stdout"
+          - "'--rotate-kubelet-server-certificate=true' in result32cfg.stdout"
 
-      - name: Get FAILED result
+      - name: Add task 3.2.11 to failed list
         set_fact:
           section3_tasks: '{{ section3_tasks | default([]) + [{ "task_number":"3.2.11","task_description":"Ensure that the RotateKubeletServerCertificate argument is set to true (Manual)","task_status":"FAILED","configuration":"Argument is not set","script":"Fix it" }] }}'
         when: 
