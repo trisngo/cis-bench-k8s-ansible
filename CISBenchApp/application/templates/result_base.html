@@ -32,6 +32,10 @@ $(function () {
                 return; 
             } 
             tasks.push(event.target.id); 
+            const clicked_button = document.getElementById(event.target.id);
+            clicked_button.style.backgroundColor = 'salmon';
+            clicked_button.style.color = 'white';
+            clicked_button.textContent = 'OK';
         });
 
         $("#result_dashboard").on("click",function(e){ 
@@ -43,21 +47,28 @@ $(function () {
         $("#submit_task").on('click', function (e) {
             if (e.target !== e.currentTarget) return;
             e.preventDefault();
-            var clickElementId = e.target.id;
-            $.ajax({
-                type: 'POST',
-                url: "{{url_for('harden.harden_option')}}",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                data: JSON.stringify(tasks),
-                success: (response) => {
-                    console.log(response);
-                },
-                error: function (xhr, errmsg, err) {
-                    console.error(errmsg);
-                }
-            });
+            confirm_text="All the tasks you chose below will be fix:";
+            for (let i=0; i < tasks.length; i++) {
+                confirm_text += "\n" + tasks[i];
+            }
+            confirm_text+="\nDo you want to proceed?"
+            if (confirm(confirm_text) == true) {
+                var clickElementId = e.target.id;
+                $.ajax({
+                    type: 'POST',
+                    url: "{{url_for('harden.harden_option')}}",
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    data: JSON.stringify(tasks),
+                    success: (response) => {
+                        console.log(response);
+                    },
+                    error: function (xhr, errmsg, err) {
+                        console.error(errmsg);
+                    }
+                });
+            }
         })
 
         $("#submit_run").on("click",function(e){ 
