@@ -163,31 +163,39 @@
 												</div>
 											</div>
 										</div>
+	
 										<div class="form" id="aks_form">
 											<div class="row">
-												<h5 class="info-text">Please enter your AKS Resource Group and Cluster's name</h5>
-												<h6 class="info-text">Make sure your host running this tool have Azure CLI connected to Azure API </h5>
-												<div class="form-group">
-													<label>Resource Group <small>(required)</small></label>
-													<input name="az_rg" type="text" class="form-control" placeholder="MyResourceGroup">
-												</div>
-												<div class="form-group">
-													<label>Cluster's name <small>(required)</small></label>
-													<input name="az_aks_cluster" type="text" class="form-control" placeholder="MyManagedCluster">
-												</div>
-												<h5 class="info-text"> Please enter your worker node IP.</h5>
+												<h5 class="info-text">Please enter your AKS node Public IP and upload SSH key.</h5>
 												<div class="col-sm-8">
 													<label for="cta-num-select2">Show Items:</label>
-													<input id="cta-num-select2" name="cta-num-select" type="text" value="2" size="2">
+													<input id="cta-num-select2" name="cta-num-select2" type="text" value="2" size="2">
 												</div>
 												<div class="cta-block2">
-													<div>
-														<div class="form-group">
+													<div class="col-sm-8">
+														<div class="col-sm-4">
+															<div class="form-group">
+																<label>Node type</label><br>
+																<select name="type0" class="form-control">
+																	<option value="node" selected> Worker </option>
+																</select>
+															</div>
+														</div>
+														<div class="form-group col-sm-8">
 															<label>IP Address <small>(required)</small></label>
 															<input name="ipadd_aks0" type="text" class="form-control" placeholder="127.0.0.1...">
 														</div>
+		
+													</div>
+													<div class="col-sm-4">
+		
+														<div class="mb-3">
+															<label for="formFile" class="form-label">SSH Key</label>
+															<input class="form-control" type="file" name="file_aks0" id="file_aks0">
+														</div>
 													</div>
 												</div>
+
 											</div>
 										</div>
 		                            </div>

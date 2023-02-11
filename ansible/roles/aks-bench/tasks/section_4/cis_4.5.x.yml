@@ -5,10 +5,10 @@
         register: result451
 
       - debug:
-          msg: "4.5.1 | NOT SCORED | Prefer using secrets as files over secrets as environment variables(Manual)."
-      - name: Get NOT SCORED result
+          msg: "4.5.1 | FAILED | Prefer using secrets as files over secrets as environment variables(Manual)."
+      - name: Get FAILED result
         set_fact:
-          section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.5.1","task_description":"Prefer using secrets as files over secrets as environment variables(Manual)","task_status":"NOT SCORED","configuration":"","script":"" }] }}'
+          section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.5.1","task_description":"Prefer using secrets as files over secrets as environment variables(Manual)","task_status":"FAILED","configuration":"","script":"" }] }}'
 
   delegate_to: 127.0.0.1
   become: false
@@ -16,10 +16,10 @@
 - name: "4.5.2 | Consider external secret storage (Manual)"
   block:
       - debug:
-          msg: "4.5.2 | NOT SCORED | Consider external secret storage (Manual)."
-      - name: Get NOT SCORED result
+          msg: "4.5.2 | FAILED | Consider external secret storage (Manual)."
+      - name: Get FAILED result
         set_fact:
-          section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.5.2","task_description":"Consider external secret storage (Manual)","task_status":"NOT SCORED","configuration":"","script":"" }] }}'
+          section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.5.2","task_description":"Consider external secret storage (Manual)","task_status":"FAILED","configuration":"","script":"" }] }}'
 
   delegate_to: 127.0.0.1
   become: false

@@ -1,11 +1,11 @@
 ---
-- name: "4.3  | NOT SCORED | Azure Policy / OPA"
+- name: "4.3  | FAILED | Azure Policy / OPA"
   block:
     - debug:
-        msg: "4.3  | NOT SCORED | Azure Policy / OPA"
-    - name: Get NOT SCORED result
+        msg: "4.3  | FAILED | Azure Policy / OPA"
+    - name: Get FAILED result
       set_fact:
-        section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.3.0","task_description":"Azure Policy / OPA","task_status":"NOT SCORED","configuration":"","script":"" }] }}'
+        section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.3.0","task_description":"Azure Policy / OPA","task_status":"FAILED","configuration":"","script":"" }] }}'
 
   delegate_to: 127.0.0.1
   become: false

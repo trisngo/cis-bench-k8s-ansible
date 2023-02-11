@@ -4,11 +4,11 @@
         register: result411
 
       - debug:
-          msg: "4.1.1 | NOT SCORED | Ensure that the cluster-admin role is only used where required (Manual).\n- Found: {{ result411.stdout | default(0) }}"
+          msg: "4.1.1 | FAILED | Ensure that the cluster-admin role is only used where required (Manual).\n- Found: {{ result411.stdout | default(0) }}"
 
-      - name: Get NOT SCORED result
+      - name: Get FAILED result
         set_fact:
-          section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.1.1","task_description":"Ensure that the cluster-admin role is only used where required (Manual)","task_status":"NOT SCORED","configuration":result411.stdout,"script":"" }] }}'
+          section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.1.1","task_description":"Ensure that the cluster-admin role is only used where required (Manual)","task_status":"FAILED","configuration":result411.stdout,"script":"" }] }}'
 
   delegate_to: 127.0.0.1
   become: false
@@ -20,11 +20,11 @@
         register: result412
 
       - debug:
-          msg: "4.1.2 | NOT SCORED | Minimize access to secrets (Manual).\n- Found: {{ result412.stdout | default(0) }}"
+          msg: "4.1.2 | FAILED | Minimize access to secrets (Manual).\n- Found: {{ result412.stdout | default(0) }}"
 
-      - name: Get NOT SCORED result
+      - name: Get FAILED result
         set_fact:
-          section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.1.2","task_description":"Minimize access to secrets (Manual)","task_status":"NOT SCORED","configuration":result412.stdout,"script":"" }] }}'
+          section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.1.2","task_description":"Minimize access to secrets (Manual)","task_status":"FAILED","configuration":result412.stdout,"script":"" }] }}'
 
   delegate_to: 127.0.0.1
   become: false
@@ -35,10 +35,10 @@
         register: result413
 
       - debug:
-          msg: "4.1.3 | NOT SCORED | Minimize wildcard use in Roles and ClusterRoles (Manual).\n- {{ result413.stdout }}"
-      - name: Get NOT SCORED result
+          msg: "4.1.3 | FAILED | Minimize wildcard use in Roles and ClusterRoles (Manual).\n- {{ result413.stdout }}"
+      - name: Get FAILED result
         set_fact:
-          section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.1.3","task_description":"Minimize wildcard use in Roles and ClusterRoles (Manual)","task_status":"NOT SCORED","configuration":result413.stdout,"script":"" }] }}'
+          section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.1.3","task_description":"Minimize wildcard use in Roles and ClusterRoles (Manual)","task_status":"FAILED","configuration":result413.stdout,"script":"" }] }}'
 
   delegate_to: 127.0.0.1
   become: false
@@ -49,11 +49,11 @@
         register: result414
 
       - debug:
-          msg: "4.1.4 | NOT SCORED | Minimize access to create pods (Manual).\n- Found: {{ result414.stdout | default(0) }}"
+          msg: "4.1.4 | FAILED | Minimize access to create pods (Manual).\n- Found: {{ result414.stdout | default(0) }}"
 
-      - name: Get NOT SCORED result
+      - name: Get FAILED result
         set_fact:
-          section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.1.4","task_description":"Minimize access to create pods (Manual)","task_status":"NOT SCORED","configuration":result414.stdout,"script":"" }] }}'
+          section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.1.4","task_description":"Minimize access to create pods (Manual)","task_status":"FAILED","configuration":result414.stdout,"script":"" }] }}'
 
   delegate_to: 127.0.0.1
   become: false
@@ -64,10 +64,10 @@
         register: result415
 
       - debug:
-          msg: "4.1.5 | NOT SCORED | Ensure that default service accounts are not actively used.(Manual).\n- Found: {{ result415.stdout | default(0) }}"
-      - name: Get NOT SCORED result
+          msg: "4.1.5 | FAILED | Ensure that default service accounts are not actively used.(Manual).\n- Found: {{ result415.stdout | default(0) }}"
+      - name: Get FAILED result
         set_fact:
-          section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.1.5","task_description":"Ensure that default service accounts are not actively used.(Manual)","task_status":"NOT SCORED","configuration":result415.stdout,"script":"" }] }}'
+          section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.1.5","task_description":"Ensure that default service accounts are not actively used.(Manual)","task_status":"FAILED","configuration":result415.stdout,"script":"" }] }}'
 
   delegate_to: 127.0.0.1
   become: false
@@ -78,10 +78,10 @@
         register: result416
 
       - debug:
-          msg: "4.1.6 | NOT SCORED | Ensure that Service Account Tokens are only mounted where necessary (Manual).\n- {{ result416.stdout }}"
-      - name: Get NOT SCORED result
+          msg: "4.1.6 | FAILED | Ensure that Service Account Tokens are only mounted where necessary (Manual).\n- {{ result416.stdout }}"
+      - name: Get FAILED result
         set_fact:
-          section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.1.6","task_description":"Ensure that Service Account Tokens are only mounted where necessary (Manual)","task_status":"NOT SCORED","configuration":result416.stdout,"script":"" }] }}'
+          section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.1.6","task_description":"Ensure that Service Account Tokens are only mounted where necessary (Manual)","task_status":"FAILED","configuration":result416.stdout,"script":"" }] }}'
 
   delegate_to: 127.0.0.1
   become: false

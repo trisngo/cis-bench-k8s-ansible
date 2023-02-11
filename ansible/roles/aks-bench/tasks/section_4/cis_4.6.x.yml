@@ -5,10 +5,10 @@
         register: result461
 
       - debug:
-          msg: "4.6.1 | NOT SCORED | Verify that admission controllers are working as expected (Manual)."
-      - name: Get NOT SCORED result
+          msg: "4.6.1 | FAILED | Verify that admission controllers are working as expected (Manual)."
+      - name: Get FAILED result
         set_fact:
-          section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.6.1","task_description":"Verify that admission controllers are working as expected (Manual)","task_status":"NOT SCORED","configuration":"","script":"" }] }}'
+          section4_tasks: '{{ section4_tasks | default([]) + [{ "task_number":"4.6.1","task_description":"Verify that admission controllers are working as expected (Manual)","task_status":"FAILED","configuration":"","script":"" }] }}'
 
   delegate_to: 127.0.0.1
   become: false

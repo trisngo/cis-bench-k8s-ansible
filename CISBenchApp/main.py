@@ -4,15 +4,16 @@ from application import create_app, mylogging, config_get
 
 # from flask import Flask, jsonify, request, redirect, abort
 
-app = create_app()
 
 if __name__ == '__main__':
     try:
-        # config_get("remediation", "bin")
-        # config_get("remediation", "inventory")
-        # config_get("remediation", "path")
-        # config_get("data_store", "dir")
+        config_get("ansible", "bin")
+        config_get("logging", "dir")
+        config_get("data_store", "dir")
+        config_get("minikube", "result_dir")
+        config_get("aks", "result_dir")
         UPLOAD_FOLDER = config_get("data_store", "dir")
+        app = create_app()
         app.config['TEMPLATES_AUTO_RELOAD'] = True
         # app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
         app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
