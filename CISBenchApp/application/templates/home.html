@@ -165,6 +165,15 @@
 										</div>
 	
 										<div class="form" id="aks_form">
+											<h6 class="info-text">Make sure your host running this tool have Azure CLI connected to Azure API </h5>
+											<div class="form-group">
+												<label>Resource Group <small>(required)</small></label>
+												<input name="az_rg" type="text" class="form-control" placeholder="MyResourceGroup">
+											</div>
+											<div class="form-group">
+												<label>Cluster's name <small>(required)</small></label>
+												<input name="az_aks_cluster" type="text" class="form-control" placeholder="MyManagedCluster">
+											</div>
 											<div class="row">
 												<h5 class="info-text">Please enter your AKS node Public IP and upload SSH key.</h5>
 												<div class="col-sm-8">

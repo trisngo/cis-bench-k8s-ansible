@@ -55,37 +55,39 @@ def handle_input():
             return render_template('run_mini.html')
         elif platform == "AKS":
             num_node = request.form.get('cta-num-select2')
+            rg = request.form.get('az_rg')
+            cluster_name = request.form.get('az_aks_cluster')
             print(num_node)
             type_dict = {}
             ipadd_dict = {}
             filename_dict = {}
+            if check_aks_cluster(rg,cluster_name):
+                for key, val in request.form.items():
+                    #print(key,val)
+                    if key.startswith("type"):
+                        type_dict[key] = "node"
+                    if key.startswith("ipadd_aks"):
+                        ipadd_dict[key] = val
 
-            for key, val in request.form.items():
-                #print(key,val)
-                if key.startswith("type"):
-                    type_dict[key] = "node"
-                if key.startswith("ipadd_aks"):
-                    ipadd_dict[key] = val
+                print("Type dictionary is: ", type_dict)
+                print("Ip add dictionary is: ", ipadd_dict)
+                print(request.files)
+                for key, val in request.files.items():
+                    if key.startswith("file_aks"):
+                        if val.filename == '':
+                            print('No selected file')
+                            return redirect(request.url)
+                        if val:
+                            filename = secure_filename(val.filename)
+                            unique_filename = make_unique(filename)
+                            val.save(os.path.join(config_get("data_store", "dir"), unique_filename))
+                            filename_dict[key] = unique_filename
+                print("Filename dictionary is: ", filename_dict)
 
-            print("Type dictionary is: ", type_dict)
-            print("Ip add dictionary is: ", ipadd_dict)
-            print(request.files)
-            for key, val in request.files.items():
-                if key.startswith("file_aks"):
-                    if val.filename == '':
-                        print('No selected file')
-                        return redirect(request.url)
-                    if val:
-                        filename = secure_filename(val.filename)
-                        unique_filename = make_unique(filename)
-                        val.save(os.path.join(config_get("data_store", "dir"), unique_filename))
-                        filename_dict[key] = unique_filename
-            print("Filename dictionary is: ", filename_dict)
-
-            writeInventory_aks(ipadd_dict, filename_dict)
-            session['ipadd_dict'] = ipadd_dict
-            session['filename_dict'] = filename_dict
-            return render_template('run_aks.html')
+                writeInventory_aks(ipadd_dict, filename_dict)
+                session['ipadd_dict'] = ipadd_dict
+                session['filename_dict'] = filename_dict
+                return render_template('run_aks.html')
 
             # rg = request.form.get('az_rg')
             # cluster_name = request.form.get('az_aks_cluster')
@@ -101,12 +103,12 @@ def handle_input():
             #     return render_template('run_aks.html')
     return redirect(url_for('views.home'))
 
-# def check_aks_cluster(rg,name):
-#     linecount = int(subprocess.check_output("az aks show --resource-group %s --name %s 2>/dev/null | wc -l" % (rg, name), shell=True).split()[0])
-#     print(linecount)
-#     if linecount > 0:
-#         return True
-#     return False
+def check_aks_cluster(rg,name):
+    linecount = int(subprocess.check_output("az aks show --resource-group %s --name %s 2>/dev/null | wc -l" % (rg, name), shell=True).split()[0])
+    print(linecount)
+    if linecount > 0:
+        return True
+    return False
 
 # def create_ssh_aks(rg, name):
 #     cmd_cnn = "yes | az aks get-credentials --resource-group %s --name %s" % (rg, name)
@@ -209,7 +211,7 @@ def bench_again():
         filename_dict = {}
         ipadd_dict = session['ipadd_dict']
         filename_dict = session['filename_dict']
-        writeInventory_mini(ipadd_dict, filename_dict)
+        writeInventory_aks(ipadd_dict, filename_dict)
         return render_template('run_aks.html')
     return redirect(url_for('views.home'))
 
